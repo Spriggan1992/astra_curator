@@ -3,11 +3,17 @@ import 'package:astra_curator/presentation/astra_curator/adding_client/adding_cl
 import 'package:astra_curator/presentation/astra_curator/chats/chats_screen.dart';
 import 'package:astra_curator/presentation/astra_curator/clients/cliet_screen.dart';
 import 'package:astra_curator/presentation/astra_curator/home_screen.dart';
+import 'package:astra_curator/presentation/auth/phone_number_screen.dart';
+import 'package:astra_curator/presentation/auth/signin_screen.dart';
+import 'package:astra_curator/presentation/auth/splash_screen.dart';
 import 'package:auto_route/auto_route.dart';
 
 @MaterialAutoRouter(
   routes: [
-    // MaterialRoute(page: SplashScreen, initial: true, path: '/'),
+    MaterialRoute(page: SplashScreen, initial: true, path: '/'),
+    MaterialRoute(page: SigninScreen, initial: false, path: 'signin'),
+    MaterialRoute(
+        page: PhoneNumberScreen, initial: false, path: 'phoneNumberScreen'),
     AutoRoute(
       path: '',
       page: HomeScreen,
