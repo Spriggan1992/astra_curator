@@ -12,6 +12,7 @@
 *.freezed.dart
 *.gr.dart
 *.config.dart
+.fvm/flutter_sdk
 
 # IntelliJ related
 *.iml

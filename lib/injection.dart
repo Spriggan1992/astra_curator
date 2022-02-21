@@ -2,7 +2,7 @@ import 'package:astra_curator/injection.config.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 
-/// Get instanse of [GetIt]
+/// Get instance of [GetIt]
 final GetIt getIt = GetIt.instance;
 
 /// initializes the configurations of [GetIt].

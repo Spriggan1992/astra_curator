@@ -11,7 +11,7 @@ class IconNavItem<T> implements INavItem {
   /// Icon selected color.
   Color selectedColor;
 
-  /// Icon unselected coplor.
+  /// Icon unselected color.
   Color unselectedColor;
 
   IconNavItem({

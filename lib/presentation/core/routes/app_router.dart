@@ -1,7 +1,7 @@
 import 'package:astra_curator/presentation/astra_curator/account/account_screen.dart';
 import 'package:astra_curator/presentation/astra_curator/adding_client/adding_client_screen.dart';
 import 'package:astra_curator/presentation/astra_curator/chats/chats_screen.dart';
-import 'package:astra_curator/presentation/astra_curator/clients/cliet_screen.dart';
+import 'package:astra_curator/presentation/astra_curator/clients/client_screen.dart';
 import 'package:astra_curator/presentation/astra_curator/home_screen.dart';
 import 'package:auto_route/auto_route.dart';
 
