@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'calendar_range_date.freezed.dart';
 
-/// Represemt model(union) CalendarRangeDate for calendar
+/// Represent model(union) CalendarRangeDate for calendar.
 @freezed
 class CalendarRangeDate with _$CalendarRangeDate {
   const CalendarRangeDate._();

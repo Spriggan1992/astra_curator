@@ -5,29 +5,51 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-/// Recomended to use with the dialogs [showDialog] and [showCupertinoDialog].
+/// Represent base component of app calendar.
+///
 /// Returns null when click close button.
 /// Returns [CalendarRangeDate] data when tap [Выбрать] button.
 ///
+/// Recomended to use with the dialogs [showDialog] and [showCupertinoDialog].
 class AstraCalendar extends StatefulWidget {
   @override
   _AstraCalendarState createState() => _AstraCalendarState();
 }
 
 class _AstraCalendarState extends State<AstraCalendar> {
+  /// Formats that the calendar can display.
   CalendarFormat _calendarFormat = CalendarFormat.month;
+
+  /// Modes that range selection can operate in. Modes can be disabled, toggledOff, toggledOn, enforced.
   RangeSelectionMode _rangeSelectionMode = RangeSelectionMode
       .toggledOn; // Can be toggled on/off by longpressing a date
+
+  /// DateTime that determines which days are currently visible and focused.
   DateTime _focusedDay = DateTime.now();
+
+  /// DateTime that determines which days are currently selected.
   DateTime? _selectedDay;
+
+  /// The start of the selected day range.
   DateTime? _rangeStart;
+
+  /// The end of the selected day range.
   DateTime? _rangeEnd;
 
+  /// The first active day of `TableCalendar`.
+  /// Blocks swiping to days before it.
+  ///
+  /// Days before it will use `disabledStyle` and trigger `onDisabledDayTapped` callback.
   DateTime kFirstDay = DateTime(
     DateTime.now().year,
     DateTime.now().month - 3,
     DateTime.now().day,
   );
+
+  /// The last active day of `TableCalendar`.
+  /// Blocks swiping to days after it.
+  ///
+  /// Days after it will use `disabledStyle` and trigger `onDisabledDayTapped` callback.
   DateTime kLastDay = DateTime(
     DateTime.now().year,
     DateTime.now().month + 3,
