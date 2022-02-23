@@ -1,3 +1,4 @@
+import 'package:astra_curator/presentation/core/extensions/date_tim_to_string.dart';
 import 'package:astra_curator/presentation/core/theming/colors.dart';
 import 'package:astra_curator/presentation/core/widgets/calendar/astra_calendar.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +37,7 @@ class _PeriodicWidgetState extends State<PeriodicWidget> {
                         ),
                   ),
                   Text(
-                    "${DateFormat('dd.MM.yy').format(beginDate!)} - ${DateFormat('dd.MM.yy').format(endDate!)}",
+                    "${beginDate!.dateTimeToddMMyyFormat()} - ${endDate!.dateTimeToddMMyyFormat()}",
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           fontWeight: FontWeight.w600,
                           color: AstraColors.black,

@@ -17,10 +17,13 @@ class AccountTile extends StatelessWidget {
 
   /// The id of the payer.
   final String id;
+
   /// The pay date.
   final String date;
+
   /// The Summ of the payment.
   final String money;
+  
   /// Paket of the payment.
   final String paket;
 
