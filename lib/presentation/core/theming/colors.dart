@@ -12,6 +12,7 @@ class AstraColors {
   static const Color black02 = Color.fromRGBO(24, 24, 24, 0.2);
   static const Color black03 = Color.fromRGBO(24, 24, 24, 0.3);
   static const Color black04 = Color.fromRGBO(24, 24, 24, 0.4);
+  static const Color black08 = Color.fromRGBO(24, 24, 24, 0.8);
   static const Color textAppbarColor = Color.fromRGBO(31, 31, 31, 1);
   static const Color iconBackColor = Color.fromRGBO(176, 176, 176, 1);
   static const Color textLinkColor = Color.fromARGB(255, 52, 92, 187);

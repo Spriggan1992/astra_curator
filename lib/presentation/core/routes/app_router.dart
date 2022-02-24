@@ -48,7 +48,7 @@ import 'package:auto_route/auto_route.dart';
         AutoRoute(
           path: '',
           name: 'AccountRouter',
-          page: EmptyRouterPage,
+          page: AccountScreen,
           children: [
             AutoRoute(path: ':accountScreen', page: AccountScreen),
           ],

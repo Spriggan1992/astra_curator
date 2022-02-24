@@ -1,38 +1,57 @@
 import 'package:astra_curator/presentation/core/theming/colors.dart';
+import 'package:astra_curator/presentation/core/theming/gradients.dart';
+import 'package:astra_curator/presentation/core/widgets/global/golden_text.dart';
 import 'package:flutter/material.dart';
-/// Button with golden border.
+
+/// Button with golden-gradient border.
 class AstraBorderedButton extends StatelessWidget {
   const AstraBorderedButton({
     Key? key,
     required this.title,
     this.onTap,
+    this.isEnableButton = true,
   }) : super(key: key);
-   
-  /// Button click event handler. 
+
+  /// Button click event handler.
   final VoidCallback? onTap;
+
   /// A button title.
   final String title;
 
+  /// A flag responsible for enabling button.
+  final bool isEnableButton;
+
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: onTap,
-      style: ElevatedButton.styleFrom(
-        side: const BorderSide(color: AstraColors.mainDarkGold, width: 1),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(14),
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          colors: Gradients.goldenGradient,
+          tileMode: TileMode.repeated,
         ),
-        primary: AstraColors.white,
-        onPrimary: AstraColors.white,
-        minimumSize: Size(MediaQuery.of(context).size.width / 2.8,
-            MediaQuery.of(context).size.height / 15),
+        borderRadius: BorderRadius.circular(14),
       ),
-      child: Text(
-        title,
-        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-              fontSize: 14,
-              color: AstraColors.mainGold,
-            ),
+      child: InkWell(
+        onTap: onTap,
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(14),
+            color: Colors.white,
+          ),
+          constraints: const BoxConstraints(
+            minHeight: 48,
+            minWidth: 135,
+          ),
+          margin: const EdgeInsets.all(1),
+          alignment: Alignment.center,
+          child: GoldenText(
+            text: title,
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                  fontSize: 14,
+                  color: AstraColors.mainGold,
+                ),
+          ),
+        ),
       ),
     );
   }

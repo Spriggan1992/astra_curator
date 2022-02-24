@@ -8,4 +8,9 @@ extension DateTimeOnString on DateTime {
     final locale = Localizations.localeOf(context).languageCode;
     return DateFormat.yMMMMd(locale).format(this);
   }
+
+  String dateTimeToddMMyyFormat(){
+    return "$DateFormat('dd.MM.yy').format(this!)"; 
+  }
+  
 }
