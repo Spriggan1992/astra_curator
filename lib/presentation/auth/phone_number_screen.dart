@@ -23,14 +23,13 @@ class PhoneNumberScreen extends StatelessWidget {
           create: (context) =>
               getIt<PhoneBloc>()..add(const PhoneEvent.initialized()),
         ),
-       
       ],
       child: BlocListener<PhoneBloc, PhoneState>(
         listener: (context, listenState) {
           if (listenState.redirectToPasswordScreen) {
-            // AutoRouter.of(context).push(
-            //   //PasswordScreenRoute(phoneNumber: listenState.phoneNumber),
-            // );
+           context.router.push(
+              PasswordScreenRoute(phoneNumber: listenState.phoneNumber),
+            );
           }
           if (listenState.redirectConfirmCode) {
             showDialog(
@@ -106,12 +105,21 @@ class PhoneNumberScreen extends StatelessWidget {
           ),
           button: BlocBuilder<PhoneBloc, PhoneState>(
             builder: (context, state) {
+              ButtonType buttonType = ButtonType.finished;
+              if (state.isEnableBtn) {
+                buttonType = ButtonType.success;
+              } else if (state.isLoading) {
+                buttonType = ButtonType.loading;
+              } else {
+                buttonType = ButtonType.waiting;
+              }
+
               return AstraGradientButton(
                 onTap: () {
                   context.read<PhoneBloc>().add(const PhoneEvent.pressedBtn());
                 },
                 title: 'Продолжить',
-                type: ButtonType.success,
+                type: buttonType,
               );
             },
           ),

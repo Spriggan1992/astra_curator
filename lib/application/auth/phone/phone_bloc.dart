@@ -26,10 +26,11 @@ class PhoneBloc extends Bloc<PhoneEvent, PhoneState> {
         changedTextValue: (e) async {
           emit(
             state.copyWith(
-                phoneNumber: e.value,
-                isEnableBtn: e.value.length == 11,
-                redirectConfirmCode: false,
-                redirectToPasswordScreen: false),
+              phoneNumber: e.value,
+              isEnableBtn: e.value.length == 11,
+              redirectConfirmCode: false,
+              redirectToPasswordScreen: false,
+            ),
           );
         },
         pressedBtn: (e) async {
@@ -52,13 +53,16 @@ class PhoneBloc extends Bloc<PhoneEvent, PhoneState> {
               ),
             ),
           );
-          emit(state.copyWith(
+          emit(
+            state.copyWith(
               isEnableBtn: state.phoneNumber.length == 11,
               phoneNumber: state.phoneNumber,
               redirectConfirmCode: false,
               redirectToPasswordScreen: false,
               isNoConnection: false,
-              isLoading: false));
+              isLoading: false,
+            ),
+          );
         },
       );
     });

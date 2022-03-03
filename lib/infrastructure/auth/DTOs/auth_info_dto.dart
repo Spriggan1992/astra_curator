@@ -15,7 +15,7 @@ class AuthInfoDTO with _$AuthInfoDTO {
     @JsonKey(name: 'phone_number') required String phoneNumber,
 
     /// Password for sending to server.
-    @JsonKey(name: 'password') required String password,
+    @JsonKey(name: 'code') required String password,
   }) = _AuthInfoDTO;
 
   /// Return converted DTO from json.

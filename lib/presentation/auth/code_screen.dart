@@ -4,7 +4,7 @@ import 'package:astra_curator/presentation/auth/widgets/pin_code_field.dart';
 import 'package:astra_curator/presentation/auth/widgets/screen_content.dart';
 import 'package:astra_curator/presentation/auth/widgets/timer_text_widget.dart';
 import 'package:astra_curator/presentation/core/theming/colors.dart';
-import 'package:astra_curator/presentation/core/widgets/buttons/astra_elevated_button.dart';
+import 'package:astra_curator/presentation/core/widgets/buttons/astra_gradient_button.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -43,21 +43,19 @@ class CodeScreen extends StatelessWidget {
                       ? "Неправильный код\nПовторите пожалуйста еще раз."
                       : "Отправить поторно",
                   style: TextStyle(
-                      color: state.isShowErrorMessage
-                          ? AstraColors.errorColor
-                          : AstraColors.black04),
+                    color: state.isShowErrorMessage
+                        ? AstraColors.errorColor
+                        : AstraColors.black04,
+                  ),
                 ),
                 const SizedBox(height: 4),
                 const TimerTextWidget()
               ],
             ),
-            button: AstraElevatedButton(
-              isEnableButton: true,
+            button: AstraGradientButton(
               title: 'Продолжить',
-              onClick: () {
-                // AutoRouter.of(context).replace(
-                 
-                // );
+              onTap: () {
+                
               },
             ),
           );

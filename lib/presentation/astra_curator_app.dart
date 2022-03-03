@@ -17,7 +17,7 @@ class AstraCuratorApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<AuthBloc>(
-          create: (__) => context.read<AuthBloc>()
+          create: (context) => getIt<AuthBloc>()
             ..add(
               const AuthEvent.authCheckRequested(),
             ),

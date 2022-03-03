@@ -61,9 +61,12 @@ class AuthApiService implements IAuthApiService {
   @override
   Future<Either<AuthFailure, bool>> checkPhoneNumber(String phone) async {
     final result = await _makeRequest<bool>(() async {
-      return _dio.post(Endpoints.auth.checkPhone as String, data: {
-        "phone_number": phone
-      }).then((result) => result.data['success']);
+      return _dio.post(
+        Endpoints.auth.checkPhone as String,
+        data: {"phone_number": phone},
+      ).then((value) {
+        return value.data['success']; 
+      }); 
     });
     return result.fold((failure) => left(failure), (success) => right(success));
   }
@@ -89,6 +92,9 @@ class AuthApiService implements IAuthApiService {
       }
       log("${e.message}: ${e.type}", level: 2, name: "DioException");
       return left(const AuthFailure.server());
+    }
+    catch(e){
+      return left(const AuthFailure.server()); 
     }
   }
 }
