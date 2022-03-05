@@ -49,7 +49,7 @@ class ScreenContent extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: Theme.of(context).textTheme.titleMedium,
+                    style: Theme.of(context).textTheme.displayMedium!.copyWith(fontSize: 28),
                   ),
                   const SizedBox(height: 60),
                   Column(

@@ -10,7 +10,7 @@ extension DateTimeOnString on DateTime {
   }
 
   String dateTimeToddMMyyFormat(){
-    return "$DateFormat('dd.MM.yy').format(this!)"; 
+    return DateFormat('dd.MM.yy').format(this); 
   }
   
 }
