@@ -7,6 +7,7 @@ part 'phone_event.dart';
 part 'phone_state.dart';
 part 'phone_bloc.freezed.dart';
 
+/// Cheсks the phone number.
 @injectable
 class PhoneBloc extends Bloc<PhoneEvent, PhoneState> {
   final IAuthApiService _apiService;
@@ -27,7 +28,7 @@ class PhoneBloc extends Bloc<PhoneEvent, PhoneState> {
           emit(
             state.copyWith(
               phoneNumber: e.value,
-              isEnableBtn: e.value.length == 11,
+              isEnableBtn: e.value.length == 17,
               redirectConfirmCode: false,
               redirectToPasswordScreen: false,
             ),
@@ -36,7 +37,7 @@ class PhoneBloc extends Bloc<PhoneEvent, PhoneState> {
         pressedBtn: (e) async {
           emit(state.copyWith(isLoading: true));
           final hasAlreadyRegistered = await _apiService.checkPhoneNumber(
-            state.phoneNumber,
+            state.phoneNumber.replaceAll(RegExp(r'[^\d]'), ''),
           );
           emit(
             hasAlreadyRegistered.fold(
@@ -55,8 +56,8 @@ class PhoneBloc extends Bloc<PhoneEvent, PhoneState> {
           );
           emit(
             state.copyWith(
-              isEnableBtn: state.phoneNumber.length == 11,
-              phoneNumber: state.phoneNumber,
+              isEnableBtn: state.phoneNumber.length == 17,
+              phoneNumber: state.phoneNumber.replaceAll(RegExp(r'[^\d]'), ''),
               redirectConfirmCode: false,
               redirectToPasswordScreen: false,
               isNoConnection: false,

@@ -8,6 +8,7 @@ part 'auth_event.dart';
 part 'auth_state.dart';
 part 'auth_bloc.freezed.dart';
 
+/// Auth bloc for authentication.
 @injectable
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final IAuthApiService _apiService;

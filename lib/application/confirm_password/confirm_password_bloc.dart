@@ -9,6 +9,7 @@ part 'confirm_password_event.dart';
 part 'confirm_password_state.dart';
 part 'confirm_password_bloc.freezed.dart';
 
+/// Confirm password bloc.
 @injectable
 class ConfirmPasswordBloc
     extends Bloc<ConfirmPasswordEvent, ConfirmPasswordState> {

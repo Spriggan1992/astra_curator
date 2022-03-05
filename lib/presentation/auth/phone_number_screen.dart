@@ -1,5 +1,6 @@
 import 'package:astra_curator/application/auth/phone/phone_bloc.dart';
 import 'package:astra_curator/injection.dart';
+import 'package:astra_curator/presentation/auth/constants/constants.dart';
 import 'package:astra_curator/presentation/auth/widgets/screen_content.dart';
 import 'package:astra_curator/presentation/core/dialogs/snack_bar.dart';
 import 'package:astra_curator/presentation/core/routes/app_router.gr.dart';
@@ -27,7 +28,7 @@ class PhoneNumberScreen extends StatelessWidget {
       child: BlocListener<PhoneBloc, PhoneState>(
         listener: (context, listenState) {
           if (listenState.redirectToPasswordScreen) {
-           context.router.push(
+            context.router.push(
               PasswordScreenRoute(phoneNumber: listenState.phoneNumber),
             );
           }
@@ -76,8 +77,10 @@ class PhoneNumberScreen extends StatelessWidget {
             builder: (context, state) {
               return TextFormField(
                 style: Theme.of(context).textTheme.displayMedium,
+                initialValue: '+7',
                 autofocus: true,
                 keyboardType: TextInputType.phone,
+                inputFormatters: [maskFormatter],
                 decoration:
                     const InputDecoration(hintText: "Введите номер телефона"),
                 onChanged: (value) {

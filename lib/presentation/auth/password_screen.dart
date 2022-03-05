@@ -6,7 +6,7 @@ import 'package:astra_curator/presentation/auth/widgets/screen_content.dart';
 import 'package:astra_curator/presentation/core/dialogs/snack_bar.dart';
 import 'package:astra_curator/presentation/core/routes/app_router.gr.dart';
 import 'package:astra_curator/presentation/core/theming/colors.dart';
-import 'package:astra_curator/presentation/core/widgets/buttons/astra_elevated_button.dart';
+import 'package:astra_curator/presentation/core/widgets/buttons/astra_gradient_button.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -78,20 +78,28 @@ class PasswordScreen extends StatelessWidget {
             },
           ),
           button: BlocBuilder<PasswordBloc, PasswordState>(
-              buildWhen: (p, c) =>
-                  p.isLoading != c.isLoading || p.isEnableBtn != c.isEnableBtn,
-              builder: (context, state) {
-                return AstraElevatedButton(
-                  isLoading: state.isLoading,
-                  isEnableButton: state.isEnableBtn,
-                  title: 'Продолжить',
-                  onClick: () {
-                    context
-                        .read<PasswordBloc>()
-                        .add(const PasswordEvent.pressedButton());
-                  },
-                );
-              }),
+            buildWhen: (p, c) =>
+                p.isLoading != c.isLoading || p.isEnableBtn != c.isEnableBtn,
+            builder: (context, state) {
+              ButtonType buttonType = ButtonType.waiting;
+
+              if (state.isLoading) {
+                buttonType = ButtonType.loading;
+              } else {
+                buttonType = ButtonType.success;
+              }
+
+              return AstraGradientButton(
+                type: buttonType,
+                title: 'Продолжить',
+                onTap: () {
+                  context.read<PasswordBloc>().add(
+                        const PasswordEvent.pressedButton(),
+                      );
+                },
+              );
+            },
+          ),
         ),
       ),
     );

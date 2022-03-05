@@ -8,6 +8,7 @@ part 'password_event.dart';
 part 'password_state.dart';
 part 'password_bloc.freezed.dart';
 
+/// Cheсks the password (code) and saves the token if the password is correct.
 @injectable
 class PasswordBloc extends Bloc<PasswordEvent, PasswordState> {
   final IAuthApiService _apiService;
