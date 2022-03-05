@@ -38,14 +38,7 @@ class PasswordScreen extends StatelessWidget {
             context.router.navigate(SplashScreenRoute(isLoading: true));
             FocusScope.of(context).unfocus();
           }
-          if (state.redirectToConfirmPassword) {
-            context.router.push(
-              ConfirmPasswordScreenRoute(
-                phoneNumber: state.phoneNumber,
-                confirmPassword: state.password,
-              ),
-            );
-          }
+
           if (state.isNoConnection) {
             showSnackBar(context);
           }

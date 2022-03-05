@@ -60,11 +60,13 @@ class PasswordBloc extends Bloc<PasswordEvent, PasswordState> {
                 ),
               ),
             );
-            emit(state.copyWith(
-              isLoading: false,
-              isNoConnection: false,
-              isSuccessfullySignIn: false,
-            ));
+            emit(
+              state.copyWith(
+                isLoading: false,
+                isNoConnection: false,
+                isSuccessfullySignIn: false,
+              ),
+            );
           } else {
             emit(
               state.copyWith(redirectToConfirmPassword: true),

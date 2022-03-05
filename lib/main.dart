@@ -8,8 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-
-
 void main() async {
   await _appInitializer();
 }
@@ -17,18 +15,17 @@ void main() async {
 /// Initializes dependencies.
 Future<void> _appInitializer() async {
   WidgetsFlutterBinding.ensureInitialized();
-   configureInjection(Environment.prod);
+  configureInjection(Environment.prod);
   await getIt<SembastDatabase>().init();
   getIt<Dio>()
     ..options = BaseOptions(
       connectTimeout: 5000,
       receiveTimeout: 3000,
     )
-  ..interceptors.add(getIt<DioInterceptor>());
+    ..interceptors.add(getIt<DioInterceptor>());
   getIt.registerSingleton<AppRouter>(AppRouter());
- 
+
   BlocOverrides.runZoned(
     () => runApp(const AstraCuratorApp()),
-    blocObserver: SimpleBlocObserver(),
   );
 }
