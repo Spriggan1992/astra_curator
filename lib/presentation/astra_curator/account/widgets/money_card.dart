@@ -9,14 +9,24 @@ class MoneyCard extends StatelessWidget {
     required this.money,
     this.isEnableCard = true,
     this.onTap,
+    this.onTapMyQwery,
+    this.onTapCondition,
   }) : super(key: key);
   
     /// Button click event handler.
   final VoidCallback? onTap;
+
    /// A value of the money with currency.
   final String money;
+  
    /// A flag responsible for enabling button.
   final bool isEnableCard;
+
+  /// My qwery
+  final VoidCallback? onTapMyQwery;
+
+  /// My qwery
+  final VoidCallback? onTapCondition;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +39,9 @@ class MoneyCard extends StatelessWidget {
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: [
+            const SizedBox(height: 18),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -47,12 +59,29 @@ class MoneyCard extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 18),
-            Text(
-              'Условия выведения',
-              style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                color: AstraColors.black08,
-              ),
+            const SizedBox(height: 8),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                TextButton(
+                   onPressed:onTapCondition ,
+                  child: Text(
+                    'Условия выведения',
+                    style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                      color: AstraColors.black08,
+                    ),
+                  ),
+                ),
+                 TextButton(
+                   onPressed:onTapMyQwery ,
+                   child: Text(
+                    'Мои запросы',
+                    style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                      color: AstraColors.black08,
+                    ),
+                ),
+                 ),
+              ],
             )
           ],
         ),
