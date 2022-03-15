@@ -1,4 +1,4 @@
-import 'package:astra_curator/presentation/astra_curator/account/widgets/i_table_row.dart';
+import 'package:astra_curator/presentation/astra_curator/account/widgets/astra_table_row.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

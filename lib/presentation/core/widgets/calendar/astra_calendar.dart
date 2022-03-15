@@ -78,7 +78,7 @@ class _AstraCalendarState extends State<AstraCalendar> {
         borderRadius: BorderRadius.circular(14),
       ),
       elevation: 2,
-      insetPadding: const EdgeInsets.symmetric(vertical: 100, horizontal: 24),
+      insetPadding: const EdgeInsets.symmetric(horizontal: 24),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,

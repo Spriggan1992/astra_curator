@@ -1,13 +1,35 @@
+import 'package:astra_curator/presentation/core/extensions/number_string.dart';
 import 'package:astra_curator/presentation/core/theming/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:astra_curator/presentation/core/widgets/buttons/astra_borderred_button.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
-class WithdrawDialog extends StatelessWidget {
-  const WithdrawDialog({Key? key, required this.controller, this.onSendQwery}) : super(key: key);
+/// Withdraw dialog to display withdraw summ and send query to withdraw money.
+class WithdrawDialog extends StatefulWidget {
+  const WithdrawDialog({Key? key, required this.controller, this.onSendQwery})
+      : super(key: key);
+
+  /// Text controller contains initial value which have gotten from server.
   final TextEditingController controller;
-  final VoidCallback? onSendQwery; 
+
+  /// The event handler. 1- validate entered summ. 2-send query to server.
+  final VoidCallback? onSendQwery;
+
+  @override
+  State<WithdrawDialog> createState() => _WithdrawDialogState();
+}
+
+class _WithdrawDialogState extends State<WithdrawDialog> {
+  String? errorText = '';
+
+  String initialValue = '';
+  @override
+  void initState() {
+    super.initState();
+    initialValue = widget.controller.text;
+  }
+
   @override
   Widget build(BuildContext context) {
     final _textTheme = Theme.of(context).textTheme;
@@ -44,17 +66,21 @@ class WithdrawDialog extends StatelessWidget {
             SizedBox(
               width: MediaQuery.of(context).size.width / 2,
               child: TextFormField(
-                controller: controller,
+                controller: widget.controller,
                 textAlign: TextAlign.center,
                 keyboardType: TextInputType.number,
                 style: _textTheme.displayMedium!.copyWith(
                   fontWeight: FontWeight.w600,
                   fontSize: 28,
                 ),
-                onChanged: (value) {},
-                decoration: const InputDecoration(
+                onFieldSubmitted: (value) {},
+                decoration: InputDecoration(
+                  errorText: errorText,
+                  errorStyle: _textTheme.bodySmall!.copyWith(
+                    color: AstraColors.errorColor,
+                  ),
                   suffixText: '₽',
-                  border: UnderlineInputBorder(
+                  border: const UnderlineInputBorder(
                     borderSide: BorderSide(
                       color: Colors.grey,
                     ),
@@ -67,8 +93,13 @@ class WithdrawDialog extends StatelessWidget {
               width: MediaQuery.of(context).size.width / 1.4,
               child: AstraBorderedButton(
                 title: 'Отправить запрос',
-                isEnableButton: controller.text.isNotEmpty,
-                onTap: onSendQwery,
+                isEnableButton: widget.controller.text.isNotEmpty,
+                onTap: () {
+                  validate();
+                  if (errorText!.isEmpty) {
+                    return widget.onSendQwery!();
+                  }
+                },
               ),
             ),
             const SizedBox(height: 24),
@@ -77,6 +108,25 @@ class WithdrawDialog extends StatelessWidget {
       ),
     );
   }
+
+  /// Compare initial value with entered value.
+  /// If initial value less than enterred value then shows error text.
+  void validate() {
+    final _enteredNumber = int.tryParse(
+          initialValue.formatStringToNumberString(),
+        ) ??
+        0;
+    final _summ = int.tryParse(
+          widget.controller.text.formatStringToNumberString(),
+        ) ??
+        0;
+
+    if (_enteredNumber < _summ) {
+      errorText = 'Сумма запроса больше чем положено.';
+      setState(() {});
+    } else {
+      errorText = '';
+      setState(() {});
+    }
+  }
 }
-
-

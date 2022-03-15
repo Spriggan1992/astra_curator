@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
-
 import 'package:astra_curator/domain/my_account/models/withdraw/withdraw_history.dart';
 import 'package:astra_curator/presentation/core/extensions/date_tim_to_string.dart';
 import 'package:astra_curator/presentation/core/theming/colors.dart';
 
-/// Table row abstract class.
-abstract class ITableRow {
+/// Table row class.
+class AstraTableRow {
+  final List<WithdrawHistory> histories;
+
+  AstraTableRow({required this.histories});
+
   /// Get table rows to display in the table.
   List<TableRow> getTableRow(BuildContext context) {
     List<TableRow> rows = [];
-    final histories = getHistories();
-
+   
     if (histories.isNotEmpty) {
       _addHeaderForTableRow(rows, context);
 
@@ -22,9 +24,6 @@ abstract class ITableRow {
     }
     return rows;
   }
-
-  /// Retrieve withdraw history data
-  List<WithdrawHistory> getHistories();
 
   /// Get status color by status.
   Color _getColor(WithdrawHistory withdrawHistory) {
@@ -51,10 +50,11 @@ abstract class ITableRow {
   }
 
   /// Table row.
-  @override
   TableRow _getTableRow(BuildContext context, WithdrawHistory withdrawHistory,
       Color color, TextTheme _textTheme) {
+   
     return TableRow(
+      
       decoration: const BoxDecoration(
         border: Border(
           bottom: BorderSide(color: Colors.black12),
@@ -114,7 +114,7 @@ abstract class ITableRow {
             ),
           ),
         ),
-      ],
+      ], 
     );
   }
 
@@ -160,15 +160,3 @@ abstract class ITableRow {
   }
 }
 
-/// Astra table row.
-class AstraTableRow extends ITableRow {
-  AstraTableRow({required this.histories});
-
-  /// List of histories.
-  final List<WithdrawHistory> histories;
-
-  @override
-  List<WithdrawHistory> getHistories() {
-    return histories;
-  }
-}

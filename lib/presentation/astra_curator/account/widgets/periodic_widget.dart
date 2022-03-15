@@ -24,6 +24,7 @@ class PeriodicWidget extends StatelessWidget {
               children: [
                 Text(
                   'Начисление за весь период: ',
+                  textScaleFactor: 0.8,
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         fontWeight: FontWeight.w600,
                         color: AstraColors.black03,
@@ -31,6 +32,7 @@ class PeriodicWidget extends StatelessWidget {
                 ),
                 Text(
                   "${rangeDate.beginDate!.dateTimeToddMMyyFormat()} - ${rangeDate.endDate!.dateTimeToddMMyyFormat()}",
+                  textScaleFactor: 0.8,
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         fontWeight: FontWeight.w600,
                         color: AstraColors.black,

@@ -10,6 +10,7 @@ import 'package:astra_curator/presentation/astra_curator/account/widgets/withdra
 import 'package:astra_curator/presentation/astra_curator/account/widgets/withdraw_history_dialog.dart';
 import 'package:astra_curator/presentation/core/dialogs/snack_bar.dart';
 import 'package:astra_curator/presentation/core/extensions/date_tim_to_string.dart';
+import 'package:astra_curator/presentation/core/extensions/money_format.dart';
 import 'package:astra_curator/presentation/core/theming/colors.dart';
 import 'package:astra_curator/presentation/core/widgets/bars/appbar/main_app_bar.dart';
 import 'package:astra_curator/presentation/core/widgets/calendar/astra_calendar.dart';
@@ -81,8 +82,9 @@ class _AccountScreenState extends State<AccountScreen> {
               },
               builder: (context, state) {
                 _amount = state.account.amount;
+                
                 return MoneyCard(
-                  money: '${state.account.amount} ₽',
+                  money: '${state.account.amount.formattedAmount()} ₽',
                   onTap: (state.account.amount == 0)
                       ? null
                       : () {
@@ -120,7 +122,7 @@ class _AccountScreenState extends State<AccountScreen> {
                               id: 'ID: ${_accountHistory.id}',
                               date: _accountHistory.convertedDateTime
                                   .dateTimeToddMMyyFormat(),
-                              money: '${_accountHistory.formattedAmount} ₽ ',
+                              money: '${_accountHistory.amount.formattedAmount()} ₽ ',
                               paket: _accountHistory.paket,
                             );
                           },
@@ -173,7 +175,7 @@ class _AccountScreenState extends State<AccountScreen> {
   }
 
   Future<void> showWithdrawDialog(BuildContext context) async {
-    controller.text = _amount.toString();
+    controller.text = _amount.formattedAmount();
     await showDialog(
       barrierDismissible: false,
       context: context,
