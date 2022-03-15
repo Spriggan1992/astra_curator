@@ -2,6 +2,7 @@ import 'package:astra_curator/domain/core/failure/astra_failure.dart';
 import 'package:astra_curator/domain/models/calendar_range_date.dart';
 import 'package:astra_curator/domain/my_account/models/account_history/account_history.dart';
 import 'package:astra_curator/domain/my_account/repositories/i_account_repository.dart';
+import 'package:astra_curator/presentation/core/extensions/date_tim_to_string.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -31,7 +32,7 @@ class AccountHistoryBloc
             final result = await _api.getHistories();
             _getHistories(event, emit, result, false);
           },
-          loadHistoriesbyPeriod: (e) async {
+          loadHistoriesByPeriod: (e) async {
             emit(
               state.copyWith(
                 isLoading: true,
@@ -39,10 +40,10 @@ class AccountHistoryBloc
                 isFetchingByPeriod: false,
               ),
             );
-            await Future.delayed(const Duration(milliseconds: 500), () => true);
-            final result = await _api.getHistoriesbyPeriod(
-              beginDate: e.rangeDate.formattedBeginDate,
-              endDate: e.rangeDate.formattedEndDate,
+
+            final result = await _api.getHistoriesByPeriod(
+              beginDate: e.rangeDate.beginDate!.dateTimeToddMMyyFormat(),
+              endDate: e.rangeDate.endDate!.dateTimeToddMMyyFormat(),
             );
             _getHistories(event, emit, result, true);
           },
@@ -53,7 +54,7 @@ class AccountHistoryBloc
 
   Future<void> _getHistories(
     AccountHistoryEvent event,
-    Emitter<AccountHistoryState> emmitter,
+    Emitter<AccountHistoryState> emitter,
     Either<AstraFailure, List<AccountHistory>> result,
     bool isFetchingByPeriod,
   ) async {
@@ -61,7 +62,7 @@ class AccountHistoryBloc
       (l) => {
         l.map(
           api: (e) {
-            emmitter(
+            emitter(
               state.copyWith(
                 histories: [],
                 isLoading: false,
@@ -73,7 +74,7 @@ class AccountHistoryBloc
             );
           },
           noConnection: (e) {
-            emmitter(
+            emitter(
               state.copyWith(
                 histories: [],
                 isLoading: false,
@@ -86,10 +87,10 @@ class AccountHistoryBloc
           },
         ),
       },
-      (r) => {
-        emmitter(
+      (histories) => {
+        emitter(
           state.copyWith(
-            histories: r,
+            histories: histories,
             isLoading: false,
             isNoConnection: false,
             isSuccess: true,

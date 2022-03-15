@@ -63,7 +63,7 @@ class AccountRepository implements IAccountRepository {
 
   /// Fetch account histories by period.
   @override
-  Future<Either<AstraFailure, List<AccountHistory>>> getHistoriesbyPeriod({
+  Future<Either<AstraFailure, List<AccountHistory>>> getHistoriesByPeriod({
     required String beginDate,
     required String endDate,
   }) {
@@ -111,16 +111,16 @@ class AccountRepository implements IAccountRepository {
         final response =
             await _dio.get(Endpoints.account.withdrawHistory as String);
 
-        final List<WithdrawHistory> withdrawHistaryList = [];
+        final List<WithdrawHistory> withdrawHistoryList = [];
 
         for (final item in response.data) {
           final WithdrawHistory _history =
               WithdrawHistoryDTO.fromJson(item as Map<String, dynamic>)
                   .toWithdrawHistory();
-          withdrawHistaryList.add(_history);
+          withdrawHistoryList.add(_history);
         }
 
-        return withdrawHistaryList;
+        return withdrawHistoryList;
       },
     );
   }

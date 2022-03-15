@@ -6,7 +6,7 @@ class AccountHistoryState with _$AccountHistoryState {
     /// List of histories fetched from server.
     required List<AccountHistory> histories,
 
-    /// A flag that responsible that data fetched successfully.
+    /// A flag that responsible data fetched successfully.
     required bool isSuccess,
 
     /// A flag responsible for show snackbar with no unexpected error.

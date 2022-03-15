@@ -1,4 +1,3 @@
-import 'package:astra_curator/domain/my_account/models/account/account.dart';
 import 'package:intl/intl.dart';
 
 /// Represent extension to convert amount to formatted string currency.

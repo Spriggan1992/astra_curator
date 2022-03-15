@@ -21,7 +21,7 @@ class AccountTile extends StatelessWidget {
   /// The pay date.
   final String date;
 
-  /// The Summ of the payment.
+  /// The sum of the payment.
   final String money;
 
   /// Paket of the payment.

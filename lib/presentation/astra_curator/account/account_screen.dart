@@ -38,9 +38,9 @@ class _AccountScreenState extends State<AccountScreen> {
 
   @override
   void initState() {
-    context
-        .read<AccountHistoryBloc>()
-        .add(const AccountHistoryEvent.loadHistories());
+    // context
+    //     .read<AccountHistoryBloc>()
+    //     .add(const AccountHistoryEvent.loadHistories());
     super.initState();
   }
 
@@ -56,11 +56,10 @@ class _AccountScreenState extends State<AccountScreen> {
       child: Scaffold(
         appBar: MainAppBar(
           title: 'Мой счет',
-          onPressed: () {},
           actions: [
             IconButton(
               onPressed: () {
-                showCalendarDialog(context);
+                _showCalendarDialog(context);
               },
               icon: const Icon(
                 Icons.calendar_today,
@@ -82,17 +81,17 @@ class _AccountScreenState extends State<AccountScreen> {
               },
               builder: (context, state) {
                 _amount = state.account.amount;
-                
+
                 return MoneyCard(
                   money: '${state.account.amount.formattedAmount()} ₽',
                   onTap: (state.account.amount == 0)
                       ? null
                       : () {
-                          showWithdrawDialog(context);
+                          _showWithdrawDialog(context);
                         },
                   isEnableCard: state.account.amount != 0,
                   onTapMyQwery: () {
-                    showWithdrawHistoryDialog(context);
+                    _showWithdrawHistoryDialog(context);
                   },
                 );
               },
@@ -122,7 +121,8 @@ class _AccountScreenState extends State<AccountScreen> {
                               id: 'ID: ${_accountHistory.id}',
                               date: _accountHistory.convertedDateTime
                                   .dateTimeToddMMyyFormat(),
-                              money: '${_accountHistory.amount.formattedAmount()} ₽ ',
+                              money:
+                                  '${_accountHistory.amount.formattedAmount()} ₽ ',
                               paket: _accountHistory.paket,
                             );
                           },
@@ -137,7 +137,7 @@ class _AccountScreenState extends State<AccountScreen> {
   }
 
   /// Shows [AstraCalendar] for choice range date.
-  Future<void> showCalendarDialog(BuildContext context) async {
+  Future<void> _showCalendarDialog(BuildContext context) async {
     final result = await showDialog<CalendarRangeDate>(
       context: context,
       builder: (_) {
@@ -149,7 +149,7 @@ class _AccountScreenState extends State<AccountScreen> {
       rangeDate = result;
       if (result.isFilled) {
         context.read<AccountHistoryBloc>().add(
-              AccountHistoryEvent.loadHistoriesbyPeriod(
+              AccountHistoryEvent.loadHistoriesByPeriod(
                 rangeDate: rangeDate,
               ),
             );
@@ -164,7 +164,7 @@ class _AccountScreenState extends State<AccountScreen> {
   }
 
   /// Shows dialog ui to display withdraw histories.
-  Future<void> showWithdrawHistoryDialog(BuildContext context) async {
+  Future<void> _showWithdrawHistoryDialog(BuildContext context) async {
     await showDialog(
       context: context,
       barrierDismissible: false,
@@ -174,7 +174,7 @@ class _AccountScreenState extends State<AccountScreen> {
     );
   }
 
-  Future<void> showWithdrawDialog(BuildContext context) async {
+  Future<void> _showWithdrawDialog(BuildContext context) async {
     controller.text = _amount.formattedAmount();
     await showDialog(
       barrierDismissible: false,
@@ -185,7 +185,7 @@ class _AccountScreenState extends State<AccountScreen> {
           onSendQwery: () {
             context.read<WithdrawBloc>().add(
                   WithdrawEvent.withdraw(
-                    textToDouble(controller.text),
+                    _textToDouble(controller.text),
                   ),
                 );
           },
@@ -195,7 +195,7 @@ class _AccountScreenState extends State<AccountScreen> {
   }
 
   /// Parse text to double.
-  double textToDouble(String text) {
+  double _textToDouble(String text) {
     try {
       return double.parse(text);
     } catch (e) {

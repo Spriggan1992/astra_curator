@@ -11,7 +11,7 @@ import 'package:astra_curator/presentation/core/theming/colors.dart';
 /// Returns null when click close button.
 /// Returns [CalendarRangeDate] data when tap [Выбрать] button.
 ///
-/// Recomended to use with the dialogs [showDialog] and [showCupertinoDialog].
+/// Recommended to use with the dialogs [showDialog] or [showCupertinoDialog].
 class AstraCalendar extends StatefulWidget {
 
   final CalendarRangeDate rangeDate;  

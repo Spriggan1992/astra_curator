@@ -36,6 +36,10 @@ class AccountDTO with _$AccountDTO {
       );
 
   /// Returns account from AccountDTO.
-  Account toDomain() =>
-      Account(id: id, amount: amount, rate: rate, curatorId: curatorId);
+  Account toDomain() => Account(
+        id: id,
+        amount: amount,
+        rate: rate,
+        curatorId: curatorId,
+      );
 }

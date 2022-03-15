@@ -11,13 +11,13 @@ class AstraTableRow {
 
   /// Get table rows to display in the table.
   List<TableRow> getTableRow(BuildContext context) {
-    List<TableRow> rows = [];
+    final List<TableRow> rows = [];
    
     if (histories.isNotEmpty) {
       _addHeaderForTableRow(rows, context);
 
       final TextTheme _textTheme = Theme.of(context).textTheme;
-      for (var history in histories) {
+      for (final history in histories) {
         final Color color = _getColor(history);
         rows.add(_getTableRow(context, history, color, _textTheme));
       }

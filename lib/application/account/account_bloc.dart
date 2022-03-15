@@ -35,10 +35,10 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
                   ),
                 );
               },
-              (r) {
+              (account) {
                 emit(
                   state.copyWith(
-                    account: r,
+                    account: account,
                     isLoading: false,
                   ),
                 );

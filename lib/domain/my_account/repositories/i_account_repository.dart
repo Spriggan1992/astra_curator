@@ -13,12 +13,12 @@ abstract class IAccountRepository {
   Future<Either<AstraFailure, List<AccountHistory>>> getHistories();
 
   /// Get account history by period (cashback).
-  Future<Either<AstraFailure, List<AccountHistory>>> getHistoriesbyPeriod({
+  Future<Either<AstraFailure, List<AccountHistory>>> getHistoriesByPeriod({
     required String beginDate,
     required String endDate,
   });
    
-  /// Post qwery to withdraw money from account. 
+  /// Post query to withdraw money from account. 
   Future<Either<AstraFailure, Unit>> withdrawMoney({required double amount}); 
 
   /// Get account history (cashback).

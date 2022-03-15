@@ -8,8 +8,7 @@ class Account with _$Account {
   const Account._();
 
   const factory Account({
-    
-    /// Cashback id. 
+    /// Cashback id.
     required int id,
 
     /// Cashback amount.
@@ -20,8 +19,12 @@ class Account with _$Account {
 
     /// Curator id.
     required int curatorId,
-
   }) = _Account;
 
-   factory Account.empty()=>const Account(id: 0, amount: 0, rate: 0, curatorId: 0); 
+  factory Account.empty() => const Account(
+        id: 0,
+        amount: 0,
+        rate: 0,
+        curatorId: 0,
+      );
 }

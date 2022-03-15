@@ -6,7 +6,7 @@ class AccountHistoryEvent with _$AccountHistoryEvent {
   const factory AccountHistoryEvent.loadHistories() = LoadHistories;
 
   /// Event to fetch list of account histories by period.
-  const factory AccountHistoryEvent.loadHistoriesbyPeriod({
+  const factory AccountHistoryEvent.loadHistoriesByPeriod({
     required CalendarRangeDate rangeDate,
-  }) = LoadHistoriesbyDate;
+  }) = LoadHistoriesByDate;
 }

@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_dynamic_calls
-
 import 'package:astra_curator/application/account/account_history/account_history_bloc.dart';
 import 'package:astra_curator/presentation/core/routes/app_router.gr.dart';
 import 'package:astra_curator/presentation/core/widgets/bars/bottom_navigation_bar/icon_nav_item.dart';
@@ -30,7 +28,7 @@ class HomeScreen extends StatelessWidget {
         return NavBar(
           onTap: (index) {
             tabsRouter.setActiveIndex(index);
-            //_loadDataWhenPressNavButton(navContext, index, _routes);
+            _loadDataWhenPressNavButton(navContext, index, _routes);
           },
           currentIndex: tabsRouter.activeIndex,
           items: [
@@ -52,4 +50,20 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
+  void _loadDataWhenPressNavButton(
+      BuildContext context, int index, List<PageRouteInfo<dynamic>> routes) {
+    switch (index) {
+      case 0:
+        break;
+      case 1:
+        break;
+      case 2:
+        break;
+      case 3:
+        context
+            .read<AccountHistoryBloc>()
+            .add(const AccountHistoryEvent.loadHistories());
+        break;
+    }
+  }
 }
