@@ -18,6 +18,7 @@ class AstraColors {
   static const Color textLinkColor = Color.fromARGB(255, 52, 92, 187);
   static const Color dividerColor = Color.fromRGBO(24, 24, 24, 0.1);
   static const Color errorColor = Colors.red;
+
   static const Color green = Color.fromRGBO(47, 156, 45, 1);
   static const Color calendarSelectColor = Color.fromRGBO(24, 38, 71, 0.2);
   static const Color milkColor = Color.fromRGBO(244, 244, 244, 1);

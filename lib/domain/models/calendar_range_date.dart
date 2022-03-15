@@ -8,8 +8,12 @@ class CalendarRangeDate with _$CalendarRangeDate {
 
   const factory CalendarRangeDate({
     /// Begin date
-    required final DateTime? beginDate,
+    DateTime? beginDate,
+
     /// End date
-    required final DateTime? endDate,
+    DateTime? endDate,
+
+    /// A flag that filling end date and begin date.
+    required bool isFilled,
   }) = _CalendarRangeDate;
 }

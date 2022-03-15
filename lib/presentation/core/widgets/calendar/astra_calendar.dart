@@ -1,17 +1,24 @@
-import 'package:astra_curator/domain/models/calendar_range_date.dart';
-import 'package:astra_curator/presentation/core/theming/colors.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
+
+import 'package:astra_curator/domain/models/calendar_range_date.dart';
+import 'package:astra_curator/presentation/core/theming/colors.dart';
 
 /// Represent base component of app calendar.
 ///
 /// Returns null when click close button.
 /// Returns [CalendarRangeDate] data when tap [Выбрать] button.
 ///
-/// Recomended to use with the dialogs [showDialog] and [showCupertinoDialog].
+/// Recommended to use with the dialogs [showDialog] or [showCupertinoDialog].
 class AstraCalendar extends StatefulWidget {
+
+  final CalendarRangeDate rangeDate;  
+  const AstraCalendar({
+    Key? key,
+    required this.rangeDate,
+  }) : super(key: key);
   @override
   _AstraCalendarState createState() => _AstraCalendarState();
 }
@@ -58,6 +65,8 @@ class _AstraCalendarState extends State<AstraCalendar> {
 
   @override
   void initState() {
+    _rangeStart = widget.rangeDate.beginDate; 
+    _rangeEnd = widget.rangeDate.endDate; 
     super.initState();
   }
 
@@ -69,7 +78,7 @@ class _AstraCalendarState extends State<AstraCalendar> {
         borderRadius: BorderRadius.circular(14),
       ),
       elevation: 2,
-      insetPadding: const EdgeInsets.symmetric(vertical: 100, horizontal: 24),
+      insetPadding: const EdgeInsets.symmetric(horizontal: 24),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -199,22 +208,43 @@ class _AstraCalendarState extends State<AstraCalendar> {
             },
           ),
           const Divider(height: 1, color: Colors.grey),
-          TextButton(
-            onPressed: () {
-              final _rangeDate = CalendarRangeDate(
-                beginDate: _rangeStart,
-                endDate: _rangeEnd,
-              );
-              context.router.pop(_rangeDate);
-            },
-            child: Text(
-              'Выбрать',
-              style: _textTheme.titleMedium!.copyWith(
-                fontWeight: FontWeight.w700,
-                fontSize: 14,
-                color: AstraColors.black03,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              TextButton(
+                onPressed: () {
+                  context.router.pop(const CalendarRangeDate(isFilled: false));
+                },
+                child: Text(
+                  'Очистить',
+                  style: _textTheme.titleMedium!.copyWith(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 14,
+                    color: AstraColors.errorColor,
+                  ),
+                ),
               ),
-            ),
+              TextButton(
+                onPressed: () {
+                  final _rangeDate = CalendarRangeDate(
+                    beginDate: _rangeStart,
+                    endDate: _rangeEnd,
+                    isFilled: (_rangeEnd != null && _rangeStart != null)
+                        ? true
+                        : false,
+                  );
+                  context.router.pop(_rangeDate);
+                },
+                child: Text(
+                  'Выбрать',
+                  style: _textTheme.titleMedium!.copyWith(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 14,
+                    color: AstraColors.black03,
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),
