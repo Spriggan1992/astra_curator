@@ -32,7 +32,6 @@ class SplashScreen extends StatelessWidget {
             );
           },
         ),
-       
       ],
       child: Scaffold(
         body: InkWell(
@@ -56,7 +55,7 @@ class SplashScreen extends StatelessWidget {
                 Visibility(
                   visible: isLoading,
                   child: const PlatformActivityIndicator(
-                    isCapertinoDarkTheme: true,
+                    isCupertinoDarkTheme: true,
                   ),
                 ),
               ],

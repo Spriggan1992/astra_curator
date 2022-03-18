@@ -46,7 +46,7 @@ class PasswordScreen extends StatelessWidget {
         child: ScreenContent(
           termContent: Container(),
           termsTextButton: Container(),
-          onBackPresed: () => context.router.pop(),
+          onBackPressed: () => context.router.pop(),
           title: code == null ? "Введите пароль" : "Задайте пароль",
           textFieldContent: BlocBuilder<PasswordBloc, PasswordState>(
             buildWhen: (p, c) =>
@@ -74,18 +74,11 @@ class PasswordScreen extends StatelessWidget {
             buildWhen: (p, c) =>
                 p.isLoading != c.isLoading || p.isEnableBtn != c.isEnableBtn,
             builder: (context, state) {
-              ButtonType buttonType = ButtonType.waiting;
-
-              if (state.isLoading) {
-                buttonType = ButtonType.loading;
-              } else {
-                buttonType = ButtonType.success;
-              }
-
               return AstraGradientButton(
-                type: buttonType,
                 title: 'Продолжить',
-                onTap: () {
+                isEnableButton: state.isEnableBtn,
+                isLoading: state.isLoading,
+                onClick: () {
                   context.read<PasswordBloc>().add(
                         const PasswordEvent.pressedButton(),
                       );

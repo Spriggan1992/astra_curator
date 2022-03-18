@@ -2,6 +2,7 @@ import 'package:astra_curator/presentation/core/theming/colors.dart';
 import 'package:astra_curator/presentation/core/widgets/text_fields/core/submitting_text_status.dart';
 import 'package:astra_curator/presentation/core/widgets/text_fields/core/validators.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 /// Represent custom text field that submit data on lost focus.
 class LostFocusTextField extends StatefulWidget {
@@ -32,6 +33,27 @@ class LostFocusTextField extends StatefulWidget {
   /// By default [true].
   final bool isShowSuffixIcon;
 
+  final List<TextInputFormatter>? textInputFormatter;
+
+  /// Text field container height.
+  ///
+  /// By default is `null`.
+  final double? textFieldHeigh;
+
+  /// The type of information for which to optimize the text input control.
+  ///
+  ///  By default is `null`.
+  final TextInputType? keyboardType;
+
+  /// An action the user has requested the text input control to perform.
+  ///
+  /// By default is `null`.
+  final TextInputAction? textInputAction;
+
+  /// Configures how the platform keyboard will select an uppercase or lowercase keyboard.
+  ///
+  /// By default is `TextCapitalization.none`.
+  final TextCapitalization textCapitalization;
   const LostFocusTextField({
     Key? key,
     required this.hint,
@@ -41,6 +63,11 @@ class LostFocusTextField extends StatefulWidget {
     this.initialTextValue = '',
     this.isShowSuffixIcon = true,
     this.readOnly = false,
+    this.textInputFormatter,
+    this.textFieldHeigh,
+    this.keyboardType,
+    this.textInputAction,
+    this.textCapitalization = TextCapitalization.none,
   }) : super(key: key);
 
   @override
@@ -75,15 +102,19 @@ class _LostFocusTextFieldState extends State<LostFocusTextField> {
       if (_submittingStatus == SubmittingTextStatus.success) {
         widget.onSubmit!(_controller.text);
       }
+      if (_controller.text.isEmpty) {
+        widget.onSubmit!('');
+      }
     });
   }
 
-  bool validateInputValue() {
-    bool isValid = true;
+  bool isValid() {
+    bool isValid = false;
     for (final validator in _validators) {
-      if (validator.validateInputValue(_controller.text)) {
+      if (validator.isValid(_controller.text)) {
+        isValid = true;
+      } else {
         _errorMessage = validator.errorMessage ?? '';
-        isValid = false;
         break;
       }
     }
@@ -94,7 +125,7 @@ class _LostFocusTextFieldState extends State<LostFocusTextField> {
     setState(() {
       if (_focusNode.hasFocus) {
         _submittingStatus = SubmittingTextStatus.initial;
-      } else if (validateInputValue()) {
+      } else if (!isValid()) {
         _submittingStatus = SubmittingTextStatus.failure;
       } else {
         _submittingStatus = SubmittingTextStatus.success;
@@ -122,23 +153,31 @@ class _LostFocusTextFieldState extends State<LostFocusTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      readOnly: widget.readOnly,
-      controller: _controller,
-      focusNode: _focusNode,
-      decoration: InputDecoration(
-        hintText: widget.hint,
-        hintStyle: Theme.of(context)
-            .textTheme
-            .bodySmall!
-            .copyWith(color: AstraColors.black04),
-        suffixIcon: showErrorIcon(),
-        errorStyle: TextStyle(height: _errorMessage.isNotEmpty ? null : 0),
-        errorText: _submittingStatus == SubmittingTextStatus.failure
-            ? _errorMessage
-            : null,
+    return SizedBox(
+      height: widget.textFieldHeigh,
+      child: TextField(
+        textCapitalization: widget.textCapitalization,
+        maxLines: null,
+        keyboardType: widget.keyboardType,
+        readOnly: widget.readOnly,
+        controller: _controller,
+        focusNode: _focusNode,
+        inputFormatters: widget.textInputFormatter,
+        decoration: InputDecoration(
+          hintText: widget.hint,
+          hintStyle: Theme.of(context)
+              .textTheme
+              .bodySmall!
+              .copyWith(color: AstraColors.black04),
+          suffixIcon: showErrorIcon(),
+          errorStyle: TextStyle(height: _errorMessage.isNotEmpty ? null : 0),
+          errorText: _submittingStatus == SubmittingTextStatus.failure
+              ? _errorMessage
+              : null,
+        ),
+        onTap: widget.readOnly ? widget.onTap : null,
+        textInputAction: widget.textInputAction ?? TextInputAction.next,
       ),
-      onTap: widget.readOnly ? widget.onTap : null,
     );
   }
 }

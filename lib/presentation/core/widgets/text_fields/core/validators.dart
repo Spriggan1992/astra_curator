@@ -4,7 +4,7 @@ abstract class Validator {
   ///
   /// If the [value] satisfy validation rules
   /// returns true otherwise return false.
-  bool validateInputValue(String value);
+  bool isValid(String value);
 
   /// The error message to display.
   String? errorMessage;
@@ -25,7 +25,7 @@ class RequiredFiled implements Validator {
   String? errorMessage;
 
   @override
-  bool validateInputValue(String value) {
+  bool isValid(String value) {
     return value.isNotEmpty;
   }
 }
@@ -36,8 +36,8 @@ class RequiredMin80Symbols implements Validator {
   String? errorMessage = 'Минимум 80 символов';
 
   @override
-  bool validateInputValue(String value) {
-    return value.length <= 80;
+  bool isValid(String value) {
+    return value.length >= 80;
   }
 }
 
@@ -49,5 +49,5 @@ class DefaultValidator implements Validator {
   String? errorMessage;
 
   @override
-  bool validateInputValue(String value) => true;
+  bool isValid(String value) => true;
 }

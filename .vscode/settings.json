@@ -5,7 +5,9 @@
         "**/.hg": true,
         "**/CVS": true,
         "**/.DS_Store": true,
-        "**/Thumbs.db": true
+        "**/Thumbs.db": true,
+        "**/*.freezed.dart": true,
+        "**/*.g.dart": true
     },
     "hide-files.files": [],
     "cSpell.words": [
@@ -17,5 +19,6 @@
         "unfocus",
         "vsync",
         "Добавление"
-    ]
+    ],
+    "explorerExclude.backup": null
 }

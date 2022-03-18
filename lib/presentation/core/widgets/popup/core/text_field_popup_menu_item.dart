@@ -1,5 +1,5 @@
 /// Represent element of [TextFieldPopUpMenuItem].
-class TextFieldPopUpMenuItem<T> {
+abstract class TextFieldPopUpMenuItem<T> {
   /// Title for displaying in popup menu.
   final String title;
 

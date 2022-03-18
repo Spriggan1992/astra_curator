@@ -48,8 +48,9 @@ class PasswordBloc extends Bloc<PasswordEvent, PasswordState> {
               (fail) => fail.maybeMap(
                 server: (value) => emit(
                   state.copyWith(
-                      errorMessage:
-                          '${value.message}\nПовторите пожалуйста еще раз.'),
+                    errorMessage:
+                        '${value.message}\nПовторите пожалуйста еще раз.',
+                  ),
                 ),
                 noConnection: (_) => emit(state.copyWith(isNoConnection: true)),
                 orElse: () {},

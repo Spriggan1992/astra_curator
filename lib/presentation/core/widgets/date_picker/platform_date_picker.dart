@@ -23,11 +23,13 @@ class PlatformDatePicker extends StatefulWidget {
   /// Submit [dateTime] event handler.
   final void Function(DateTime dateTime) onSubmitDate;
 
+  final DateTime? initialDate;
   const PlatformDatePicker({
     Key? key,
     required this.onSubmitDate,
     required this.hint,
     this.isShowSuffixIcon = true,
+    this.initialDate,
   }) : super(key: key);
 
   @override
@@ -37,6 +39,15 @@ class PlatformDatePicker extends StatefulWidget {
 class _PlatformDatePickerState extends State<PlatformDatePicker> {
   final _controller = TextEditingController();
   SelectionDateStatus _selectionDateStatus = SelectionDateStatus.initial;
+
+  @override
+  void initState() {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      _controller.text =
+          widget.initialDate?.dateTimeToStringDateTime(context) ?? '';
+    });
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -85,8 +96,10 @@ class _PlatformDatePickerState extends State<PlatformDatePicker> {
             height: MediaQuery.of(context).size.width * 0.35,
             width: double.infinity,
             child: IOSDatePicker(
+              initialDate: widget.initialDate,
               onDateTimeChanged: (dateTime) {
-                _controller.text = dateTime.dateTimeToStringDateTime(context);
+                _controller.text =
+                    dateTime.dateTimeToStringDateTime(context) ?? '';
                 widget.onSubmitDate(dateTime);
               },
             ),
@@ -108,7 +121,9 @@ class _PlatformDatePickerState extends State<PlatformDatePicker> {
     return showDialog<DateTime>(
       context: context,
       builder: (context) {
-        return const AndroidDatePicker();
+        return AndroidDatePicker(
+          initialDate: widget.initialDate,
+        );
       },
     );
   }
@@ -121,7 +136,7 @@ class _PlatformDatePickerState extends State<PlatformDatePicker> {
     if (Platform.isAndroid) {
       final pickedDate = await _showAndroidDatePicker();
       if (pickedDate != null) {
-        _controller.text = pickedDate.dateTimeToStringDateTime(context);
+        _controller.text = pickedDate.dateTimeToStringDateTime(context) ?? '';
         widget.onSubmitDate(pickedDate);
       }
       _setSelectionDateStatus();

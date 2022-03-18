@@ -1,4 +1,5 @@
 import 'package:astra_curator/presentation/core/theming/colors.dart';
+import 'package:astra_curator/presentation/core/theming/gradients.dart';
 import 'package:astra_curator/presentation/core/widgets/global/platform.activity_indicator.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +12,8 @@ class AstraElevatedButton extends StatelessWidget {
     this.titleColor,
     this.isEnableButton = true,
     this.isLoading = false,
+    this.backgroundColor,
+    this.width,
   }) : super(key: key);
 
   /// Button title to display.
@@ -29,37 +32,48 @@ class AstraElevatedButton extends StatelessWidget {
   /// if  buttonStyle is null, displays style from button themeData
   final Color? titleColor;
 
+  /// Button background color
+  final Color? backgroundColor;
+
+  /// Button width.
+  final double? width;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: MediaQuery.of(context).size.width * 0.7,
-      child: ElevatedButton(
-        onPressed: isEnableButton ? onClick : null,
-        style: ElevatedButton.styleFrom(
-          primary: AstraColors.milkColor,
+      width: width ?? double.infinity,
+      child: Container(
+        width: isLoading ? 20 : null,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(18),
         ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16),
-          child: SizedBox(
-            width: isLoading ? 20 : null,
-            height: 20,
-            child: isLoading
-                ? const PlatformActivityIndicator()
-                : Text(
-                    title,
-                    textAlign: TextAlign.center,
-                    style: (titleColor == null)
-                        ? const TextStyle(
-                            color: AstraColors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                          )
-                        : TextStyle(
-                            color: titleColor,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                          ),
-                  ),
+        child: ElevatedButton(
+          onPressed: isEnableButton ? onClick : null,
+          style: ElevatedButton.styleFrom(
+            shadowColor: Colors.transparent,
+            primary: backgroundColor ?? Colors.white,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            child: SizedBox(
+              width: isLoading ? 20 : null,
+              child: isLoading
+                  ? const PlatformActivityIndicator()
+                  : Text(
+                      title,
+                      textAlign: TextAlign.center,
+                      style: (titleColor == null)
+                          ? const TextStyle(
+                              color: AstraColors.white,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                            )
+                          : TextStyle(
+                              color: titleColor,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                            ),
+                    ),
+            ),
           ),
         ),
       ),

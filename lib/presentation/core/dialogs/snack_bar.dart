@@ -17,13 +17,15 @@ void showSnackBar(
             margin: const EdgeInsets.all(8),
             borderRadius: BorderRadius.circular(8),
             controller: controller,
-            backgroundColor: AstraColors.disableBtn,
+            backgroundColor: AstraColors.white,
             position: FlashPosition.bottom,
             behavior: FlashBehavior.floating,
             child: FlashBar(
               padding: const EdgeInsets.all(20),
-              content: Text(title ?? 'Отсутствует подключение к интернету',
-                  textAlign: TextAlign.center),
+              content: Text(
+                title ?? 'Отсутствует подключение к интернету',
+                textAlign: TextAlign.center,
+              ),
             ),
           );
     },

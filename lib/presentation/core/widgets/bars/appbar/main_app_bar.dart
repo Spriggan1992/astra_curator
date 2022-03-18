@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-/// Represent main appbar of app.
-class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
+/// Represent reusable appbar of app.
+class ReusableAppBar extends StatelessWidget implements PreferredSizeWidget {
   /// The primary title displayed in the app bar.
   final String? title;
 
@@ -21,7 +21,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   /// The leading icon click event handler.
   final Function()? onPressed;
 
-  const MainAppBar({
+  const ReusableAppBar({
     Key? key,
     this.title,
     this.onPressed,
@@ -36,6 +36,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       elevation: elevation,
       backgroundColor: (bgColor == null) ? Colors.white : bgColor,
+      automaticallyImplyLeading: false,
       leading: onPressed == null
           ? null
           : IconButton(

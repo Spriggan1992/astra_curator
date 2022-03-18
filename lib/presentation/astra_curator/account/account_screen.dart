@@ -54,7 +54,7 @@ class _AccountScreenState extends State<AccountScreen> {
         ),
       ],
       child: Scaffold(
-        appBar: MainAppBar(
+        appBar: ReusableAppBar(
           title: 'Мой счет',
           actions: [
             IconButton(

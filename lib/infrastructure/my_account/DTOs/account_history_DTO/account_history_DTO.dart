@@ -1,9 +1,10 @@
+// ignore_for_file: invalid_annotation_target
+
 import 'package:astra_curator/domain/my_account/models/account_history/account_history.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'account_history_DTO.freezed.dart';
 part 'account_history_DTO.g.dart';
-
 
 /// DTO for [AccountHistory] entity.
 @freezed
@@ -14,7 +15,7 @@ class AccountHistoryDTO with _$AccountHistoryDTO {
     /// History id.
     @JsonKey(name: 'id') required int id,
 
-     /// History paket.
+    /// History paket.
     @JsonKey(name: 'paket') required String paket,
 
     /// History amount.
@@ -26,7 +27,7 @@ class AccountHistoryDTO with _$AccountHistoryDTO {
     /// History date time.
     @JsonKey(name: 'datetime') required String dateTime,
 
-     /// History profile.
+    /// History profile.
     @JsonKey(name: 'profile') required String profile,
 
     /// Address
@@ -47,7 +48,7 @@ class AccountHistoryDTO with _$AccountHistoryDTO {
         paket: _.paket,
         profile: _.profile,
       );
-  
+
   /// Returns converted [AccountHistory] from domain.
   AccountHistory toAccountHistory() => AccountHistory(
         id: id,

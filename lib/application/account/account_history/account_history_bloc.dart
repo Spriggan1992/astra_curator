@@ -1,4 +1,4 @@
-import 'package:astra_curator/domain/core/failure/astra_failure.dart';
+import 'package:astra_curator/domain/core/failure/failure.dart';
 import 'package:astra_curator/domain/models/calendar_range_date.dart';
 import 'package:astra_curator/domain/my_account/models/account_history/account_history.dart';
 import 'package:astra_curator/domain/my_account/repositories/i_account_repository.dart';
@@ -55,7 +55,7 @@ class AccountHistoryBloc
   Future<void> _getHistories(
     AccountHistoryEvent event,
     Emitter<AccountHistoryState> emitter,
-    Either<AstraFailure, List<AccountHistory>> result,
+    Either<Failure, List<AccountHistory>> result,
     bool isFetchingByPeriod,
   ) async {
     result.fold(

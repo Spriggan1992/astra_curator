@@ -15,7 +15,7 @@ class SigninScreen extends StatelessWidget {
     return Scaffold(
       body: InkWell(
         child: Container(
-          width: MediaQuery.of(context).size.width,
+          padding: const EdgeInsets.symmetric(horizontal: 56),
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: Gradients.goldenGradient,
