@@ -5,6 +5,7 @@ import 'package:astra_curator/presentation/auth/widgets/screen_content.dart';
 import 'package:astra_curator/presentation/core/dialogs/snack_bar.dart';
 import 'package:astra_curator/presentation/core/routes/app_router.gr.dart';
 import 'package:astra_curator/presentation/core/theming/colors.dart';
+import 'package:astra_curator/presentation/core/utils/astra_input_formatter.dart';
 import 'package:astra_curator/presentation/core/widgets/buttons/astra_gradient_button.dart';
 import 'package:astra_curator/presentation/core/widgets/buttons/dialog_action_button.dart';
 import 'package:astra_curator/presentation/core/widgets/dialogs/dialog_one_actions.dart';
@@ -80,7 +81,10 @@ class PhoneNumberScreen extends StatelessWidget {
                 initialValue: '+7',
                 autofocus: true,
                 keyboardType: TextInputType.phone,
-                inputFormatters: [maskFormatter],
+                inputFormatters: [
+                  maskFormatter,
+                  AstraPhoneInputFormatter(),
+                ],
                 decoration:
                     const InputDecoration(hintText: "Введите номер телефона"),
                 onChanged: (value) {
