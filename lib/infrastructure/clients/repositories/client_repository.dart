@@ -25,15 +25,12 @@ class ClientRepository implements IClientRepository {
 
         final _body = response.data as List<dynamic>;
 
-        List<Client> clients = [];
-       
-        for (final item in _body) {
-          final client =
-              ClientDTO.fromJson(item as Map<String, dynamic>).toDomain();
-          clients.add(client);
-        }
+        final _clients = _body.map(
+          (client) =>
+              ClientDTO.fromJson(client as Map<String, dynamic>).toDomain(),
+        );
 
-        return clients;
+        return _clients.toList();
       },
     );
   }
