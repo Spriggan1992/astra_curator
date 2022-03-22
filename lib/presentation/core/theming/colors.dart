@@ -6,9 +6,11 @@ class AstraColors {
   static const Color mainDarkGold = Color(0xFF644821);
   static const Color white = Colors.white;
   static const Color white03 = Color.fromRGBO(251, 251, 251, 0.3);
+  static const Color white08 = Color.fromRGBO(251, 251, 251, 0.8);
   static const Color disableBtn = Color.fromRGBO(0, 0, 0, 0.8);
   static const Color btnBlueColor = Color.fromRGBO(24, 38, 71, 1);
   static const Color black = Color.fromRGBO(24, 24, 24, 1);
+  static const Color black01 = Color.fromRGBO(24, 24, 24, 0.1);
   static const Color black02 = Color.fromRGBO(24, 24, 24, 0.2);
   static const Color black03 = Color.fromRGBO(24, 24, 24, 0.3);
   static const Color black04 = Color.fromRGBO(24, 24, 24, 0.4);
