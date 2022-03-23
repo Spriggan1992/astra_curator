@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_annotation_target
+
 import 'package:astra_curator/domain/my_account/models/account_history/account_history.dart';
 import 'package:astra_curator/domain/my_account/models/withdraw/withdraw_history.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';

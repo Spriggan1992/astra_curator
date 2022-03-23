@@ -7,18 +7,23 @@ import 'package:flutter/material.dart';
 class PlatformActivityIndicator extends StatelessWidget {
   /// Whether the activity indicator brightness is dark or light.
   ///
-  /// /// Defaults to false.
-  final bool isCapertinoDarkTheme;
+  ///  Defaults to false.
+  final bool isCupertinoDarkTheme;
 
   /// Color of the activity indicator.
   ///
   /// Defaults to color extracted from native.
   final Color? materialIndicatorColor;
-  const PlatformActivityIndicator(
-      {Key? key,
-      this.isCapertinoDarkTheme = false,
-      this.materialIndicatorColor})
-      : super(key: key);
+
+  /// The width of the line used to draw the circle.
+  final double materialIndicatorStrokeWidth;
+
+  const PlatformActivityIndicator({
+    Key? key,
+    this.isCupertinoDarkTheme = false,
+    this.materialIndicatorColor,
+    this.materialIndicatorStrokeWidth = 4.0,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,12 +32,15 @@ class PlatformActivityIndicator extends StatelessWidget {
         ? CupertinoTheme(
             data: CupertinoTheme.of(context).copyWith(
               brightness:
-                  isCapertinoDarkTheme ? Brightness.dark : Brightness.light,
+                  isCupertinoDarkTheme ? Brightness.dark : Brightness.light,
             ),
             child: const CupertinoActivityIndicator(),
           )
         : Center(
-            child: CircularProgressIndicator(color: materialIndicatorColor),
+            child: CircularProgressIndicator(
+              color: materialIndicatorColor,
+              strokeWidth: materialIndicatorStrokeWidth,
+            ),
           );
   }
 }

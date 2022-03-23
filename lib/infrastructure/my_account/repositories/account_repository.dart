@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:astra_curator/domain/core/failure/astra_failure.dart';
+import 'package:astra_curator/domain/core/failure/failure.dart';
 import 'package:astra_curator/domain/my_account/models/account/account.dart';
 import 'package:astra_curator/domain/my_account/models/account_history/account_history.dart';
 import 'package:astra_curator/domain/my_account/models/withdraw/withdraw_history.dart';
@@ -25,10 +25,10 @@ class AccountRepository implements IAccountRepository {
 
   /// Fetch account (cashback).
   @override
-  Future<Either<AstraFailure, Account>> getAccountData() async {
+  Future<Either<Failure, Account>> getAccountData() async {
     return makeRequest<Account>(
       () async {
-        final response = await _dio.get(Endpoints.account.cashback as String);
+        final response = await _dio.get(Endpoints.account.cashback);
 
         final account =
             AccountDTO.fromJson(response.data as Map<String, dynamic>)
@@ -41,7 +41,7 @@ class AccountRepository implements IAccountRepository {
 
   /// Fetch account histories.
   @override
-  Future<Either<AstraFailure, List<AccountHistory>>> getHistories() {
+  Future<Either<Failure, List<AccountHistory>>> getHistories() {
     return makeRequest<List<AccountHistory>>(
       () async {
         final response =
@@ -63,15 +63,16 @@ class AccountRepository implements IAccountRepository {
 
   /// Fetch account histories by period.
   @override
-  Future<Either<AstraFailure, List<AccountHistory>>> getHistoriesByPeriod({
+  Future<Either<Failure, List<AccountHistory>>> getHistoriesByPeriod({
     required String beginDate,
     required String endDate,
   }) {
     return makeRequest<List<AccountHistory>>(
       () async {
         final response = await _dio.get(
-            Endpoints.account.historyByPeriod(beginDate, endDate) as String);
-        List<AccountHistory> accountList = [];
+          Endpoints.account.historyByPeriod(beginDate, endDate),
+        );
+        final List<AccountHistory> accountList = [];
 
         for (final item in response.data) {
           final AccountHistory _history =
@@ -79,48 +80,37 @@ class AccountRepository implements IAccountRepository {
                   .toAccountHistory();
           accountList.add(_history);
         }
-
         return accountList;
       },
     );
   }
 
   @override
-  Future<Either<AstraFailure, Unit>> withdrawMoney({required double amount}) {
+  Future<Either<Failure, Unit>> withdrawMoney({required double amount}) {
     return makeRequest<Unit>(
       () async {
-        String _json = json.encode(
+        final String _json = json.encode(
           {
             "amount": amount,
           },
         );
         final response = await _dio.post(
-          Endpoints.account.withdraw as String,
+          Endpoints.account.withdraw,
           data: _json,
         );
-
         return response.data;
       },
     );
   }
 
   @override
-  Future<Either<AstraFailure, List<WithdrawHistory>>> getWithdrawHistories() {
+  Future<Either<Failure, List<WithdrawHistory>>> getWithdrawHistories() {
     return makeRequest<List<WithdrawHistory>>(
       () async {
-        final response =
-            await _dio.get(Endpoints.account.withdrawHistory as String);
-
-        final List<WithdrawHistory> withdrawHistoryList = [];
-
-        for (final item in response.data) {
-          final WithdrawHistory _history =
-              WithdrawHistoryDTO.fromJson(item as Map<String, dynamic>)
-                  .toWithdrawHistory();
-          withdrawHistoryList.add(_history);
-        }
-
-        return withdrawHistoryList;
+        final response = await _dio.get(Endpoints.account.withdrawHistory);
+        return (response.data as List<Map<String, dynamic>>)
+            .map((e) => WithdrawHistoryDTO.fromJson(e).toWithdrawHistory())
+            .toList();
       },
     );
   }

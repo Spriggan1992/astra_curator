@@ -24,6 +24,12 @@ class GradientBorderContainer extends StatelessWidget {
   /// A point within a rectangle.
   final Alignment alignment;
 
+  /// Whether the container shape is circular.
+  final bool isCircular;
+
+  /// Container background color.
+  final Color background;
+
   const GradientBorderContainer({
     Key? key,
     required this.child,
@@ -31,6 +37,8 @@ class GradientBorderContainer extends StatelessWidget {
     this.width,
     this.gradient = _defaultGradient,
     this.alignment = Alignment.center,
+    this.isCircular = false,
+    this.background = Colors.white,
   }) : super(key: key);
 
   @override
@@ -41,14 +49,16 @@ class GradientBorderContainer extends StatelessWidget {
       padding: const EdgeInsets.all(1),
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
+        shape: isCircular ? BoxShape.circle : BoxShape.rectangle,
+        borderRadius: isCircular ? null : BorderRadius.circular(16),
         gradient: _defaultGradient,
       ),
       child: Container(
         height: height,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
-          color: Colors.white,
+          shape: isCircular ? BoxShape.circle : BoxShape.rectangle,
+          borderRadius: isCircular ? null : BorderRadius.circular(16),
+          color: background,
         ),
         alignment: Alignment.center,
         child: child,

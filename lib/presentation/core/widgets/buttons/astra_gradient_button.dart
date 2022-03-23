@@ -1,83 +1,90 @@
+import 'package:astra_curator/presentation/core/theming/colors.dart';
 import 'package:astra_curator/presentation/core/theming/gradients.dart';
+import 'package:astra_curator/presentation/core/widgets/global/platform.activity_indicator.dart';
 import 'package:flutter/material.dart';
-/// Button type enum.
-enum ButtonType { success, loading, finished, waiting }
-/// Gradient button. 
-class AstraGradientButton extends StatelessWidget {
-  /// Title of the button.
-  final String title;
-  /// Button click event handler.
-  final VoidCallback? onTap;
-  /// Button type, success, loading, finished, waiting
-  final ButtonType type;
 
+/// Represent main reusable button.
+class AstraGradientButton extends StatelessWidget {
   const AstraGradientButton({
     Key? key,
+    required this.onClick,
     required this.title,
-    required this.onTap,
-    this.type = ButtonType.waiting,
+    this.titleColor,
+    this.isEnableButton = true,
+    this.isLoading = false,
+    this.width,
   }) : super(key: key);
 
-  Widget _buildChildWidget() {
-    switch (type) {
-      case ButtonType.loading:
-        return const FittedBox(
-          fit: BoxFit.scaleDown,
-          child: SizedBox(
-            height: 20,
-            width: 20,
-            child: CircularProgressIndicator(color: Colors.white),
-          ),
-        );
-      case ButtonType.success:
-        return Center(
-          child: Text(
-            title,
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-                color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
-          ),
-        );
-      case ButtonType.waiting:
-        return Center(
-          child: Text(
-            title,
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-                color: Color.fromRGBO(187, 187, 187, 1),
-                fontSize: 14,
-                fontWeight: FontWeight.w600),
-          ),
-        );
-      case ButtonType.finished:
-        return const Center(child: Icon(Icons.check, color: Colors.white));
-      default:
-        return const Text('error');
-    }
-  }
+  /// Button title to display.
+  final String title;
 
+  /// Button click event handler.
+  final VoidCallback? onClick;
+
+  /// A flag responsible for enabling button.
+  final bool isEnableButton;
+
+  /// A flag responsible for showing progress indicator when loading data.
+  final bool isLoading;
+
+  /// A button style.
+  /// if  buttonStyle is null, displays style from button themeData
+  final Color? titleColor;
+
+  /// Button width.
+  final double? width;
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
+    return SizedBox(
+      width: width ?? double.infinity,
       child: Container(
-        child:_buildChildWidget(),
-        height: 55,
-        width: MediaQuery.of(context).size.width -
-            (MediaQuery.of(context).size.width / 6),
+        height: 56,
+        width: isLoading ? 20 : null,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(14),
-          color: (type == ButtonType.waiting)
-              ? const Color.fromRGBO(0, 0, 0, 0.08)
-              : null,
-          gradient: (type != ButtonType.waiting)
+          borderRadius: BorderRadius.circular(18),
+          gradient: isEnableButton
               ? const LinearGradient(
                   colors: Gradients.goldenGradient,
                   begin: Alignment.bottomLeft,
                   end: Alignment.bottomRight,
                   tileMode: TileMode.decal,
-                  stops: [0.0, 1.0])
+                  stops: [0.0, 1.0],
+                )
               : null,
+        ),
+        child: ElevatedButton(
+          onPressed: isEnableButton ? onClick : null,
+          style: ElevatedButton.styleFrom(
+            shadowColor: Colors.transparent,
+            primary: Colors.transparent,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            child: SizedBox(
+              width: isLoading ? 20 : null,
+              child: isLoading
+                  ? const PlatformActivityIndicator(
+                      isCupertinoDarkTheme: true,
+                      materialIndicatorStrokeWidth: 2,
+                      materialIndicatorColor: AstraColors.white,
+                    )
+                  : Text(
+                      title,
+                      textAlign: TextAlign.center,
+                      style: (titleColor == null)
+                          ? const TextStyle(
+                              color: AstraColors.white,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                            )
+                          : TextStyle(
+                              color: titleColor,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                            ),
+                    ),
+            ),
+          ),
         ),
       ),
     );

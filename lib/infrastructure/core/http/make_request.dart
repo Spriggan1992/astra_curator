@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:astra_curator/domain/core/failure/astra_failure.dart';
+import 'package:astra_curator/domain/core/failure/failure.dart';
 import 'package:astra_curator/infrastructure/auth/extentions/dio_extensions.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
@@ -10,8 +10,8 @@ typedef CallBackRequest<T> = Future<T> Function();
 
 /// Make http request.
 ///
-/// Returns [Either] there left is [AstraFailure] and right is [T].
-Future<Either<AstraFailure, T>> makeRequest<T>(
+/// Returns [Either] there left is [Failure] and right is [T].
+Future<Either<Failure, T>> makeRequest<T>(
   CallBackRequest callback,
 ) async {
   try {
@@ -22,13 +22,13 @@ Future<Either<AstraFailure, T>> makeRequest<T>(
     log("${e.message}: ${e.type}; response: ${e.response}", level: 2);
     if (e.isNoConnectionError) {
       log("${e.message}: ${e.type}", level: 2);
-      return left(const AstraFailure.noConnection());
+      return left(const Failure.noConnection());
     } else {
       log("${e.message}: ${e.type}", level: 2);
-      return left(const AstraFailure.api());
+      return left(const Failure.api());
     }
   } catch (e) {
     log(e.toString(), level: 2);
-    return left(const AstraFailure.api());
+    return left(const Failure.api());
   }
 }

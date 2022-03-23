@@ -14,7 +14,7 @@ class ScreenContent extends StatelessWidget {
   final Widget button;
 
   /// App bar backpress click event handler.
-  final VoidCallback? onBackPresed;
+  final VoidCallback? onBackPressed;
 
   /// A notification message to display.
   final Widget? notificationMessageContent;
@@ -27,7 +27,7 @@ class ScreenContent extends StatelessWidget {
     required this.textFieldContent,
     required this.button,
     this.notificationMessageContent,
-    this.onBackPresed,
+    this.onBackPressed,
     required this.termContent,
     required this.termsTextButton,
   }) : super(key: key);
@@ -35,9 +35,9 @@ class ScreenContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MainAppBar(
+      appBar: ReusableAppBar(
         elevation: 0,
-        onPressed: onBackPresed ?? () {},
+        onPressed: onBackPressed ?? () {},
       ),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
@@ -49,7 +49,10 @@ class ScreenContent extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: Theme.of(context).textTheme.displayMedium!.copyWith(fontSize: 28),
+                    style: Theme.of(context)
+                        .textTheme
+                        .displayMedium!
+                        .copyWith(fontSize: 28),
                   ),
                   const SizedBox(height: 60),
                   Column(

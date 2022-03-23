@@ -4,7 +4,7 @@ import 'package:astra_curator/presentation/core/widgets/popup/core/text_field_po
 import 'package:flutter/material.dart';
 
 /// Represent text field with popup menu.
-class TextFieldPopUpMenu extends StatefulWidget {
+class TextFieldPopUpMenu<T> extends StatefulWidget {
   /// Whether the popup menu fit to text field size.
   ///
   /// By default is false, that means popup menu will fit to the size of text field.
@@ -19,10 +19,14 @@ class TextFieldPopUpMenu extends StatefulWidget {
   /// Pop up menu items.
   final List<TextFieldPopUpMenuItem> items;
 
+  /// Select item event handler.
+  final Function(TextFieldPopUpMenuItem selectedItem) onSelected;
+
   const TextFieldPopUpMenu({
     Key? key,
     required this.items,
     required this.hint,
+    required this.onSelected,
     this.initialValue,
     this.isFullSize = false,
   }) : super(key: key);
@@ -31,7 +35,7 @@ class TextFieldPopUpMenu extends StatefulWidget {
   State<TextFieldPopUpMenu> createState() => _TextFieldPopUpMenuState();
 }
 
-class _TextFieldPopUpMenuState extends State<TextFieldPopUpMenu>
+class _TextFieldPopUpMenuState<T> extends State<TextFieldPopUpMenu<T>>
     with TickerProviderStateMixin {
   late final AnimationController _animationController;
   late final Animation<double> _sizeTransition;
@@ -42,7 +46,7 @@ class _TextFieldPopUpMenuState extends State<TextFieldPopUpMenu>
   bool _isMenuOpen = false;
   late Offset _buttonPosition;
   late Size _buttonSize;
-  late OverlayEntry _overlayEntry;
+  OverlayEntry? _overlayEntry;
 
   @override
   void initState() {
@@ -58,7 +62,9 @@ class _TextFieldPopUpMenuState extends State<TextFieldPopUpMenu>
     _textController.dispose();
     _animationController.dispose();
     _focusNode.dispose();
-    _overlayEntry.dispose();
+    if (_overlayEntry != null) {
+      _overlayEntry?.dispose();
+    }
     super.dispose();
   }
 
@@ -88,6 +94,7 @@ class _TextFieldPopUpMenuState extends State<TextFieldPopUpMenu>
   // Sets up element from pop up menu.
   void _selectItem(TextFieldPopUpMenuItem value) {
     _textController.text = value.title;
+    widget.onSelected(value);
     _focusNode.unfocus();
   }
 
@@ -116,7 +123,7 @@ class _TextFieldPopUpMenuState extends State<TextFieldPopUpMenu>
   void _openMenu() {
     findTextField();
     _overlayEntry = _overlayEntryBuilder();
-    Overlay.of(context)?.insert(_overlayEntry);
+    Overlay.of(context)?.insert(_overlayEntry!);
     _isMenuOpen = !_isMenuOpen;
     _animationController.forward();
   }
@@ -207,6 +214,7 @@ class _TextFieldPopUpMenuState extends State<TextFieldPopUpMenu>
       key: _key,
       focusNode: _focusNode,
       controller: _textController,
+      enabled: widget.items.length > 1,
       readOnly: true,
       decoration: InputDecoration(
         hintText: widget.hint,
@@ -214,17 +222,19 @@ class _TextFieldPopUpMenuState extends State<TextFieldPopUpMenu>
             .textTheme
             .bodySmall!
             .copyWith(color: AstraColors.black04),
-        suffixIcon: RotationTransition(
-          turns: _rotation,
-          child: const RotatedBox(
-            quarterTurns: 3,
-            child: Icon(
-              Icons.arrow_back_ios_new_sharp,
-              size: 20,
-              color: AstraColors.black,
-            ),
-          ),
-        ),
+        suffixIcon: widget.items.length > 1
+            ? RotationTransition(
+                turns: _rotation,
+                child: const RotatedBox(
+                  quarterTurns: 3,
+                  child: Icon(
+                    Icons.arrow_back_ios_new_sharp,
+                    size: 20,
+                    color: AstraColors.black,
+                  ),
+                ),
+              )
+            : const SizedBox.shrink(),
         focusedBorder:
             Theme.of(context).inputDecorationTheme.focusedBorder!.copyWith(
                   borderSide: const BorderSide(color: AstraColors.dividerColor),

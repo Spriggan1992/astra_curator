@@ -1,10 +1,9 @@
-// import 'package:astra_app/infrastructure/core/database/sembast/sembast_database.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 /// Main module for injection.
 @module
@@ -25,7 +24,7 @@ abstract class AppInjectableModule {
   @lazySingleton
   Dio get dio => Dio();
 
-  /// Initizlized imagePicker service.
+  /// Initialized imagePicker service.
   @lazySingleton
   ImagePicker get imagePicker => ImagePicker();
 

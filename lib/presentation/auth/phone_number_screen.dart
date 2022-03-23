@@ -112,21 +112,13 @@ class PhoneNumberScreen extends StatelessWidget {
           ),
           button: BlocBuilder<PhoneBloc, PhoneState>(
             builder: (context, state) {
-              ButtonType buttonType = ButtonType.finished;
-              if (state.isEnableBtn) {
-                buttonType = ButtonType.success;
-              } else if (state.isLoading) {
-                buttonType = ButtonType.loading;
-              } else {
-                buttonType = ButtonType.waiting;
-              }
-
               return AstraGradientButton(
-                onTap: () {
+                title: 'Продолжить',
+                isEnableButton: state.isEnableBtn,
+                isLoading: state.isLoading,
+                onClick: () {
                   context.read<PhoneBloc>().add(const PhoneEvent.pressedBtn());
                 },
-                title: 'Продолжить',
-                type: buttonType,
               );
             },
           ),

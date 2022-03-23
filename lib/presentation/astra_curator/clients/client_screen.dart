@@ -13,7 +13,7 @@ class ClientsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final _textTheme = Theme.of(context).textTheme;
     return Scaffold(
-      appBar: MainAppBar(
+      appBar: ReusableAppBar(
         title: 'Клиенты',
         actions: [
           SortPopUpMenu(onSelected: (value) {}),

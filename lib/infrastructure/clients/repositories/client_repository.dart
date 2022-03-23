@@ -1,6 +1,6 @@
 import 'package:astra_curator/domain/clients/models/client.dart';
 import 'package:astra_curator/domain/clients/repositories/i_client_repository.dart';
-import 'package:astra_curator/domain/core/failure/astra_failure.dart';
+import 'package:astra_curator/domain/core/failure/failure.dart';
 import 'package:astra_curator/infrastructure/clients/DTOs/client_DTO.dart';
 import 'package:astra_curator/infrastructure/core/http/endpoints.dart';
 import 'package:astra_curator/infrastructure/core/http/make_request.dart';
@@ -17,20 +17,18 @@ class ClientRepository implements IClientRepository {
   final Dio _dio;
 
   @override
-  Future<Either<AstraFailure, List<Client>>> getClients() async {
+  Future<Either<Failure, List<Client>>> getClients() async {
     return makeRequest<List<Client>>(
       () async {
         /// Repair endpoint.
-        final response = await _dio.get(Endpoints.account.cashback as String);
-
+        final response = await _dio.get(Endpoints.account.cashback);
         final _body = response.data as List<dynamic>;
-
-        final _clients = _body.map(
-          (client) =>
-              ClientDTO.fromJson(client as Map<String, dynamic>).toDomain(),
-        );
-
-        return _clients.toList();
+        return _body
+            .map(
+              (client) =>
+                  ClientDTO.fromJson(client as Map<String, dynamic>).toDomain(),
+            )
+            .toList();
       },
     );
   }

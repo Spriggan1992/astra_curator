@@ -14,6 +14,7 @@ class AppTheme {
         elevation: 1,
         titleTextStyle: TextStyle(
           color: AstraColors.black,
+          fontWeight: FontWeight.w600,
           fontSize: 17,
         ),
       ),
@@ -21,7 +22,7 @@ class AppTheme {
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(18),
           ),
           primary: AstraColors.mainGold,
           onPrimary: AstraColors.white,
