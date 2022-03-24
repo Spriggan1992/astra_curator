@@ -1,11 +1,11 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-part 'client_detailed_info_model.freezed.dart';
+part 'new_client_detailed_info_model.freezed.dart';
 
 /// Defines detailed information about client
 @freezed
-class ClientDetailedInfoModel with _$ClientDetailedInfoModel {
-  const ClientDetailedInfoModel._();
-  const factory ClientDetailedInfoModel({
+class NewClientDetailedInfoModel with _$NewClientDetailedInfoModel {
+  const NewClientDetailedInfoModel._();
+  const factory NewClientDetailedInfoModel({
     /// User's character.
     required String? character,
 
@@ -32,11 +32,11 @@ class ClientDetailedInfoModel with _$ClientDetailedInfoModel {
 
     /// User's selfControl.
     required String? selfControl,
-  }) = _ClientDetailedInfoModel;
+  }) = _NewClientDetailedInfoModel;
 
   /// Empty client detailed info model.
-  factory ClientDetailedInfoModel.empty() {
-    return const ClientDetailedInfoModel(
+  factory NewClientDetailedInfoModel.empty() {
+    return const NewClientDetailedInfoModel(
       character: '',
       skills: '',
       orientation: '',

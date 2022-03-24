@@ -1,15 +1,15 @@
 // ignore_for_file: invalid_annotation_target
 
-import 'package:astra_curator/domain/core/models/client_detailed_info_model.dart';
+import 'package:astra_curator/domain/core/models/new_client_detailed_info_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-part 'client_detailed_info_dto.freezed.dart';
-part 'client_detailed_info_dto.g.dart';
+part 'new_client_detailed_info_dto.freezed.dart';
+part 'new_client_detailed_info_dto.g.dart';
 
 ///Defines
 @freezed
-class ClientDetailedInfoDTO with _$ClientDetailedInfoDTO {
-  const ClientDetailedInfoDTO._();
-  const factory ClientDetailedInfoDTO({
+class NewClientDetailedInfoDTO with _$NewClientDetailedInfoDTO {
+  const NewClientDetailedInfoDTO._();
+  const factory NewClientDetailedInfoDTO({
     /// User's character.
     @JsonKey(name: 'character') required String? character,
 
@@ -36,10 +36,10 @@ class ClientDetailedInfoDTO with _$ClientDetailedInfoDTO {
 
     /// User's selfControl.
     @JsonKey(name: 'self_control') required String? selfControl,
-  }) = _ClientDetailedInfoDTO;
+  }) = _NewClientDetailedInfoDTO;
 
-  factory ClientDetailedInfoDTO.fromDomain(ClientDetailedInfoModel _) {
-    return ClientDetailedInfoDTO(
+  factory NewClientDetailedInfoDTO.fromDomain(NewClientDetailedInfoModel _) {
+    return NewClientDetailedInfoDTO(
       character: _.character,
       skills: _.skills,
       orientation: _.orientation,
@@ -53,7 +53,7 @@ class ClientDetailedInfoDTO with _$ClientDetailedInfoDTO {
   }
 
 // Convert DTO to domain.
-  ClientDetailedInfoModel toDomain() => ClientDetailedInfoModel(
+  NewClientDetailedInfoModel toDomain() => NewClientDetailedInfoModel(
         character: character,
         skills: skills,
         orientation: orientation,
@@ -65,11 +65,11 @@ class ClientDetailedInfoDTO with _$ClientDetailedInfoDTO {
         selfControl: selfControl,
       );
 // Return converted DTO from json.
-  factory ClientDetailedInfoDTO.fromJson(Map<String, dynamic> json) =>
-      _$ClientDetailedInfoDTOFromJson(json);
+  factory NewClientDetailedInfoDTO.fromJson(Map<String, dynamic> json) =>
+      _$NewClientDetailedInfoDTOFromJson(json);
 
 // Convert object to json.
-  factory ClientDetailedInfoDTO.toJson() {
-    return ClientDetailedInfoDTO.toJson();
+  factory NewClientDetailedInfoDTO.toJson() {
+    return NewClientDetailedInfoDTO.toJson();
   }
 }

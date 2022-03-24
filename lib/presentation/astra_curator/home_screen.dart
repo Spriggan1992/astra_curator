@@ -1,12 +1,10 @@
-import 'dart:developer';
-
 import 'package:astra_curator/application/account/account_history/account_history_bloc.dart';
+import 'package:astra_curator/application/clients/clients_bloc.dart';
 import 'package:astra_curator/application/cubit/app_bar_cubit.dart';
 import 'package:astra_curator/application/photos/photos_bloc.dart';
 import 'package:astra_curator/injection.dart';
 import 'package:astra_curator/presentation/core/routes/app_router.gr.dart';
 import 'package:astra_curator/presentation/core/routes/router_observer.dart';
-import 'package:astra_curator/presentation/core/widgets/bars/appbar/main_app_bar.dart';
 import 'package:astra_curator/presentation/core/widgets/bars/bottom_navigation_bar/icon_nav_item.dart';
 import 'package:astra_curator/presentation/core/widgets/bars/bottom_navigation_bar/nav_bar.dart';
 import 'package:astra_curator/presentation/core/widgets/bars/bottom_navigation_bar/svg_nav_item.dart';
@@ -37,6 +35,9 @@ class HomeScreen extends StatelessWidget {
           BlocProvider(
             create: (context) => getIt<PhotosBloc>(),
           ),
+          BlocProvider<ClientsBloc>(
+            create: (context) => getIt<ClientsBloc>(),
+          ),
         ],
         child: AutoTabsScaffold(
           extendBody: true,
@@ -44,7 +45,7 @@ class HomeScreen extends StatelessWidget {
           routes: _routes,
           navigatorObservers: () => [RouterObserver()],
           bottomNavigationBuilder: (navContext, tabsRouter) {
-            return _buildBottomBar(context, tabsRouter);
+            return _buildBottomBar(navContext, tabsRouter);
           },
         ),
       ),
@@ -87,6 +88,7 @@ class HomeScreen extends StatelessWidget {
       case 0:
         break;
       case 1:
+        context.read<ClientsBloc>().add(const ClientsEvent.loadClients());
         break;
       case 2:
         break;

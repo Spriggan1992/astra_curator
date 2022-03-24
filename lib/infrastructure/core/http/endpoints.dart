@@ -6,6 +6,7 @@ class Endpoints {
   static _AccountEndPoints get account => _AccountEndPoints();
   static _AddingClientEndpoints get regions => _AddingClientEndpoints();
   static String get imageAddress => relevantAddress;
+  static _Clients get clients => _Clients();
 }
 
 final String _address = ServerAddress().relevant;
@@ -29,4 +30,8 @@ class _AccountEndPoints {
 class _AddingClientEndpoints {
   String get cities => "${_address}curator/regions/city/";
   String get countries => "${_address}curator/regions/country/";
+}
+
+class _Clients {
+  String get profiles => "${_address}curator/profiles/";
 }

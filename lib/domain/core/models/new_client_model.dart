@@ -9,9 +9,9 @@ part 'client_model.freezed.dart';
 
 /// Defines client model.
 @freezed
-class ClientModel with _$ClientModel {
-  const ClientModel._();
-  const factory ClientModel({
+class NewClientModel with _$NewClientModel {
+  const NewClientModel._();
+  const factory NewClientModel({
     /// Clients's phone number.
     required String phoneNumber,
 
@@ -49,10 +49,10 @@ class ClientModel with _$ClientModel {
 
     /// Clients's sort description.
     required String shortDescription,
-  }) = _ClientModel;
+  }) = _NewClientModel;
 
   /// Empty .
-  factory ClientModel.empty() => ClientModel(
+  factory NewClientModel.empty() => NewClientModel(
         phoneNumber: '',
         firstName: '',
         lastName: '',

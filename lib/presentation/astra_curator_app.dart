@@ -1,6 +1,7 @@
 import 'package:astra_curator/application/account/account_history/account_history_bloc.dart';
 import 'package:astra_curator/application/account/withdraw/withdraw_bloc.dart';
 import 'package:astra_curator/application/auth/auth/auth_bloc.dart';
+import 'package:astra_curator/application/clients/clients_bloc.dart';
 import 'package:astra_curator/injection.dart';
 import 'package:astra_curator/presentation/core/routes/app_router.gr.dart';
 import 'package:astra_curator/presentation/core/theming/theme/app_theme.dart';
@@ -25,7 +26,10 @@ class AstraCuratorApp extends StatelessWidget {
         BlocProvider<AccountHistoryBloc>(
           create: (context) => getIt<AccountHistoryBloc>(),
         ),
-        BlocProvider<WithdrawBloc>(create: (context) => getIt<WithdrawBloc>()),
+        BlocProvider<WithdrawBloc>(
+          create: (context) => getIt<WithdrawBloc>(),
+        ),
+      
       ],
       child: MaterialApp.router(
         localizationsDelegates: const [

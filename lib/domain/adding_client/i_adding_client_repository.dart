@@ -1,6 +1,6 @@
 import 'package:astra_curator/domain/core/failure/failure.dart';
 import 'package:astra_curator/domain/core/models/city_model.dart';
-import 'package:astra_curator/domain/core/models/client_model.dart';
+import 'package:astra_curator/domain/core/models/new_client_model.dart';
 import 'package:astra_curator/domain/core/models/country_model.dart';
 import 'package:dartz/dartz.dart';
 
@@ -13,5 +13,5 @@ abstract class IAddingClientRepository {
   Future<Either<Failure, List<CountryModel>>> getCountries();
 
   /// Register new user.
-  Future<Either<Failure, Unit>> registerNewUser(ClientModel model);
+  Future<Either<Failure, Unit>> registerNewUser(NewClientModel model);
 }

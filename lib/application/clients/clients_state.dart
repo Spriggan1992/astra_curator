@@ -1,30 +1,23 @@
 part of 'clients_bloc.dart';
 
+/// Client's state.
 @freezed
 class ClientsState with _$ClientsState {
   const factory ClientsState({
     /// List of clients fetched from server.
-    required List<Client> clients,
+    required List<ClientModel> clients,
 
-    /// A flag that responsible that data fetched successfully.
-    required bool isSuccess,
+    /// A sort type of clients.
+    required SortTypes sortTypes,
 
-    /// A flag responsible for show snackbar with no unexpected error.
-    required bool isUnExpectedError,
-
-    /// A flag responsible for show snackbar with no connection error.
-    required bool isNoConnection,
-
-    /// A flag responsible fo loading data.
-    required bool isLoading,
+    /// Loading state, will be success, initial, error.
+    required LoadingStatesWithFailure loadingStates,
   }) = _ClientsState;
 
   /// Clients initial state.
   factory ClientsState.initial() => const ClientsState(
         clients: [],
-        isSuccess: false,
-        isUnExpectedError: false,
-        isNoConnection: false,
-        isLoading: true,
+        sortTypes: SortTypes.initial,
+        loadingStates: LoadingStatesWithFailure.initial,
       );
 }

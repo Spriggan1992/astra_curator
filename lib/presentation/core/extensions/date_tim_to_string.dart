@@ -12,5 +12,9 @@ extension DateTimeOnString on DateTime {
   String dateTimeToddMMyyFormat(){
     return DateFormat('dd.MM.yy').format(this); 
   }
+
+   String dateTimeClientFormat(){
+    return DateFormat('dd.MM.yy - hh:ss').format(this) ; 
+  }
   
 }

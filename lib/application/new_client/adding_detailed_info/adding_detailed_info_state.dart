@@ -4,7 +4,7 @@ part of 'adding_detailed_info_bloc.dart';
 class AddingDetailedInfoState with _$AddingDetailedInfoState {
   const factory AddingDetailedInfoState({
     /// Detailed information about client.
-    required ClientDetailedInfoModel clientInfo,
+    required NewClientDetailedInfoModel clientInfo,
 
     /// Whether any field is filled.
     required bool anyFieldIsNotEmpty,
@@ -15,7 +15,7 @@ class AddingDetailedInfoState with _$AddingDetailedInfoState {
 
   /// Initial state.
   factory AddingDetailedInfoState.initial() => AddingDetailedInfoState(
-        clientInfo: ClientDetailedInfoModel.empty(),
+        clientInfo: NewClientDetailedInfoModel.empty(),
         anyFieldIsNotEmpty: false,
         loadingState: LoadingStatesWithFailure.initial,
       );
