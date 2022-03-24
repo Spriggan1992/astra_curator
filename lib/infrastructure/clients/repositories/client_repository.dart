@@ -18,8 +18,8 @@ class ClientRepository implements IClientRepository {
   final Dio _dio;
 
   @override
-  Future<Either<Failure, List<Client>>> getClients() async {
-    return makeRequest<List<Client>>(
+  Future<Either<Failure, List<ClientModel>>> getClients() async {
+    return makeRequest<List<ClientModel>>(
       () async {
         final response = await _dio.get(Endpoints.clients.profiles);
         final _body = response.data as List<dynamic>;
@@ -34,8 +34,8 @@ class ClientRepository implements IClientRepository {
   }
 
   @override
-  Future<List<Client>> sortClients(
-      SortTypes sortTypes, List<Client> clients) async {
+  Future<List<ClientModel>> sortClients(
+      SortTypes sortTypes, List<ClientModel> clients) async {
     if (sortTypes == SortTypes.sortByDate) {
       /// TODO finish when API will be ready.
       return clients;

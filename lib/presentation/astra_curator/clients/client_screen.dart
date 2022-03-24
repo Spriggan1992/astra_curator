@@ -1,6 +1,7 @@
 import 'package:astra_curator/application/clients/clients_bloc.dart';
 import 'package:astra_curator/application/clients/clients_sort_types.dart';
 import 'package:astra_curator/application/core/enums/astra_failures.dart';
+import 'package:astra_curator/application/core/enums/loading_state_with_failures.dart';
 import 'package:astra_curator/presentation/astra_curator/clients/widgets/client_tile.dart';
 import 'package:astra_curator/presentation/astra_curator/clients/widgets/sort_popup_menu.dart';
 import 'package:astra_curator/presentation/core/theming/colors.dart';
@@ -14,7 +15,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ClientsScreen extends StatelessWidget {
   const ClientsScreen({Key? key}) : super(key: key);
 
-  /// Send event to sort. 
+  /// Send event to sort.
   void onPressedPopupItem(BuildContext context, int value) {
     switch (value) {
       case 1:
@@ -55,9 +56,11 @@ class ClientsScreen extends StatelessWidget {
       ),
       body: BlocBuilder<ClientsBloc, ClientsState>(
         builder: (context, state) {
-          if (state.isLoading) {
-            return const PlatformActivityIndicator();
-          } else if (state.isSuccess) {
+          if (state.loadingStates == LoadingStatesWithFailure.initial) {
+            return const Center(child: PlatformActivityIndicator());
+          } else if (state.loadingStates == LoadingStatesWithFailure.loading) {
+            return const Center(child: PlatformActivityIndicator());
+          } else if (state.loadingStates == LoadingStatesWithFailure.success) {
             if (state.clients.isNotEmpty) {
               return ListView.separated(
                 physics: const BouncingScrollPhysics(),
@@ -79,7 +82,7 @@ class ClientsScreen extends StatelessWidget {
             }
           } else {
             return ErrorScreen(
-              failure: (state.isNoConnection)
+              failure: (state.loadingStates == LoadingStatesWithFailure.noConnectionFailure)
                   ? AstraFailures.noConnection
                   : AstraFailures.unexpected,
               onTryAgain: () {},

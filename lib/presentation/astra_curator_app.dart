@@ -29,9 +29,7 @@ class AstraCuratorApp extends StatelessWidget {
         BlocProvider<WithdrawBloc>(
           create: (context) => getIt<WithdrawBloc>(),
         ),
-        BlocProvider<ClientsBloc>(
-          create: (context) => getIt<ClientsBloc>(),
-        ),
+      
       ],
       child: MaterialApp.router(
         localizationsDelegates: const [

@@ -1,4 +1,5 @@
 import 'package:astra_curator/application/clients/clients_sort_types.dart';
+import 'package:astra_curator/application/core/enums/loading_state_with_failures.dart';
 import 'package:astra_curator/domain/clients/models/client.dart';
 import 'package:astra_curator/domain/clients/repositories/i_client_repository.dart';
 import 'package:bloc/bloc.dart';
@@ -20,43 +21,27 @@ class ClientsBloc extends Bloc<ClientsEvent, ClientsState> {
       await event.map(
         loadClients: (e) async {
           final result = await _api.getClients();
-          result.fold(
-            (l) => {
-              l.map(
-                api: (e) {
-                  emit(
-                    state.copyWith(
-                      isUnExpectedError: true,
-                      isLoading: false,
-                    ),
-                  );
-                },
-                noConnection: (e) {
-                  emit(
-                    state.copyWith(
-                      isNoConnection: true,
-                      isLoading: false,
-                    ),
-                  );
-                },
-              ),
-            },
-            (clients) => {
-              emit(
-                state.copyWith(
-                  clients: clients,
-                  isLoading: false,
-                  isSuccess: true,
+          emit(
+            result.fold(
+              (failure) => failure.map(
+                api: (e) => state.copyWith(
+                  loadingStates: LoadingStatesWithFailure.unexpectedFailure,
+                ),
+                noConnection: (e) => state.copyWith(
+                  loadingStates: LoadingStatesWithFailure.noConnectionFailure,
                 ),
               ),
-            },
+              (clients) => state.copyWith(
+                clients: clients,
+                loadingStates: LoadingStatesWithFailure.success,
+              ),
+            ),
           );
         },
         sortClients: (e) async {
           emit(
             state.copyWith(
-              isLoading: true,
-              isSuccess: false,
+              loadingStates: LoadingStatesWithFailure.initial,
               sortTypes: SortTypes.initial,
             ),
           );
@@ -64,12 +49,11 @@ class ClientsBloc extends Bloc<ClientsEvent, ClientsState> {
           final sortedClients =
               await _api.sortClients(e.sortTypes, state.clients);
 
-          await Future.delayed(const Duration(seconds: 2));
+          await Future.delayed(const Duration(milliseconds: 200));
           emit(
             state.copyWith(
               clients: sortedClients,
-              isLoading: false,
-              isSuccess: true,
+              loadingStates: LoadingStatesWithFailure.success,
               sortTypes: e.sortTypes,
             ),
           );

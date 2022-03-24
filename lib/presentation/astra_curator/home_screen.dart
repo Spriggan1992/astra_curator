@@ -35,6 +35,9 @@ class HomeScreen extends StatelessWidget {
           BlocProvider(
             create: (context) => getIt<PhotosBloc>(),
           ),
+          BlocProvider<ClientsBloc>(
+            create: (context) => getIt<ClientsBloc>(),
+          ),
         ],
         child: AutoTabsScaffold(
           extendBody: true,
@@ -42,7 +45,7 @@ class HomeScreen extends StatelessWidget {
           routes: _routes,
           navigatorObservers: () => [RouterObserver()],
           bottomNavigationBuilder: (navContext, tabsRouter) {
-            return _buildBottomBar(context, tabsRouter);
+            return _buildBottomBar(navContext, tabsRouter);
           },
         ),
       ),

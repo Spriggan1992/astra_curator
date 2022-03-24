@@ -6,37 +6,37 @@ part 'client.freezed.dart';
 
 /// Represents client model.
 @freezed
-class Client with _$Client {
-  const Client._();
-  const factory Client({
+class ClientModel with _$ClientModel {
+  const ClientModel._();
+  const factory ClientModel({
     // Client's id.
     required int id,
 
     // Curator's id.
     required int curatorId,
 
-    /// Clien's phone number.
+    /// Client's phone number.
     required String phoneNumber,
 
-    /// Clien's first name.
+    /// Client's first name.
     required String firstName,
 
-    /// Clien's last name.
+    /// Client's last name.
     required String lastName,
 
-    /// Clien's age.
+    /// Client's age.
     required int? age,
 
-    /// Clien's birthday.
+    /// Client's birthday.
     required String? birthday,
 
-    /// Clien's height.
+    /// Client's height.
     required int height,
 
-    /// Clien's gender.
+    /// Client's gender.
     required String gender,
 
-    /// Clien's status.
+    /// Client's status.
     required String status,
 
     /// A flag showing clien's has child or not.
@@ -89,7 +89,7 @@ class Client with _$Client {
 
     /// Client's curator images.
     required List<ImageModel> curatorPhotos,
-  }) = _Client;
+  }) = _ClientModel;
   
   /// Client's fullName.
   String get fullName => "$firstName $lastName";

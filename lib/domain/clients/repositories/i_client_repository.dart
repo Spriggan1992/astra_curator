@@ -7,8 +7,8 @@ import 'package:dartz/dartz.dart';
 /// Loads data from server methods.
 abstract class IClientRepository {
   /// Load data from server.
-  Future<Either<Failure, List<Client>>> getClients();
+  Future<Either<Failure, List<ClientModel>>> getClients();
 
   /// Sort clients by types.
-  Future<List<Client>> sortClients(SortTypes sortTypes, List<Client> clients);
+  Future<List<ClientModel>> sortClients(SortTypes sortTypes, List<ClientModel> clients);
 }

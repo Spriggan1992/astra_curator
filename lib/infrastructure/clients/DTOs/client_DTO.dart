@@ -1,6 +1,5 @@
 import 'package:astra_curator/domain/clients/models/client.dart';
-import 'package:astra_curator/infrastructure/clients/DTOs/client_image_dto.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:astra_curator/infrastructure/core/DTOs/image_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'client_DTO.freezed.dart';
 part 'client_DTO.g.dart';
@@ -88,11 +87,11 @@ class ClientDTO with _$ClientDTO {
 
     /// Client's profile images.
     @JsonKey(name: 'profile_photos')
-        required List<ClientImageDTO> profilePhotos,
+        required List<ImageDTO> profilePhotos,
 
     /// Client's curator images.
     @JsonKey(name: 'curator_photos')
-        required List<ClientImageDTO> curatorPhotos,
+        required List<ImageDTO> curatorPhotos,
   }) = _ClientDTO;
 
   /// Return converted DTO from json.
@@ -100,7 +99,7 @@ class ClientDTO with _$ClientDTO {
       _$ClientDTOFromJson(json);
 
   /// Converted to client model.
-  Client toDomain() => Client(
+  ClientModel toDomain() => ClientModel(
         id: id,
         age: age,
         birthday: birthday,
