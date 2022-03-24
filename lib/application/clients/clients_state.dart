@@ -1,10 +1,14 @@
 part of 'clients_bloc.dart';
 
+/// Client's state.
 @freezed
 class ClientsState with _$ClientsState {
   const factory ClientsState({
     /// List of clients fetched from server.
     required List<Client> clients,
+
+    /// A sort type of clients.
+    required SortTypes sortTypes, 
 
     /// A flag that responsible that data fetched successfully.
     required bool isSuccess,
@@ -22,6 +26,7 @@ class ClientsState with _$ClientsState {
   /// Clients initial state.
   factory ClientsState.initial() => const ClientsState(
         clients: [],
+        sortTypes: SortTypes.initial,
         isSuccess: false,
         isUnExpectedError: false,
         isNoConnection: false,

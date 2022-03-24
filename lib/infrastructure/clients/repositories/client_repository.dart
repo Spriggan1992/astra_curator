@@ -1,3 +1,4 @@
+import 'package:astra_curator/application/clients/clients_sort_types.dart';
 import 'package:astra_curator/domain/clients/models/client.dart';
 import 'package:astra_curator/domain/clients/repositories/i_client_repository.dart';
 import 'package:astra_curator/domain/core/failure/failure.dart';
@@ -20,8 +21,7 @@ class ClientRepository implements IClientRepository {
   Future<Either<Failure, List<Client>>> getClients() async {
     return makeRequest<List<Client>>(
       () async {
-        /// Repair endpoint.
-        final response = await _dio.get(Endpoints.account.cashback);
+        final response = await _dio.get(Endpoints.clients.profiles);
         final _body = response.data as List<dynamic>;
         return _body
             .map(
@@ -31,5 +31,25 @@ class ClientRepository implements IClientRepository {
             .toList();
       },
     );
+  }
+
+  @override
+  Future<List<Client>> sortClients(
+      SortTypes sortTypes, List<Client> clients) async {
+    if (sortTypes == SortTypes.sortByDate) {
+      /// TODO finish when API will be ready.
+      return clients;
+    } else if (sortTypes == SortTypes.sortById) {
+      clients.sort((a, b) => a.id.compareTo(b.id));
+      return clients;
+    } else if (sortTypes == SortTypes.sortByNameAscending) {
+      clients.sort((a, b) => a.firstName.compareTo(b.firstName));
+      return clients;
+    } else if (sortTypes == SortTypes.sortByNameDescending) {
+       clients.sort((a, b) => b.firstName.compareTo(a.firstName));
+      return clients;
+    } else {
+      return clients;
+    }
   }
 }

@@ -1,7 +1,7 @@
 import 'package:astra_curator/domain/adding_client/i_adding_client_repository.dart';
 import 'package:astra_curator/domain/core/failure/failure.dart';
 import 'package:astra_curator/domain/core/models/city_model.dart';
-import 'package:astra_curator/domain/core/models/client_model.dart';
+import 'package:astra_curator/domain/core/models/new_client_model.dart';
 import 'package:astra_curator/domain/core/models/country_model.dart';
 import 'package:astra_curator/infrastructure/core/DTOs/city_dto.dart';
 import 'package:astra_curator/infrastructure/core/DTOs/country_dto.dart';
@@ -40,7 +40,7 @@ class AddingClientRepository implements IAddingClientRepository {
   }
 
   @override
-  Future<Either<Failure, Unit>> registerNewUser(ClientModel model) async {
+  Future<Either<Failure, Unit>> registerNewUser(NewClientModel model) async {
     await Future.delayed(const Duration(milliseconds: 1000));
     return right(unit);
   }

@@ -17,7 +17,7 @@ class AddingClientState with _$AddingClientState {
     required bool formIsFilled,
 
     /// Client's information for register.
-    required ClientModel client,
+    required NewClientModel client,
 
     /// Client's photos.
     required List<ImageModel> photos,
@@ -32,7 +32,7 @@ class AddingClientState with _$AddingClientState {
         countries: [],
         cities: [],
         formIsFilled: false,
-        client: ClientModel.empty(),
+        client: NewClientModel.empty(),
         photos: [],
         registerLoadingStates: LoadingStatesWithFailure.initial,
       );

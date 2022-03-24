@@ -1,6 +1,6 @@
 import 'package:astra_curator/application/core/enums/loading_state_with_failures.dart';
 import 'package:astra_curator/domain/adiing_detailed_info/i_adding_detailed_info_repository.dart';
-import 'package:astra_curator/domain/core/models/client_detailed_info_model.dart';
+import 'package:astra_curator/domain/core/models/new_client_detailed_info_model.dart';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';

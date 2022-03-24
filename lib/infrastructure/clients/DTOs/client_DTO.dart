@@ -1,4 +1,6 @@
 import 'package:astra_curator/domain/clients/models/client.dart';
+import 'package:astra_curator/infrastructure/clients/DTOs/client_image_dto.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'client_DTO.freezed.dart';
 part 'client_DTO.g.dart';
@@ -8,17 +10,89 @@ part 'client_DTO.g.dart';
 class ClientDTO with _$ClientDTO {
   const ClientDTO._();
   const factory ClientDTO({
-    /// Client's name.
-    @JsonKey(name: 'name') required String name,
+    // Client's id.
+    @JsonKey(name: 'id') required int id,
 
-    /// Client's id.
-    @JsonKey(name: 'id') required String id,
+    // Curator's id.
+    @JsonKey(name: 'curator_id') required int curatorId,
 
-    /// Client's last entered date time.
-    @JsonKey(name: 'dateTime') required String dateTime,
+    /// Clien's phone number.
+    @JsonKey(name: 'phone_number') required String phoneNumber,
 
-    /// Client's image.
-    @JsonKey(name: 'image') required String image,
+    /// Clien's first name.
+    @JsonKey(name: 'firstname') required String firstName,
+
+    /// Clien's last name.
+    @JsonKey(name: 'lastname') required String lastName,
+
+    /// Clien's age.
+    @JsonKey(name: 'age',nullable: true) required int? age,
+
+    /// Clien's birthday.
+    @JsonKey(name: 'birthday',defaultValue: '',nullable: true) String? birthday,
+
+    /// Clien's height.
+    @JsonKey(name: 'height') required int height,
+
+    /// Clien's gender.
+    @JsonKey(name: 'gender') required String gender,
+
+    /// Clien's status.
+    @JsonKey(name: 'status') required String status,
+
+    /// A flag showing clien's has child or not.
+    @JsonKey(name: 'have_child') required bool haveChild,
+
+    /// Client's country.
+    @JsonKey(name: 'country') required String country,
+
+    /// Client's city.
+    @JsonKey(name: 'city') required String city,
+
+    /// Client's profile info.
+    @JsonKey(name: 'profile_info') required String profileInfo,
+
+    /// A date time that client was created.
+    @JsonKey(name: 'created_at') required String createdAt,
+
+    /// A date time that client was saved at.
+    @JsonKey(name: 'saved_at') required String savedAt,
+
+    /// A flag shows that client is active or not active.
+    @JsonKey(name: 'is_active') required bool isActive,
+
+    /// A flag shows that client is draft or not.
+    @JsonKey(name: 'draft') required bool draft,
+
+    /// A flag shows that client is hidden or not.
+    @JsonKey(name: 'is_hidden') required bool isHidden,
+
+    /// A flag shows that client is show info or not.
+    @JsonKey(name: 'show_info') required bool showInfo,
+
+    /// A flag shows that client is mutual like or not.
+
+    @JsonKey(name: 'is_mutual_like', defaultValue: false,nullable: true) bool? isMutualLike,
+
+    /// Client's curator first name.
+    @JsonKey(name: 'curator_firstname') required String curatorFirstname,
+
+    /// Client's curator last name.
+    @JsonKey(name: 'curator_lastname') required String curatorLastname,
+
+    /// A flag shows that client is online or not.
+    @JsonKey(name: 'is_online', defaultValue: false,nullable: true) bool? isOnline,
+
+    /// Client's like amount.
+    @JsonKey(name: 'likes_amount') required int likesAmount,
+
+    /// Client's profile images.
+    @JsonKey(name: 'profile_photos')
+        required List<ClientImageDTO> profilePhotos,
+
+    /// Client's curator images.
+    @JsonKey(name: 'curator_photos')
+        required List<ClientImageDTO> curatorPhotos,
   }) = _ClientDTO;
 
   /// Return converted DTO from json.
@@ -28,16 +102,31 @@ class ClientDTO with _$ClientDTO {
   /// Converted to client model.
   Client toDomain() => Client(
         id: id,
-        name: name,
-        dateTime: dateTime,
-        image: image,
-      );
-
-  /// Client DTO from client model.
-  factory ClientDTO.fromDomain(Client _) => ClientDTO(
-        name: _.name,
-        id: _.id,
-        dateTime: _.dateTime,
-        image: _.image,
+        age: age,
+        birthday: birthday,
+        city: city,
+        country: country,
+        createdAt: createdAt,
+        curatorFirstname: curatorFirstname,
+        curatorId: curatorId,
+        curatorLastname: curatorLastname,
+        curatorPhotos: curatorPhotos.map((e) => e.toDomain()).toList(),
+        profilePhotos: profilePhotos.map((e) => e.toDomain()).toList(),
+        draft: draft,
+        firstName: firstName,
+        gender: gender,
+        haveChild: haveChild,
+        height: height,
+        isActive: isActive,
+        isHidden: isHidden,
+        isMutualLike: isMutualLike,
+        isOnline: isOnline,
+        lastName: lastName,
+        likesAmount: likesAmount,
+        phoneNumber: phoneNumber,
+        profileInfo: profileInfo,
+        savedAt: savedAt,
+        showInfo: showInfo,
+        status: status,
       );
 }

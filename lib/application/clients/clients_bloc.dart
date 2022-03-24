@@ -1,3 +1,4 @@
+import 'package:astra_curator/application/clients/clients_sort_types.dart';
 import 'package:astra_curator/domain/clients/models/client.dart';
 import 'package:astra_curator/domain/clients/repositories/i_client_repository.dart';
 import 'package:bloc/bloc.dart';
@@ -8,6 +9,7 @@ part 'clients_event.dart';
 part 'clients_state.dart';
 part 'clients_bloc.freezed.dart';
 
+/// The bloc to load clients from server and sort clients.
 @injectable
 class ClientsBloc extends Bloc<ClientsEvent, ClientsState> {
   /// API.
@@ -25,6 +27,7 @@ class ClientsBloc extends Bloc<ClientsEvent, ClientsState> {
                   emit(
                     state.copyWith(
                       isUnExpectedError: true,
+                      isLoading: false,
                     ),
                   );
                 },
@@ -32,6 +35,7 @@ class ClientsBloc extends Bloc<ClientsEvent, ClientsState> {
                   emit(
                     state.copyWith(
                       isNoConnection: true,
+                      isLoading: false,
                     ),
                   );
                 },
@@ -41,9 +45,33 @@ class ClientsBloc extends Bloc<ClientsEvent, ClientsState> {
               emit(
                 state.copyWith(
                   clients: clients,
+                  isLoading: false,
+                  isSuccess: true,
                 ),
               ),
             },
+          );
+        },
+        sortClients: (e) async {
+          emit(
+            state.copyWith(
+              isLoading: true,
+              isSuccess: false,
+              sortTypes: SortTypes.initial,
+            ),
+          );
+
+          final sortedClients =
+              await _api.sortClients(e.sortTypes, state.clients);
+
+          await Future.delayed(const Duration(seconds: 2));
+          emit(
+            state.copyWith(
+              clients: sortedClients,
+              isLoading: false,
+              isSuccess: true,
+              sortTypes: e.sortTypes,
+            ),
           );
         },
       );
