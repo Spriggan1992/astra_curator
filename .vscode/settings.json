@@ -15,10 +15,14 @@
         "Astra",
         "autovalidate",
         "cupertino",
+        "dartz",
+        "DTOs",
         "RGBO",
+        "sembast",
         "unfocus",
         "vsync",
         "Добавление"
     ],
-    "explorerExclude.backup": null
+    "explorerExclude.backup": null,
+    "dart.flutterSdkPath": "/Users/romankozlov/fvm/versions/2.10.3"
 }

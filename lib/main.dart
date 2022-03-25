@@ -1,10 +1,8 @@
-import 'dart:developer';
-
-import 'package:astra_curator/infrastructure/core/database/sembast/sembast_database.dart';
-import 'package:astra_curator/infrastructure/core/http/dio_interceptor.dart';
+import 'package:astra_curator/core/infrastructure/database/sembast/sembast_database.dart';
+import 'package:astra_curator/core/infrastructure/http/dio_interceptor.dart';
+import 'package:astra_curator/core/presentation/astra_curator_app.dart';
+import 'package:astra_curator/core/presentation/routes/app_router.gr.dart';
 import 'package:astra_curator/injection.dart';
-import 'package:astra_curator/presentation/astra_curator_app.dart';
-import 'package:astra_curator/presentation/core/routes/app_router.gr.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,8 +19,8 @@ Future<void> _appInitializer() async {
   await getIt<SembastDatabase>().init();
   getIt<Dio>()
     ..options = BaseOptions(
-      connectTimeout: 5000,
-      receiveTimeout: 3000,
+      connectTimeout: 10000,
+      receiveTimeout: 10000,
     )
     ..interceptors.add(getIt<DioInterceptor>());
   getIt.registerSingleton<AppRouter>(AppRouter());
