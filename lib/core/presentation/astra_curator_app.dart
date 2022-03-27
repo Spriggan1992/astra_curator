@@ -1,6 +1,6 @@
 import 'package:astra_curator/account/application/account_history/account_history_bloc.dart';
 import 'package:astra_curator/account/application/withdraw/withdraw_bloc.dart';
-import 'package:astra_curator/auth/application/auth/auth_bloc.dart';
+import 'package:astra_curator/auth/core/application/auth_bloc.dart';
 import 'package:astra_curator/core/presentation/routes/app_router.gr.dart';
 import 'package:astra_curator/core/presentation/theming/theme/app_theme.dart';
 import 'package:astra_curator/injection.dart';

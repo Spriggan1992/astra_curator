@@ -1,5 +1,5 @@
 import 'package:astra_curator/core/infrastructure/database/sembast/sembast_database.dart';
-import 'package:astra_curator/core/infrastructure/http/dio_interceptor.dart';
+import 'package:astra_curator/auth/core/infrastructure/dio_interceptor.dart';
 import 'package:astra_curator/core/presentation/astra_curator_app.dart';
 import 'package:astra_curator/core/presentation/routes/app_router.gr.dart';
 import 'package:astra_curator/injection.dart';

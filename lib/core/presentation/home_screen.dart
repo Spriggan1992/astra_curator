@@ -1,6 +1,6 @@
 import 'package:astra_curator/account/application/account_history/account_history_bloc.dart';
-import 'package:astra_curator/chats/application/chats/chats_bloc.dart';
-import 'package:astra_curator/clients/application/clients_bloc.dart';
+import 'package:astra_curator/chats/chats/application/chats_bloc.dart';
+import 'package:astra_curator/clients/clients/application/clients_bloc.dart';
 import 'package:astra_curator/core/presentation/routes/app_router.gr.dart';
 import 'package:astra_curator/core/presentation/routes/router_observer.dart';
 import 'package:astra_curator/core/presentation/widgets/bars/bottom_navigation_bar/icon_nav_item.dart';
@@ -44,9 +44,7 @@ class HomeScreen extends StatelessWidget {
           resizeToAvoidBottomInset: false,
           routes: _routes,
           navigatorObservers: () => [RouterObserver()],
-          bottomNavigationBuilder: (navContext, tabsRouter) {
-            return _buildBottomBar(navContext, tabsRouter);
-          },
+          bottomNavigationBuilder: _buildBottomBar,
         ),
       ),
     );

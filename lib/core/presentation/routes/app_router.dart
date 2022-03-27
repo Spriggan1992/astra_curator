@@ -1,15 +1,15 @@
 import 'package:astra_curator/account/presentation/account_screen.dart';
-import 'package:astra_curator/auth/presentation/password_screen.dart';
-import 'package:astra_curator/auth/presentation/phone_number_screen.dart';
-import 'package:astra_curator/auth/presentation/signin_screen.dart';
-import 'package:astra_curator/auth/presentation/splash_screen.dart';
-import 'package:astra_curator/chats/presentation/chat_screen/chat_screen.dart';
-import 'package:astra_curator/chats/presentation/chats_screen/chats_screen.dart';
-import 'package:astra_curator/clients/presentation/clients_screen/clients_screen.dart';
+import 'package:astra_curator/auth/core/presentation/splash_screen.dart';
+import 'package:astra_curator/auth/password/presentation/password_screen.dart';
+import 'package:astra_curator/auth/phone/presentation/phone_number_screen.dart';
+import 'package:astra_curator/auth/signing/presentation/signin_screen.dart';
+import 'package:astra_curator/chats/chat/presentation/chat_screen.dart';
+import 'package:astra_curator/chats/chats/presentation/chats_screen.dart';
+import 'package:astra_curator/clients/clients/presentation/clients_screen/clients_screen.dart';
 import 'package:astra_curator/core/presentation/home_screen.dart';
-import 'package:astra_curator/new_client/presentation/adding_client/adding_client_screen.dart';
-import 'package:astra_curator/new_client/presentation/additional_screen/new_client_additional_screen.dart';
-import 'package:astra_curator/new_client/presentation/detailed_info_screen/new_client_detailed_info_screen.dart';
+import 'package:astra_curator/new_client/adding_client/presentation/adding_client_screen.dart';
+import 'package:astra_curator/new_client/additional_screen/presentation/new_client_additional_screen.dart';
+import 'package:astra_curator/new_client/detailed_info/presentation/new_client_detailed_info_screen.dart';
 import 'package:astra_curator/photos/presentation/photos_screen.dart';
 import 'package:auto_route/auto_route.dart';
 

@@ -24,5 +24,6 @@
         "Добавление"
     ],
     "explorerExclude.backup": null,
-    "dart.flutterSdkPath": "/Users/romankozlov/fvm/versions/2.10.3"
+    "dart.flutterSdkPath": "/Users/romankozlov/fvm/versions/2.10.3",
+    "dart.sdkPath": "/Users/romankozlov/fvm/versions/2.10.3/bin/cache/dart-sdk"
 }

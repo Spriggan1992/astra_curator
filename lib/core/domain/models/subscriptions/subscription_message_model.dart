@@ -1,4 +1,4 @@
-import 'package:astra_curator/chats/domain/models/message_model.dart';
+import 'package:astra_curator/chats/chat/domain/models/message_model.dart';
 import 'package:astra_curator/core/domain/models/subscriptions/i_subscription_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
