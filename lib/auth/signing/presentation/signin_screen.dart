@@ -1,3 +1,4 @@
+import 'package:astra_curator/core/presentation/constants/app_texts.dart';
 import 'package:astra_curator/core/presentation/routes/app_router.gr.dart';
 import 'package:astra_curator/core/presentation/theming/colors.dart';
 import 'package:astra_curator/core/presentation/theming/gradients.dart';
@@ -32,7 +33,7 @@ class SingingScreen extends StatelessWidget {
                 onClick: () {
                   context.router.push(const PhoneNumberScreenRoute());
                 },
-                title: 'Войти',
+                title: AppTexts.signIn,
                 titleColor: AstraColors.mainDarkGold,
               ),
             ],

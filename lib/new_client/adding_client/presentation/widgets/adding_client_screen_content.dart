@@ -4,6 +4,7 @@ import 'package:astra_curator/core/domain/models/city_model.dart';
 import 'package:astra_curator/core/domain/models/country_model.dart';
 import 'package:astra_curator/core/domain/models/gender_model.dart';
 import 'package:astra_curator/core/domain/models/martial_status_model.dart';
+import 'package:astra_curator/core/presentation/constants/app_texts.dart';
 import 'package:astra_curator/core/presentation/routes/app_router.gr.dart';
 import 'package:astra_curator/core/presentation/widgets/bars/appbar/main_app_bar.dart';
 import 'package:astra_curator/core/presentation/widgets/buttons/astra_gradient_button.dart';
@@ -12,7 +13,6 @@ import 'package:astra_curator/core/presentation/widgets/popup/text_field_pop_up_
 import 'package:astra_curator/core/presentation/widgets/text_fields/core/validators.dart';
 import 'package:astra_curator/core/presentation/widgets/text_fields/lost_focus_text_field.dart';
 import 'package:astra_curator/new_client/adding_client/application/adding_client_bloc.dart';
-import 'package:astra_curator/new_client/adding_client/presentation/constants/adding_client_texts.dart';
 import 'package:astra_curator/new_client/adding_client/presentation/widgets/adding_photo_sign.dart';
 import 'package:astra_curator/new_client/adding_client/presentation/widgets/photos.dart';
 import 'package:auto_route/auto_route.dart';
@@ -59,7 +59,7 @@ class _AddingClientScreenContentState extends State<AddingClientScreenContent> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         appBar: const ReusableAppBar(
-          title: AddingClientTexts.appBarTitle,
+          title: AppTexts.addingClient,
         ),
         body: SingleChildScrollView(
           controller: _scrollController,
@@ -74,7 +74,7 @@ class _AddingClientScreenContentState extends State<AddingClientScreenContent> {
                     LostFocusTextField(
                       keyboardType: TextInputType.phone,
                       initialTextValue: state.client.phoneNumber,
-                      hint: AddingClientTexts.phoneNumber,
+                      hint: AppTexts.phoneNumber,
                       onSubmit: (value) => context
                           .read<AddingClientBloc>()
                           .add(AddingClientEvent.phoneNumberChanged(value)),
@@ -84,7 +84,7 @@ class _AddingClientScreenContentState extends State<AddingClientScreenContent> {
                     ),
                     // First name
                     LostFocusTextField(
-                      hint: AddingClientTexts.firstName,
+                      hint: AppTexts.firstName,
                       textCapitalization: TextCapitalization.words,
                       initialTextValue: state.client.firstName,
                       onSubmit: (value) => context
@@ -96,7 +96,7 @@ class _AddingClientScreenContentState extends State<AddingClientScreenContent> {
                     ),
                     // Last name
                     LostFocusTextField(
-                      hint: AddingClientTexts.lastName,
+                      hint: AppTexts.lastName,
                       textCapitalization: TextCapitalization.words,
                       initialTextValue: state.client.lastName,
                       onSubmit: (value) => context
@@ -108,7 +108,7 @@ class _AddingClientScreenContentState extends State<AddingClientScreenContent> {
                     ),
                     // Birthday.
                     PlatformDatePicker(
-                      hint: AddingClientTexts.birthday,
+                      hint: AppTexts.birthday,
                       initialDate: state.client.birthday,
                       onSubmitDate: (dateTime) => context
                           .read<AddingClientBloc>()
@@ -119,7 +119,7 @@ class _AddingClientScreenContentState extends State<AddingClientScreenContent> {
                     TextFieldPopUpMenu(
                       initialValue: widget.cities.first,
                       isFullSize: true,
-                      hint: AddingClientTexts.city,
+                      hint: AppTexts.city,
                       items: widget.cities.map((e) => e).toList(),
                       onSelected: (selectedItem) =>
                           context.read<AddingClientBloc>().add(
@@ -132,7 +132,7 @@ class _AddingClientScreenContentState extends State<AddingClientScreenContent> {
                     TextFieldPopUpMenu(
                       initialValue: widget.countries.first,
                       isFullSize: true,
-                      hint: AddingClientTexts.country,
+                      hint: AppTexts.country,
                       items: widget.countries
                           .map((countryModel) => countryModel)
                           .toList(),
@@ -151,14 +151,14 @@ class _AddingClientScreenContentState extends State<AddingClientScreenContent> {
                           child: TextFieldPopUpMenu(
                             initialValue: state.client.gender,
                             isFullSize: true,
-                            hint: AddingClientTexts.gender,
+                            hint: AppTexts.gender,
                             items: const [
                               GenderModel(
-                                title: AddingClientTexts.genderMale,
+                                title: AppTexts.genderMale,
                                 value: 1,
                               ),
                               GenderModel(
-                                title: AddingClientTexts.genderFemale,
+                                title: AppTexts.genderFemale,
                                 value: 2,
                               ),
                             ],
@@ -180,7 +180,7 @@ class _AddingClientScreenContentState extends State<AddingClientScreenContent> {
                               FilteringTextInputFormatter.allow(
                                   RegExp(r'[0-9]'))
                             ],
-                            hint: AddingClientTexts.height,
+                            hint: AppTexts.height,
                             onSubmit: (value) =>
                                 context.read<AddingClientBloc>().add(
                                       AddingClientEvent.heightChanged(value),
@@ -195,14 +195,14 @@ class _AddingClientScreenContentState extends State<AddingClientScreenContent> {
                     // MartialStatus
                     TextFieldPopUpMenu(
                       initialValue: state.client.martialStatus,
-                      hint: AddingClientTexts.martialStatus,
+                      hint: AppTexts.martialStatus,
                       items: const [
                         MartialStatusModel(
-                          title: AddingClientTexts.martialStatusSingle,
+                          title: AppTexts.martialStatusSingle,
                           value: 0,
                         ),
                         MartialStatusModel(
-                          title: AddingClientTexts.martialStatusDivorced,
+                          title: AppTexts.martialStatusDivorced,
                           value: 1,
                         ),
                       ],
@@ -216,14 +216,14 @@ class _AddingClientScreenContentState extends State<AddingClientScreenContent> {
                     // Child status.
                     TextFieldPopUpMenu(
                       initialValue: state.client.haveChild,
-                      hint: AddingClientTexts.haveChild,
+                      hint: AppTexts.haveChild,
                       items: const [
                         ChildStatusModel(
-                          title: AddingClientTexts.haveChildFalse,
+                          title: AppTexts.haveChildFalse,
                           value: false,
                         ),
                         ChildStatusModel(
-                          title: AddingClientTexts.haveChildTrue,
+                          title: AppTexts.haveChildTrue,
                           value: true,
                         ),
                       ],
@@ -242,7 +242,7 @@ class _AddingClientScreenContentState extends State<AddingClientScreenContent> {
                         child: LostFocusTextField(
                           initialTextValue: state.client.shortDescription,
                           textInputAction: TextInputAction.newline,
-                          hint: AddingClientTexts.shortDescription,
+                          hint: AppTexts.shortDescription,
                           textCapitalization: TextCapitalization.sentences,
                           onSubmit: (value) =>
                               context.read<AddingClientBloc>().add(
@@ -291,7 +291,7 @@ class _AddingClientScreenContentState extends State<AddingClientScreenContent> {
                           // isEnableButton: formIsFilled,
                           isLoading: state.registerLoadingStates ==
                               LoadingStatesWithFailure.loading,
-                          title: AddingClientTexts.buttonTitle,
+                          title: AppTexts.continueText,
                           onClick: () {
                             context
                                 .read<AddingClientBloc>()

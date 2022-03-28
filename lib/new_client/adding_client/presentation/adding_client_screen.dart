@@ -1,12 +1,12 @@
 import 'package:astra_curator/core/application/enums/loading_state_with_failures.dart';
 import 'package:astra_curator/core/application/enums/loading_states.dart';
+import 'package:astra_curator/core/presentation/constants/app_texts.dart';
 import 'package:astra_curator/core/presentation/dialogs/snack_bar.dart';
 import 'package:astra_curator/core/presentation/routes/app_router.gr.dart';
 import 'package:astra_curator/core/presentation/widgets/scaffolds/error_screens/astra_failure_screen.dart';
 import 'package:astra_curator/core/presentation/widgets/scaffolds/loading_screen.dart';
 import 'package:astra_curator/injection.dart';
 import 'package:astra_curator/new_client/adding_client/application/adding_client_bloc.dart';
-import 'package:astra_curator/new_client/adding_client/presentation/constants/adding_client_texts.dart';
 import 'package:astra_curator/new_client/adding_client/presentation/widgets/adding_client_screen_content.dart';
 import 'package:astra_curator/photos/application/photos_bloc.dart';
 import 'package:auto_route/auto_route.dart';
@@ -33,7 +33,7 @@ class NewClientAddingClientScreen extends StatelessWidget {
               LoadingStatesWithFailure.unexpectedFailure) {
             showSnackBar(
               context,
-              title: AddingClientTexts.unexpectedFailureTitle,
+              title: AppTexts.unexpectedFailureTitle,
             );
           }
           if (state.registerLoadingStates ==

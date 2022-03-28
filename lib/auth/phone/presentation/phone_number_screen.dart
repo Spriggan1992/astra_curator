@@ -1,6 +1,7 @@
 import 'package:astra_curator/auth/core/presentation/constants/constants.dart';
 import 'package:astra_curator/auth/core/presentation/widgets/screen_content.dart';
 import 'package:astra_curator/auth/phone/application/phone_bloc.dart';
+import 'package:astra_curator/core/presentation/constants/app_texts.dart';
 import 'package:astra_curator/core/presentation/dialogs/snack_bar.dart';
 import 'package:astra_curator/core/presentation/routes/app_router.gr.dart';
 import 'package:astra_curator/core/presentation/theming/colors.dart';
@@ -40,14 +41,14 @@ class PhoneNumberScreen extends StatelessWidget {
                 content: Column(
                   children: const [
                     Text(
-                      'Номер в базе\nне зарегистрирован',
+                      AppTexts.numberRegistered,
                       textAlign: TextAlign.center,
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: 8),
                     Text(
-                      'Для регистрации обратитесь\nв службу поддержки по номеру',
+                      AppTexts.contactSupport,
                       style: TextStyle(
                         color: AstraColors.btnBlueColor,
                         fontSize: 15,
@@ -66,7 +67,7 @@ class PhoneNumberScreen extends StatelessWidget {
                   ],
                 ),
                 action: DialogActionButton(
-                  title: "Спасибо",
+                  title: AppTexts.thankYou,
                   onClick: context.router.pop,
                 ),
               ),
@@ -77,7 +78,7 @@ class PhoneNumberScreen extends StatelessWidget {
           }
         },
         child: ScreenContent(
-          title: "Мой номер телефона",
+          title: AppTexts.myPhoneNumber,
           textFieldContent: BlocBuilder<PhoneBloc, PhoneState>(
             builder: (context, state) {
               return TextFormField(
@@ -90,7 +91,7 @@ class PhoneNumberScreen extends StatelessWidget {
                   AstraPhoneInputFormatter(),
                 ],
                 decoration:
-                    const InputDecoration(hintText: "Введите номер телефона"),
+                    const InputDecoration(hintText: AppTexts.enterPhoneNumber),
                 onChanged: (value) {
                   context.read<PhoneBloc>().add(
                         PhoneEvent.changedTextValue(value),
@@ -101,13 +102,13 @@ class PhoneNumberScreen extends StatelessWidget {
             },
           ),
           termContent: Text(
-            "Нажимая кнопку “продолжить” я соглашаюсь с",
+            AppTexts.byClicingIagree,
             style: Theme.of(context).textTheme.bodySmall,
           ),
           termsTextButton: InkWell(
             onTap: () {},
             child: Text(
-              'пользовательским соглашением.',
+              AppTexts.userAgreement,
               style: Theme.of(context).textTheme.bodySmall!.copyWith(
                     color: AstraColors.textLinkColor,
                     decoration: TextDecoration.underline,
@@ -117,7 +118,7 @@ class PhoneNumberScreen extends StatelessWidget {
           button: BlocBuilder<PhoneBloc, PhoneState>(
             builder: (context, state) {
               return AstraGradientButton(
-                title: 'Продолжить',
+                title: AppTexts.continueText,
                 isEnableButton: state.isEnableBtn,
                 isLoading: state.isLoading,
                 onClick: () {
@@ -127,7 +128,7 @@ class PhoneNumberScreen extends StatelessWidget {
             },
           ),
           notificationMessageContent: Text(
-            "Вам придёт сообщение с кодом.\nНикому его не говорите.",
+            AppTexts.willReceiveMessage,
             style: Theme.of(context).textTheme.bodySmall,
           ),
         ),

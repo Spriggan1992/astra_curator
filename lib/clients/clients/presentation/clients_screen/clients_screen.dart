@@ -1,10 +1,10 @@
 import 'package:astra_curator/clients/clients/application/clients_bloc.dart';
 import 'package:astra_curator/clients/clients/application/clients_sort_types.dart';
-import 'package:astra_curator/clients/clients/presentation/clients_screen/constants/clients_texts.dart';
 import 'package:astra_curator/clients/clients/presentation/clients_screen/widgets/client_tile.dart';
 import 'package:astra_curator/clients/clients/presentation/clients_screen/widgets/sort_popup_menu.dart';
 import 'package:astra_curator/core/application/enums/astra_failures.dart';
 import 'package:astra_curator/core/application/enums/loading_state_with_failures.dart';
+import 'package:astra_curator/core/presentation/constants/app_texts.dart';
 import 'package:astra_curator/core/presentation/theming/colors.dart';
 import 'package:astra_curator/core/presentation/widgets/bars/appbar/main_app_bar.dart';
 import 'package:astra_curator/core/presentation/widgets/global/platform.activity_indicator.dart';
@@ -47,7 +47,7 @@ class ClientsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: ReusableAppBar(
-        title: ClientsTexts.appBarTitle,
+        title: AppTexts.clients,
         actions: [
           SortPopUpMenu(
             onSelected: (value) {
@@ -80,7 +80,7 @@ class ClientsScreen extends StatelessWidget {
                 },
               );
             } else {
-              return const Center(child: Text(ClientsTexts.emptyList));
+              return const Center(child: Text(AppTexts.emptyList));
             }
           } else {
             return ErrorScreen(

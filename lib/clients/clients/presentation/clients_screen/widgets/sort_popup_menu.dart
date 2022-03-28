@@ -1,4 +1,4 @@
-import 'package:astra_curator/clients/clients/presentation/clients_screen/constants/clients_texts.dart';
+import 'package:astra_curator/core/presentation/constants/app_texts.dart';
 import 'package:astra_curator/core/presentation/theming/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +29,7 @@ class SortPopUpMenu extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  ClientsTexts.sortByLastLogin,
+                  AppTexts.sortByLastLogin,
                   style: _textTheme.bodySmall!.copyWith(
                     color: AstraColors.black,
                     fontWeight: FontWeight.w500,
@@ -51,7 +51,7 @@ class SortPopUpMenu extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'По ID',
+                  AppTexts.byId,
                   style: _textTheme.bodySmall!.copyWith(
                     color: AstraColors.black,
                     fontWeight: FontWeight.w500,
@@ -71,7 +71,7 @@ class SortPopUpMenu extends StatelessWidget {
             value: 3,
             child: Center(
               child: Text(
-                ClientsTexts.sortByAlphabeticOrder,
+                AppTexts.sortByAlphabeticOrder,
                 textAlign: TextAlign.center,
                 style: _textTheme.bodySmall!.copyWith(
                   color: AstraColors.black,
@@ -85,7 +85,7 @@ class SortPopUpMenu extends StatelessWidget {
             value: 4,
             child: Center(
               child: Text(
-                ClientsTexts.sortByAlphabeticOrderReversed,
+                AppTexts.sortByAlphabeticOrderReversed,
                 style: _textTheme.bodySmall!.copyWith(
                   color: AstraColors.black,
                   fontWeight: FontWeight.w500,

@@ -1,5 +1,5 @@
 import 'package:astra_curator/account/domain/models/withdraw/withdraw_history.dart';
-import 'package:astra_curator/account/presentation/constants/account_texts.dart';
+import 'package:astra_curator/core/presentation/constants/app_texts.dart';
 import 'package:astra_curator/core/presentation/extensions/date_tim_to_string.dart';
 import 'package:astra_curator/core/presentation/theming/colors.dart';
 import 'package:flutter/material.dart';
@@ -29,16 +29,16 @@ class AstraTableRow {
   /// Get status color by status.
   Color _getColor(WithdrawHistory withdrawHistory) {
     switch (withdrawHistory.status) {
-      case AccountTexts.completedO:
+      case AppTexts.completedO:
         return AstraColors.green;
 
-      case AccountTexts.completed:
+      case AppTexts.completed:
         return AstraColors.green;
 
-      case AccountTexts.rejectedO:
+      case AppTexts.rejectedO:
         return AstraColors.errorColor;
 
-      case AccountTexts.rejected:
+      case AppTexts.rejected:
         return AstraColors.errorColor;
 
       default:
@@ -79,7 +79,7 @@ class AstraTableRow {
                   ),
                 ),
                 Text(
-                  '${AccountTexts.id}: ${withdrawHistory.id}',
+                  '${AppTexts.id.toUpperCase()}: ${withdrawHistory.id}',
                   style: _textTheme.titleSmall!.copyWith(
                     color: AstraColors.black04,
                     fontWeight: FontWeight.w600,
@@ -129,7 +129,7 @@ class AstraTableRow {
       children: [
         TableCell(
           child: Text(
-            AccountTexts.dateId,
+            AppTexts.dateId,
             style: _textTheme.titleSmall!.copyWith(
               color: AstraColors.black04,
               fontWeight: FontWeight.w600,
@@ -139,7 +139,7 @@ class AstraTableRow {
         TableCell(
           verticalAlignment: TableCellVerticalAlignment.middle,
           child: Text(
-            AccountTexts.sum,
+            AppTexts.sum,
             textAlign: TextAlign.right,
             style: _textTheme.titleSmall!.copyWith(
               color: AstraColors.black04,
@@ -150,7 +150,7 @@ class AstraTableRow {
         TableCell(
           verticalAlignment: TableCellVerticalAlignment.middle,
           child: Text(
-            AccountTexts.status,
+            AppTexts.status,
             textAlign: TextAlign.right,
             style: _textTheme.titleSmall!.copyWith(
               color: AstraColors.black04,

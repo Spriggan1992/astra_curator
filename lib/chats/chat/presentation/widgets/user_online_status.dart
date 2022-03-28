@@ -1,4 +1,5 @@
-import 'package:astra_curator/chats/chat/presentation/constants/chat_texts.dart';
+
+import 'package:astra_curator/core/presentation/constants/app_texts.dart';
 import 'package:astra_curator/core/presentation/theming/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -30,9 +31,9 @@ class UserOnlineStatus extends StatelessWidget {
 
   String _setStatusTitle() {
     if (!hasInternet) {
-      return ChatTexts.waitingNetwork;
+      return AppTexts.waitingNetwork;
     } else {
-      return isOnline ? ChatTexts.online : ChatTexts.offline;
+      return isOnline ? AppTexts.online : AppTexts.offline;
     }
   }
 }

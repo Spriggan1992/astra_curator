@@ -1,7 +1,7 @@
 import 'package:astra_curator/chats/chats/application/chats_bloc.dart';
 import 'package:astra_curator/chats/chats/application/enums/delete_statuses.dart';
 import 'package:astra_curator/chats/chats/presentation/chats_content.dart';
-import 'package:astra_curator/chats/chats/presentation/constants/chats_text.dart';
+import 'package:astra_curator/core/presentation/constants/app_texts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,7 +21,7 @@ class ChatsScreen extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.white,
         title: Text(
-          ChatsTexts.appBarTitle,
+          AppTexts.messages,
           style: Theme.of(context).textTheme.headline6!.copyWith(
                 color: const Color.fromRGBO(31, 31, 31, 1),
                 fontSize: 17,
