@@ -54,6 +54,9 @@ class LostFocusTextField extends StatefulWidget {
   ///
   /// By default is `TextCapitalization.none`.
   final TextCapitalization textCapitalization;
+  final bool isDisabled;
+
+  final Function(String value)? onChanged;
   const LostFocusTextField({
     Key? key,
     required this.hint,
@@ -68,6 +71,8 @@ class LostFocusTextField extends StatefulWidget {
     this.keyboardType,
     this.textInputAction,
     this.textCapitalization = TextCapitalization.none,
+    this.isDisabled = false,
+    this.onChanged,
   }) : super(key: key);
 
   @override
@@ -99,11 +104,13 @@ class _LostFocusTextFieldState extends State<LostFocusTextField> {
   void focusListener() {
     _focusNode.addListener(() {
       setSubmittingStatus();
-      if (_submittingStatus == SubmittingTextStatus.success) {
-        widget.onSubmit!(_controller.text);
-      }
-      if (_controller.text.isEmpty) {
-        widget.onSubmit!('');
+      if (widget.onSubmit != null) {
+        if (_submittingStatus == SubmittingTextStatus.success) {
+          widget.onSubmit!(_controller.text);
+        }
+        if (_controller.text.isEmpty) {
+          widget.onSubmit!('');
+        }
       }
     });
   }
@@ -134,20 +141,24 @@ class _LostFocusTextFieldState extends State<LostFocusTextField> {
   }
 
   Widget showErrorIcon() {
-    if (_submittingStatus == SubmittingTextStatus.failure &&
-        widget.isShowSuffixIcon) {
-      return Icon(
-        Icons.close,
-        color: Theme.of(context).errorColor,
-      );
-    } else if (_submittingStatus == SubmittingTextStatus.success &&
-        widget.isShowSuffixIcon) {
-      return const Icon(
-        Icons.done,
-        color: Colors.green,
-      );
-    } else {
+    if (widget.readOnly || widget.isDisabled) {
       return const SizedBox.shrink();
+    } else {
+      if (_submittingStatus == SubmittingTextStatus.failure &&
+          widget.isShowSuffixIcon) {
+        return Icon(
+          Icons.close,
+          color: Theme.of(context).errorColor,
+        );
+      } else if (_submittingStatus == SubmittingTextStatus.success &&
+          widget.isShowSuffixIcon) {
+        return const Icon(
+          Icons.done,
+          color: Colors.green,
+        );
+      } else {
+        return const SizedBox.shrink();
+      }
     }
   }
 
@@ -156,12 +167,14 @@ class _LostFocusTextFieldState extends State<LostFocusTextField> {
     return SizedBox(
       height: widget.textFieldHeigh,
       child: TextField(
+        enabled: !widget.isDisabled,
         textCapitalization: widget.textCapitalization,
         maxLines: null,
         keyboardType: widget.keyboardType,
         readOnly: widget.readOnly,
         controller: _controller,
         focusNode: _focusNode,
+        onChanged: widget.onChanged,
         inputFormatters: widget.textInputFormatter,
         decoration: InputDecoration(
           hintText: widget.hint,

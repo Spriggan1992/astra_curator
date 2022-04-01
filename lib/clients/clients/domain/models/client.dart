@@ -25,10 +25,10 @@ class ClientModel with _$ClientModel {
     required String lastName,
 
     /// Client's age.
-    required int? age,
+    int? age,
 
     /// Client's birthday.
-    required String? birthday,
+    String? birthday,
 
     /// Client's height.
     required int height,
@@ -39,7 +39,7 @@ class ClientModel with _$ClientModel {
     /// Client's status.
     required String status,
 
-    /// A flag showing clien's has child or not.
+    /// A flag showing client's has child or not.
     required bool haveChild,
 
     /// Client's country.
@@ -70,7 +70,7 @@ class ClientModel with _$ClientModel {
     required bool showInfo,
 
     /// A flag shows that client is mutual like or not.
-    required bool? isMutualLike,
+    bool? isMutualLike,
 
     /// Client's curator first name.
     required String curatorFirstname,
@@ -79,7 +79,7 @@ class ClientModel with _$ClientModel {
     required String curatorLastname,
 
     /// A flag shows that client is online or not.
-    required bool? isOnline,
+    bool? isOnline,
 
     /// Client's like amount.
     required int likesAmount,
@@ -90,6 +90,35 @@ class ClientModel with _$ClientModel {
     /// Client's curator images.
     required List<ImageModel> curatorPhotos,
   }) = _ClientModel;
+
+  factory ClientModel.empty() => const ClientModel(
+        id: 0,
+        curatorId: 0,
+        phoneNumber: '',
+        firstName: '',
+        lastName: '',
+        birthday: '',
+        height: 0,
+        gender: '',
+        country: '',
+        city: '',
+        profileInfo: '',
+        createdAt: '',
+        savedAt: '',
+        isActive: false,
+        draft: false,
+        isHidden: false,
+        showInfo: false,
+        isMutualLike: false,
+        curatorFirstname: '',
+        curatorLastname: '',
+        isOnline: false,
+        haveChild: false,
+        status: '',
+        likesAmount: 0,
+        profilePhotos: [],
+        curatorPhotos: [],
+      );
 
   /// Client's fullName.
   String get fullName => "$firstName $lastName";

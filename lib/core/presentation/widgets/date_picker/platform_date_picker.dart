@@ -23,13 +23,20 @@ class PlatformDatePicker extends StatefulWidget {
   /// Submit [dateTime] event handler.
   final void Function(DateTime dateTime) onSubmitDate;
 
+  /// The initial picked date.
+  ///
+  /// By default is null.
   final DateTime? initialDate;
+
+  /// Whether the text can be changed.
+  final bool isDisabled;
   const PlatformDatePicker({
     Key? key,
     required this.onSubmitDate,
     required this.hint,
-    this.isShowSuffixIcon = true,
     this.initialDate,
+    this.isShowSuffixIcon = true,
+    this.isDisabled = false,
   }) : super(key: key);
 
   @override
@@ -69,20 +76,24 @@ class _PlatformDatePickerState extends State<PlatformDatePicker> {
 
   // Show status icon.
   Widget _showStatusIcon() {
-    if (_selectionDateStatus == SelectionDateStatus.failure &&
-        widget.isShowSuffixIcon) {
-      return Icon(
-        Icons.close,
-        color: Theme.of(context).errorColor,
-      );
-    } else if (_selectionDateStatus == SelectionDateStatus.success &&
-        widget.isShowSuffixIcon) {
-      return const Icon(
-        Icons.done,
-        color: Colors.green,
-      );
-    } else {
+    if (widget.isDisabled) {
       return const SizedBox.shrink();
+    } else {
+      if (_selectionDateStatus == SelectionDateStatus.failure &&
+          widget.isShowSuffixIcon) {
+        return Icon(
+          Icons.close,
+          color: Theme.of(context).errorColor,
+        );
+      } else if (_selectionDateStatus == SelectionDateStatus.success &&
+          widget.isShowSuffixIcon) {
+        return const Icon(
+          Icons.done,
+          color: Colors.green,
+        );
+      } else {
+        return const SizedBox.shrink();
+      }
     }
   }
 
@@ -146,9 +157,11 @@ class _PlatformDatePickerState extends State<PlatformDatePicker> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () async {
-        await _showPlatformDatePick();
-      },
+      onTap: widget.isDisabled
+          ? null
+          : () async {
+              await _showPlatformDatePick();
+            },
       child: TextField(
         controller: _controller,
         decoration: InputDecoration(
@@ -160,9 +173,11 @@ class _PlatformDatePickerState extends State<PlatformDatePicker> {
               .copyWith(color: AstraColors.black04),
         ),
         enabled: false,
-        onTap: () async {
-          await _showPlatformDatePick();
-        },
+        onTap: widget.isDisabled
+            ? null
+            : () async {
+                await _showPlatformDatePick();
+              },
       ),
     );
   }

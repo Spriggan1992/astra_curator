@@ -19,8 +19,8 @@ class AddingClientState with _$AddingClientState {
     /// Client's information for register.
     required NewClientModel client,
 
-    /// Client's photos.
-    required List<ImageModel> photos,
+    // /// Client's photos.
+    // required List<ImageModel> photos,
 
     /// Register new user state.
     required LoadingStatesWithFailure registerLoadingStates,
@@ -33,7 +33,7 @@ class AddingClientState with _$AddingClientState {
         cities: [],
         formIsFilled: false,
         client: NewClientModel.empty(),
-        photos: [],
+        // photos: [],
         registerLoadingStates: LoadingStatesWithFailure.initial,
       );
 }
