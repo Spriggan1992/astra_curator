@@ -195,21 +195,34 @@ class AddingClientBloc extends Bloc<AddingClientEvent, AddingClientState> {
                     ),
                   )
                   .toList();
-              if (state.photos.length < 3) {
-                emit(state.copyWith(photos: [...state.photos, ...fileToImage]));
+              if (state.client.photos.length < 3) {
+                emit(
+                  state.copyWith(
+                    client: state.client.copyWith(
+                      photos: [...state.client.photos, ...fileToImage],
+                    ),
+                  ),
+                );
               } else {
-                emit(state.copyWith(photos: fileToImage));
+                emit(
+                  state.copyWith(
+                    client: state.client.copyWith(photos: fileToImage),
+                  ),
+                );
               }
             }
             add(const AddingClientEvent.formIsFilled());
           },
           photosUpdated: (e) async {
-            emit(state.copyWith(photos: e.updatedImages));
+            emit(
+              state.copyWith(
+                client: state.client.copyWith(photos: e.updatedImages),
+              ),
+            );
             add(const AddingClientEvent.formIsFilled());
           },
           formIsFilled: (e) async {
-            final formIsFilled =
-                state.client.allFieldIsFilled && state.photos.length >= 3;
+            final formIsFilled = state.client.allFieldIsFilled;
             emit(state.copyWith(formIsFilled: formIsFilled));
           },
           buttonPressed: (e) async {

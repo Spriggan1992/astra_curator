@@ -1,30 +1,39 @@
-import 'package:astra_curator/core/application/enums/loading_state_with_failures.dart';
+import 'package:astra_curator/clients/detailed_client_info/application/editing_detailed_client_info_actor/updated_client_loading_state.dart';
+import 'package:astra_curator/clients/detailed_client_info/domain/i_editing_detailed_client_repository.dart';
+import 'package:astra_curator/core/application/enums/loading_states.dart';
 import 'package:astra_curator/core/domain/models/client_detailed_info_model.dart';
-import 'package:astra_curator/new_client/detailed_info/domain/i_adding_detailed_info_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
-part 'adding_detailed_info_event.dart';
-part 'adding_detailed_info_state.dart';
-part 'adding_detailed_info_bloc.freezed.dart';
+part 'editing_detailed_client_info_actor_event.dart';
+part 'editing_detailed_client_info_actor_state.dart';
+part 'editing_detailed_client_info_actor_bloc.freezed.dart';
 
 @injectable
-class AddingDetailedInfoBloc
-    extends Bloc<AddingDetailedInfoEvent, AddingDetailedInfoState> {
-  final IAddingDetailedInfoRepository _repository;
-  AddingDetailedInfoBloc(this._repository)
-      : super(AddingDetailedInfoState.initial()) {
-    on<AddingDetailedInfoEvent>(
+class EditingDetailedClientInfoActorBloc extends Bloc<
+    EditingDetailedClientInfoActorEvent, EditingDetailedClientInfoActorState> {
+  final IEditingDetailedClientRepository _repository;
+  EditingDetailedClientInfoActorBloc(this._repository)
+      : super(EditingDetailedClientInfoActorState.initial()) {
+    on<EditingDetailedClientInfoActorEvent>(
       (event, emit) async {
         await event.map(
+          initialized: (e) async {
+            emit(
+              state.copyWith(
+                loadingState: LoadingStates.success,
+                clientInfo: e.detailedInfoModel,
+                userId: e.userId,
+              ),
+            );
+          },
           characterChanged: (e) async {
             emit(
               state.copyWith(
                 clientInfo: state.clientInfo.copyWith(character: e.value),
               ),
             );
-            add(const AddingDetailedInfoEvent.anyFieldIsNotEmptyChecked());
           },
           skillsChanged: (e) async {
             emit(
@@ -32,7 +41,6 @@ class AddingDetailedInfoBloc
                 clientInfo: state.clientInfo.copyWith(skills: e.value),
               ),
             );
-            add(const AddingDetailedInfoEvent.anyFieldIsNotEmptyChecked());
           },
           orientationChanged: (e) async {
             emit(
@@ -40,7 +48,6 @@ class AddingDetailedInfoBloc
                 clientInfo: state.clientInfo.copyWith(orientation: e.value),
               ),
             );
-            add(const AddingDetailedInfoEvent.anyFieldIsNotEmptyChecked());
           },
           emotionalityChanged: (e) async {
             emit(
@@ -48,7 +55,6 @@ class AddingDetailedInfoBloc
                 clientInfo: state.clientInfo.copyWith(emotionality: e.value),
               ),
             );
-            add(const AddingDetailedInfoEvent.anyFieldIsNotEmptyChecked());
           },
           intellectualityChanged: (e) async {
             emit(
@@ -56,7 +62,6 @@ class AddingDetailedInfoBloc
                 clientInfo: state.clientInfo.copyWith(intellectuality: e.value),
               ),
             );
-            add(const AddingDetailedInfoEvent.anyFieldIsNotEmptyChecked());
           },
           sociabilityChanged: (e) async {
             emit(
@@ -64,7 +69,6 @@ class AddingDetailedInfoBloc
                 clientInfo: state.clientInfo.copyWith(sociability: e.value),
               ),
             );
-            add(const AddingDetailedInfoEvent.anyFieldIsNotEmptyChecked());
           },
           selfRatingChanged: (e) async {
             emit(
@@ -72,7 +76,6 @@ class AddingDetailedInfoBloc
                 clientInfo: state.clientInfo.copyWith(selfControl: e.value),
               ),
             );
-            add(const AddingDetailedInfoEvent.anyFieldIsNotEmptyChecked());
           },
           volitionallyChanged: (e) async {
             emit(
@@ -80,7 +83,6 @@ class AddingDetailedInfoBloc
                 clientInfo: state.clientInfo.copyWith(volitionally: e.value),
               ),
             );
-            add(const AddingDetailedInfoEvent.anyFieldIsNotEmptyChecked());
           },
           selfControlChanged: (e) async {
             emit(
@@ -88,33 +90,29 @@ class AddingDetailedInfoBloc
                 clientInfo: state.clientInfo.copyWith(selfControl: e.value),
               ),
             );
-            add(const AddingDetailedInfoEvent.anyFieldIsNotEmptyChecked());
-          },
-          anyFieldIsNotEmptyChecked: (e) async {
-            emit(
-              state.copyWith(
-                anyFieldIsNotEmpty: state.clientInfo.anyFieldIsNotEmpty,
-              ),
-            );
           },
           buttonPressed: (e) async {
             emit(
-              state.copyWith(loadingState: LoadingStatesWithFailure.loading),
+              state.copyWith(
+                clientUpdatedLoadingState: ClientUpdatedLoadingState.loading,
+              ),
             );
             final response =
-                await _repository.addClientDetailedInfo(state.clientInfo);
+                await _repository.updateClientDetailedInfo(state.userId);
             emit(
               response.fold(
                 (failure) => failure.map(
                   api: (_) => state.copyWith(
-                    loadingState: LoadingStatesWithFailure.unexpectedFailure,
+                    clientUpdatedLoadingState:
+                        ClientUpdatedLoadingState.unexpected,
                   ),
                   noConnection: (_) => state.copyWith(
-                    loadingState: LoadingStatesWithFailure.noConnectionFailure,
+                    clientUpdatedLoadingState:
+                        ClientUpdatedLoadingState.noConnection,
                   ),
                 ),
                 (_) => state.copyWith(
-                  loadingState: LoadingStatesWithFailure.success,
+                  clientUpdatedLoadingState: ClientUpdatedLoadingState.success,
                 ),
               ),
             );

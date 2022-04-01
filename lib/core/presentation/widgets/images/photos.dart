@@ -5,21 +5,31 @@ import 'package:astra_curator/core/presentation/widgets/icons/svg_icon.dart';
 import 'package:astra_curator/core/presentation/widgets/images/astra_file_image.dart';
 import 'package:flutter/material.dart';
 
+/// Represent THumbnail of client photos.
 class Photos extends StatelessWidget {
+  /// Pick image event handler.
+  final VoidCallback? onPickImage;
+
+  /// Show image event handler.
+  final VoidCallback? onShowImage;
+
+  /// Whether to edit mode is on.
+  final bool isEditMode;
+
+  /// Client photos to display.
+  final List<ImageModel> images;
+
+  /// If true the photos container is "disabled".
+  final bool isDisabled;
+
   const Photos({
     Key? key,
     required this.images,
     this.onPickImage,
     this.onShowImage,
     this.isEditMode = false,
-    this.addedImg,
+    this.isDisabled = false,
   }) : super(key: key);
-
-  final VoidCallback? onPickImage;
-  final VoidCallback? onShowImage;
-  final bool isEditMode;
-  final List<ImageModel> images;
-  final ImageModel? addedImg;
   @override
   Widget build(BuildContext context) {
     return AnimatedSwitcher(
@@ -44,7 +54,7 @@ class Photos extends StatelessWidget {
             )
           : GestureDetector(
               key: const ValueKey(2),
-              onTap: onShowImage,
+              onTap: isDisabled ? null : onShowImage,
               child: Padding(
                 padding: const EdgeInsets.all(20),
                 child: Stack(

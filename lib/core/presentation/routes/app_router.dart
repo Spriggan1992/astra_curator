@@ -5,7 +5,9 @@ import 'package:astra_curator/auth/phone/presentation/phone_number_screen.dart';
 import 'package:astra_curator/auth/signing/presentation/signin_screen.dart';
 import 'package:astra_curator/chats/chat/presentation/chat_screen.dart';
 import 'package:astra_curator/chats/chats/presentation/chats_screen.dart';
-import 'package:astra_curator/clients/clients/presentation/clients_screen/clients_screen.dart';
+import 'package:astra_curator/clients/clients/presentation/clients_screen.dart';
+import 'package:astra_curator/clients/detailed_client_info/presentation/editing_detailed_client_info_screen.dart';
+import 'package:astra_curator/clients/edditing_client/presentation/editing_client_screen.dart';
 import 'package:astra_curator/core/presentation/home_screen.dart';
 import 'package:astra_curator/new_client/adding_client/presentation/adding_client_screen.dart';
 import 'package:astra_curator/new_client/additional_screen/presentation/new_client_additional_screen.dart';
@@ -77,7 +79,19 @@ const _clients = AutoRoute(
     AutoRoute(
       name: 'EditingClientRouter',
       path: ':editingClientScreen',
-      page: NewClientAddingClientScreen,
+      page: EditingClientScreen,
+    ),
+    AutoRoute(
+      name: 'ClientsPhotosRouter',
+      path: ':clientsPhotosScreen',
+      page: PhotosScreen,
+      meta: {'hideBottomNav': true},
+    ),
+    AutoRoute(
+      name: 'EditingDetailedClientInfoRouter',
+      path: ':editingDetailedClientInfoScreen',
+      page: EditingDetailedClientInfoScreen,
+      // meta: {'hideBottomNav': true},
     ),
   ],
 );

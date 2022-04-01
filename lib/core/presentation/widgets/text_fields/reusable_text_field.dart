@@ -2,7 +2,6 @@ import 'package:astra_curator/core/presentation/theming/colors.dart';
 import 'package:flutter/material.dart';
 
 /// Represent reusable text field.
-///
 class ReusableTextField extends StatefulWidget {
   /// Text that suggests what sort of input the field accepts.
   final String hint;
@@ -13,11 +12,14 @@ class ReusableTextField extends StatefulWidget {
   /// Change [value] event handler.
   final Function(String value)? onChanged;
 
+  /// If false the text field is "disabled".
+  final bool isEnabled;
   const ReusableTextField({
     Key? key,
     required this.hint,
     this.initialTextValue,
     this.onChanged,
+    this.isEnabled = true,
   }) : super(key: key);
 
   @override
@@ -37,13 +39,16 @@ class _ReusableTextFieldState extends State<ReusableTextField> {
   Widget build(BuildContext context) {
     return TextField(
       maxLines: null,
+      enabled: widget.isEnabled,
       controller: _controller,
       decoration: InputDecoration(
-        hintText: widget.hint,
-        hintStyle: Theme.of(context)
-            .textTheme
-            .bodySmall!
-            .copyWith(color: AstraColors.black04),
+        label: Text(
+          widget.hint,
+          style: Theme.of(context)
+              .textTheme
+              .bodyMedium!
+              .copyWith(color: AstraColors.black04),
+        ),
       ),
       onChanged: widget.onChanged,
     );

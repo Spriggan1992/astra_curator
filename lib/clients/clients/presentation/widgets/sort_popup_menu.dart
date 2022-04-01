@@ -1,4 +1,4 @@
-import 'package:astra_curator/clients/clients/presentation/clients_screen/constants/clients_texts.dart';
+import 'package:astra_curator/clients/clients/presentation/constants/clients_texts.dart';
 import 'package:astra_curator/core/presentation/theming/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

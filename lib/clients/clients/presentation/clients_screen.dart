@@ -1,14 +1,16 @@
 import 'package:astra_curator/clients/clients/application/clients_bloc.dart';
 import 'package:astra_curator/clients/clients/application/clients_sort_types.dart';
-import 'package:astra_curator/clients/clients/presentation/clients_screen/constants/clients_texts.dart';
-import 'package:astra_curator/clients/clients/presentation/clients_screen/widgets/client_tile.dart';
-import 'package:astra_curator/clients/clients/presentation/clients_screen/widgets/sort_popup_menu.dart';
+import 'package:astra_curator/clients/clients/presentation/constants/clients_texts.dart';
+import 'package:astra_curator/clients/clients/presentation/widgets/client_tile.dart';
+import 'package:astra_curator/clients/clients/presentation/widgets/sort_popup_menu.dart';
 import 'package:astra_curator/core/application/enums/astra_failures.dart';
 import 'package:astra_curator/core/application/enums/loading_state_with_failures.dart';
+import 'package:astra_curator/core/presentation/routes/app_router.gr.dart';
 import 'package:astra_curator/core/presentation/theming/colors.dart';
 import 'package:astra_curator/core/presentation/widgets/bars/appbar/main_app_bar.dart';
 import 'package:astra_curator/core/presentation/widgets/global/platform.activity_indicator.dart';
 import 'package:astra_curator/core/presentation/widgets/scaffolds/error_screens/astra_failure_screen.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -76,6 +78,9 @@ class ClientsScreen extends StatelessWidget {
                     id: client.id,
                     name: client.fullName,
                     imageUrl: client.mainImagePath,
+                    onTileTap: () {
+                      context.navigateTo(EditingClientRouter(client: client));
+                    },
                   );
                 },
               );

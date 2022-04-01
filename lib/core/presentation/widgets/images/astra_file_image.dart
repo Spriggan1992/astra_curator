@@ -1,5 +1,6 @@
 import 'package:astra_curator/core/domain/models/image_model.dart';
 import 'package:astra_curator/core/presentation/theming/colors.dart';
+import 'package:astra_curator/core/presentation/widgets/images/astra_network_image.dart';
 import 'package:flutter/material.dart';
 
 final _border = Border.all(
@@ -46,12 +47,19 @@ class AstraFileImage extends StatelessWidget {
             : null,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(height),
-          child: Image.file(
-            image.cachedImage!.thumbnailImage!,
-            fit: BoxFit.cover,
-            width: width,
-            height: height,
-          ),
+          child: image.cachedImage?.thumbnailImage == null
+              ? AstraNetworkImage(
+                  imageUrl: image.imageUrl,
+                  fit: BoxFit.cover,
+                  width: width,
+                  height: height,
+                )
+              : Image.file(
+                  image.cachedImage!.thumbnailImage!,
+                  fit: BoxFit.cover,
+                  width: width,
+                  height: height,
+                ),
         ),
       ),
     );
