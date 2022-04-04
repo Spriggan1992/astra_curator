@@ -122,20 +122,21 @@ class _AddingClientScreenContentState extends State<AddingClientScreenContent> {
                     ),
                     const SizedBox(height: 50),
                     // City.
-                    TextFieldPopUpMenu(
+                    TextFieldPopUpMenu<CityModel>(
                       initialValue: widget.cities.first,
                       isFullSize: true,
+                      onDisplay: (item) => item.title,
                       hint: AppTexts.city,
                       items: widget.cities.map((e) => e).toList(),
                       onSelected: (selectedItem) =>
                           context.read<AddingClientBloc>().add(
                                 AddingClientEvent.cityChanged(
-                                  selectedItem as CityModel,
+                                  selectedItem,
                                 ),
                               ),
                     ),
                     // Country.
-                    TextFieldPopUpMenu(
+                    TextFieldPopUpMenu<CountryModel>(
                       initialValue: widget.countries.first,
                       isFullSize: true,
                       hint: AppTexts.country,
@@ -145,7 +146,7 @@ class _AddingClientScreenContentState extends State<AddingClientScreenContent> {
                       onSelected: (selectedItem) =>
                           context.read<AddingClientBloc>().add(
                                 AddingClientEvent.countryChanged(
-                                  selectedItem as CountryModel,
+                                  selectedItem,
                                 ),
                               ),
                     ),
@@ -154,10 +155,11 @@ class _AddingClientScreenContentState extends State<AddingClientScreenContent> {
                       children: [
                         // Gender.
                         Expanded(
-                          child: TextFieldPopUpMenu(
+                          child: TextFieldPopUpMenu<GenderModel>(
                             initialValue: state.client.gender,
                             isFullSize: true,
                             hint: AppTexts.gender,
+                            onDisplay: (item) => item.title,
                             items: const [
                               GenderModel(
                                 title: AppTexts.genderMale,
@@ -171,7 +173,7 @@ class _AddingClientScreenContentState extends State<AddingClientScreenContent> {
                             onSelected: (selectedItem) =>
                                 context.read<AddingClientBloc>().add(
                                       AddingClientEvent.genderChanged(
-                                        selectedItem as GenderModel,
+                                        selectedItem,
                                       ),
                                     ),
                           ),
@@ -200,7 +202,7 @@ class _AddingClientScreenContentState extends State<AddingClientScreenContent> {
                       ],
                     ),
                     // MartialStatus
-                    TextFieldPopUpMenu(
+                    TextFieldPopUpMenu<MartialStatusModel>(
                       initialValue: state.client.martialStatus,
                       hint: AppTexts.martialStatus,
                       items: const [
@@ -213,17 +215,19 @@ class _AddingClientScreenContentState extends State<AddingClientScreenContent> {
                           value: 1,
                         ),
                       ],
+                      onDisplay: (item) => item.title,
                       onSelected: (selectedItem) =>
                           context.read<AddingClientBloc>().add(
                                 AddingClientEvent.martialStatusChanged(
-                                  selectedItem as MartialStatusModel,
+                                  selectedItem,
                                 ),
                               ),
                     ),
                     // Child status.
-                    TextFieldPopUpMenu(
+                    TextFieldPopUpMenu<ChildStatusModel>(
                       initialValue: state.client.haveChild,
                       hint: AppTexts.haveChild,
+                      onDisplay: (item) => item.title,
                       items: const [
                         ChildStatusModel(
                           title: AppTexts.haveChildFalse,
@@ -237,7 +241,7 @@ class _AddingClientScreenContentState extends State<AddingClientScreenContent> {
                       onSelected: (selectedItem) =>
                           context.read<AddingClientBloc>().add(
                                 AddingClientEvent.childStatusChanged(
-                                  selectedItem as ChildStatusModel,
+                                  selectedItem,
                                 ),
                               ),
                     ),

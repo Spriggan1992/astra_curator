@@ -54,8 +54,11 @@ class LostFocusTextField extends StatefulWidget {
   ///
   /// By default is `TextCapitalization.none`.
   final TextCapitalization textCapitalization;
+
+  /// If false the text field is "disabled".
   final bool isDisabled;
 
+  /// Change [value] event handler.
   final Function(String value)? onChanged;
   const LostFocusTextField({
     Key? key,

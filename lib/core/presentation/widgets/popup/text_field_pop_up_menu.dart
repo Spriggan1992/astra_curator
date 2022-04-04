@@ -1,6 +1,5 @@
 import 'package:astra_curator/core/presentation/theming/colors.dart';
 import 'package:astra_curator/core/presentation/widgets/containers/gradient_border_container.dart';
-import 'package:astra_curator/core/presentation/widgets/popup/core/text_field_popup_menu_item.dart';
 import 'package:flutter/material.dart';
 
 /// Represent text field with popup menu.
@@ -11,19 +10,21 @@ class TextFieldPopUpMenu<T> extends StatefulWidget {
   final bool isFullSize;
 
   /// Initial value of selected value.
-  final TextFieldPopUpMenuItem? initialValue;
+  final T? initialValue;
 
   /// Text that suggests what sort of input the field accepts.
   final String hint;
 
   /// Pop up menu items.
-  final List<TextFieldPopUpMenuItem> items;
+  final List<T> items;
 
   /// Select item event handler.
-  final Function(TextFieldPopUpMenuItem selectedItem) onSelected;
+  final Function(T selectedItem) onSelected;
 
   /// Whether the menu is disabled.
   final bool isDisabled;
+
+  final String Function(T) onDisplay;
 
   const TextFieldPopUpMenu({
     Key? key,
@@ -33,10 +34,11 @@ class TextFieldPopUpMenu<T> extends StatefulWidget {
     this.initialValue,
     this.isFullSize = false,
     this.isDisabled = false,
+    required this.onDisplay,
   }) : super(key: key);
 
   @override
-  State<TextFieldPopUpMenu> createState() => _TextFieldPopUpMenuState();
+  State<TextFieldPopUpMenu> createState() => _TextFieldPopUpMenuState<T>();
 }
 
 class _TextFieldPopUpMenuState<T> extends State<TextFieldPopUpMenu<T>>
@@ -56,7 +58,10 @@ class _TextFieldPopUpMenuState<T> extends State<TextFieldPopUpMenu<T>>
   void initState() {
     _listenTextFieldFocus();
     _setUpAnimations();
-    _textController.text = widget.initialValue?.title ?? '';
+    _textController.text = widget.initialValue == null
+        ? ''
+        : widget.onDisplay(widget.initialValue!);
+    // _textController.text = widget.initialValue?.title ?? '';
 
     super.initState();
   }
@@ -96,8 +101,8 @@ class _TextFieldPopUpMenuState<T> extends State<TextFieldPopUpMenu<T>>
   }
 
   // Sets up element from pop up menu.
-  void _selectItem(TextFieldPopUpMenuItem value) {
-    _textController.text = value.title;
+  void _selectItem(T value) {
+    _textController.text = widget.onDisplay(value);
     widget.onSelected(value);
     _focusNode.unfocus();
   }
@@ -184,7 +189,7 @@ class _TextFieldPopUpMenuState<T> extends State<TextFieldPopUpMenu<T>>
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
                                 Text(
-                                  widget.items[index].title,
+                                  widget.onDisplay(widget.items[index]),
                                   textAlign: TextAlign.center,
                                 ),
                                 const SizedBox(

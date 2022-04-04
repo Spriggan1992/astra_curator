@@ -1,3 +1,4 @@
+import 'package:astra_curator/core/infrastructure/services/pagination_service/pagination_service.dart';
 import 'package:astra_curator/core/infrastructure/services/subscription_service/subscription_connection_settings.dart';
 import 'package:dart_amqp/dart_amqp.dart';
 import 'package:dio/dio.dart';
@@ -25,7 +26,6 @@ abstract class AppInjectableModule {
   /// Initialized dio client.
   @lazySingleton
   Dio get dio => Dio();
-  
 
   /// Initialized imagePicker service.
   @lazySingleton

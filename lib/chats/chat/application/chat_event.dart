@@ -26,7 +26,8 @@ class ChatEvent with _$ChatEvent {
   ///
   /// The [hasConnection] responsible that there has internet connection.
   const factory ChatEvent.internetConnectionStatusConnectionChanged(
-      bool hasConnection) = _SubscribeToInternetConnectionStatus;
+    bool hasConnection,
+  ) = _SubscribeToInternetConnectionStatus;
 
   /// Received chat event.
   const factory ChatEvent.chatReceived(SubscriptionMessageModel message) =

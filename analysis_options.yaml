@@ -11,3 +11,4 @@ analyzer:
     sort_pub_dependencies: ignore
     invalid_internal_annotation: ignore
     avoid_positional_boolean_parameters: ignore
+    avoid_classes_with_only_static_members: ignore

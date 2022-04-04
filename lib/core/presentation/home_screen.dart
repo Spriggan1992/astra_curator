@@ -86,7 +86,9 @@ class HomeScreen extends StatelessWidget {
       case 0:
         break;
       case 1:
-        context.read<ClientsBloc>().add(const ClientsEvent.loadClients());
+        context
+            .read<ClientsBloc>()
+            .add(const ClientsEvent.loadClients(isRefreshItems: false));
         break;
       case 2:
         context.read<ChatsBloc>().add(const ChatsEvent.chatsLoaded());

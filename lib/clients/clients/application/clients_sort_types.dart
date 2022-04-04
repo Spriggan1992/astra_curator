@@ -1,16 +1,15 @@
-
 /// The enum clients sort type to sort clients.
-enum SortTypes{
+enum SortTypes {
   /// Initial type using by default.
   initial,
-  
+
   /// Sort by id.
   sortById,
 
-  /// Ascending Sort by name. 
+  /// Ascending Sort by name.
   sortByNameAscending,
 
-  /// Descending Sort by name. 
+  /// Descending Sort by name.
   sortByNameDescending,
 
   ///Ascending sort by date.

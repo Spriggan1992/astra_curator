@@ -1,19 +1,16 @@
-import 'package:astra_curator/core/presentation/widgets/popup/core/text_field_popup_menu_item.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'child_status_model.freezed.dart';
 
 /// Defines child status model.
 @freezed
-class ChildStatusModel
-    with _$ChildStatusModel
-    implements TextFieldPopUpMenuItem<bool> {
+class ChildStatusModel with _$ChildStatusModel {
   const ChildStatusModel._();
   const factory ChildStatusModel({
     /// Whether the client has child or not.
-    @override required bool value,
+    required bool value,
 
     /// The title of displaying status.
-    @override required String title,
+    required String title,
   }) = _ChildStatusMode;
 
   /// Empty child status.

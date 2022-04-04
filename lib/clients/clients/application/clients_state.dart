@@ -5,19 +5,21 @@ part of 'clients_bloc.dart';
 class ClientsState with _$ClientsState {
   const factory ClientsState({
     /// List of clients fetched from server.
-    required List<ClientModel> clients,
+    required PaginationDataModel<List<ClientModel>> paginationModel,
 
     /// A sort type of clients.
     required SortTypes sortTypes,
 
     /// Loading state, will be success, initial, error.
     required LoadingStatesWithFailure loadingStates,
+    required bool isAvailableToLoad,
   }) = _ClientsState;
 
   /// Clients initial state.
-  factory ClientsState.initial() => const ClientsState(
-        clients: [],
+  factory ClientsState.initial() => ClientsState(
+        paginationModel: PaginationDataModel.empty(),
         sortTypes: SortTypes.initial,
         loadingStates: LoadingStatesWithFailure.initial,
+        isAvailableToLoad: true,
       );
 }
