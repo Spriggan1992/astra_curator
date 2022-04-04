@@ -1,5 +1,7 @@
 import 'package:astra_curator/core/presentation/constants/app_texts.dart';
+import 'package:astra_curator/core/presentation/routes/app_router.gr.dart';
 import 'package:astra_curator/core/presentation/theming/colors.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +13,7 @@ class ClientTile extends StatelessWidget {
     required this.imageUrl,
     required this.dateTime,
     required this.id,
+    required this.onTileTap,
   }) : super(key: key);
 
   /// Client's name.
@@ -25,12 +28,16 @@ class ClientTile extends StatelessWidget {
   /// Client's id.
   final String imageUrl;
 
+  /// Tile click event handler
+  final VoidCallback onTileTap;
+
   @override
   Widget build(BuildContext context) {
     final _textTheme = Theme.of(context).textTheme;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6),
       child: ListTile(
+        onTap: onTileTap,
         dense: true,
         horizontalTitleGap: 4,
         leading: CircleAvatar(

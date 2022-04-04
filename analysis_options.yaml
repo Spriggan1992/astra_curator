@@ -10,3 +10,4 @@ analyzer:
     sort_unnamed_constructors_first: ignore
     sort_pub_dependencies: ignore
     invalid_internal_annotation: ignore
+    avoid_positional_boolean_parameters: ignore

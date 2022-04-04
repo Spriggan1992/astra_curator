@@ -9,12 +9,14 @@ import 'package:astra_curator/core/presentation/routes/app_router.gr.dart';
 import 'package:astra_curator/core/presentation/widgets/bars/appbar/main_app_bar.dart';
 import 'package:astra_curator/core/presentation/widgets/buttons/astra_gradient_button.dart';
 import 'package:astra_curator/core/presentation/widgets/date_picker/platform_date_picker.dart';
+import 'package:astra_curator/core/presentation/widgets/images/photos.dart';
 import 'package:astra_curator/core/presentation/widgets/popup/text_field_pop_up_menu.dart';
 import 'package:astra_curator/core/presentation/widgets/text_fields/core/validators.dart';
 import 'package:astra_curator/core/presentation/widgets/text_fields/lost_focus_text_field.dart';
+import 'package:astra_curator/core/presentation/widgets/texts/adding_photo_sign.dart';
 import 'package:astra_curator/new_client/adding_client/application/adding_client_bloc.dart';
-import 'package:astra_curator/new_client/adding_client/presentation/widgets/adding_photo_sign.dart';
-import 'package:astra_curator/new_client/adding_client/presentation/widgets/photos.dart';
+
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -22,8 +24,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// Represent adding client screen.
 class AddingClientScreenContent extends StatefulWidget {
+  /// Cities to display.
   final List<CityModel> cities;
+
+  /// Countries to display.
   final List<CountryModel> countries;
+
   const AddingClientScreenContent({
     Key? key,
     required this.cities,
@@ -178,7 +184,8 @@ class _AddingClientScreenContentState extends State<AddingClientScreenContent> {
                             initialTextValue: state.client.height,
                             textInputFormatter: [
                               FilteringTextInputFormatter.allow(
-                                  RegExp(r'[0-9]'))
+                                RegExp(r'[0-9]'),
+                              )
                             ],
                             hint: AppTexts.height,
                             onSubmit: (value) =>
@@ -258,7 +265,7 @@ class _AddingClientScreenContentState extends State<AddingClientScreenContent> {
                     ),
                     const SizedBox(height: 10),
                     Photos(
-                      images: state.photos,
+                      images: state.client.photos,
                       onPickImage: () => context.read<AddingClientBloc>().add(
                             const AddingClientEvent.photosAdded(),
                           ),
@@ -266,7 +273,7 @@ class _AddingClientScreenContentState extends State<AddingClientScreenContent> {
                         context
                             .pushRoute(
                               NewClientPhotosRouter(
-                                images: state.photos,
+                                images: state.client.photos,
                               ),
                             )
                             .then(
@@ -277,7 +284,12 @@ class _AddingClientScreenContentState extends State<AddingClientScreenContent> {
                       },
                     ),
                     const SizedBox(height: 16),
-                    AddingPhotoSign(state.photos.length),
+                    AddingPhotoSign(
+                      state.client.photos.length,
+                      onTap: () => context.read<AddingClientBloc>().add(
+                            const AddingClientEvent.photosAdded(),
+                          ),
+                    ),
                     const SizedBox(height: 32),
                     BlocBuilder<AddingClientBloc, AddingClientState>(
                       buildWhen: (p, c) =>

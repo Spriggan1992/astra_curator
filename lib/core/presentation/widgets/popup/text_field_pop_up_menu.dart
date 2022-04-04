@@ -22,6 +22,9 @@ class TextFieldPopUpMenu<T> extends StatefulWidget {
   /// Select item event handler.
   final Function(TextFieldPopUpMenuItem selectedItem) onSelected;
 
+  /// Whether the menu is disabled.
+  final bool isDisabled;
+
   const TextFieldPopUpMenu({
     Key? key,
     required this.items,
@@ -29,6 +32,7 @@ class TextFieldPopUpMenu<T> extends StatefulWidget {
     required this.onSelected,
     this.initialValue,
     this.isFullSize = false,
+    this.isDisabled = false,
   }) : super(key: key);
 
   @override
@@ -214,7 +218,7 @@ class _TextFieldPopUpMenuState<T> extends State<TextFieldPopUpMenu<T>>
       key: _key,
       focusNode: _focusNode,
       controller: _textController,
-      enabled: widget.items.length > 1,
+      enabled: widget.items.length > 1 && !widget.isDisabled,
       readOnly: true,
       decoration: InputDecoration(
         hintText: widget.hint,
@@ -222,7 +226,7 @@ class _TextFieldPopUpMenuState<T> extends State<TextFieldPopUpMenu<T>>
             .textTheme
             .bodySmall!
             .copyWith(color: AstraColors.black04),
-        suffixIcon: widget.items.length > 1
+        suffixIcon: widget.items.length > 1 && !widget.isDisabled
             ? RotationTransition(
                 turns: _rotation,
                 child: const RotatedBox(

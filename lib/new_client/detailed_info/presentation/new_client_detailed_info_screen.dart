@@ -3,18 +3,20 @@ import 'package:astra_curator/core/presentation/dialogs/snack_bar.dart';
 import 'package:astra_curator/core/presentation/routes/app_router.gr.dart';
 import 'package:astra_curator/core/presentation/widgets/bars/appbar/main_app_bar.dart';
 import 'package:astra_curator/core/presentation/widgets/buttons/astra_gradient_button.dart';
+import 'package:astra_curator/core/presentation/widgets/text_fields/reusable_text_field.dart';
 import 'package:astra_curator/injection.dart';
 import 'package:astra_curator/new_client/detailed_info/application/adding_detailed_info_bloc.dart';
 import 'package:astra_curator/new_client/detailed_info/presentation/constants/constants.dart';
 import 'package:astra_curator/new_client/detailed_info/presentation/widgets/client_adding_completion_dialog.dart';
-import 'package:astra_curator/new_client/detailed_info/presentation/widgets/reusable_text_field.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// Represent adding detailed information about client screen.
 class NewClientDetailedInfoScreen extends StatelessWidget {
-  const NewClientDetailedInfoScreen({Key? key}) : super(key: key);
+  const NewClientDetailedInfoScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

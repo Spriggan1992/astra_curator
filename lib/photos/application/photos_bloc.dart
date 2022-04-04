@@ -27,7 +27,7 @@ class PhotosBloc extends Bloc<PhotosEvent, PhotosState> {
           photosDeleted: (e) async {
             final updatedImages = state.images.where(
               (element) {
-                if (element.cachedImage != null) {
+                if (element.cachedImage?.fullImage != null) {
                   return element.cachedImage?.fullImage !=
                       state.images[state.currentImageIndex].cachedImage
                           ?.fullImage;

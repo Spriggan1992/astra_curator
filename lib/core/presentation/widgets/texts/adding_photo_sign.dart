@@ -1,14 +1,23 @@
 import 'package:astra_curator/core/presentation/constants/app_texts.dart';
 import 'package:astra_curator/core/presentation/theming/colors.dart';
-import 'package:astra_curator/new_client/adding_client/application/adding_client_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// Represents interactive sign to adding photos or just inform user about how many photos he should to add.
 class AddingPhotoSign extends StatelessWidget {
   /// Number of photos already submitted.
   final int amount;
-  const AddingPhotoSign(this.amount, {Key? key}) : super(key: key);
+
+  /// Sign click event handler.
+  final VoidCallback onTap;
+
+  /// If false the text is "disabled"
+  final bool isDisabled;
+  const AddingPhotoSign(
+    this.amount, {
+    Key? key,
+    required this.onTap,
+    this.isDisabled = false,
+  }) : super(key: key);
 
   String _getSign() {
     if (amount == 2) {
@@ -33,9 +42,7 @@ class AddingPhotoSign extends StatelessWidget {
       );
     } else {
       return GestureDetector(
-        onTap: () => context.read<AddingClientBloc>().add(
-              const AddingClientEvent.photosAdded(),
-            ),
+        onTap: isDisabled ? null : onTap,
         child: const Text(
           AppTexts.chooseAnotherPhoto,
           textAlign: TextAlign.center,

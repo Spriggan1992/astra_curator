@@ -1,6 +1,6 @@
 // ignore_for_file: invalid_annotation_target
 
-import 'package:astra_curator/core/domain/models/new_client_detailed_info_model.dart';
+import 'package:astra_curator/core/domain/models/client_detailed_info_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'new_client_detailed_info_dto.freezed.dart';
 part 'new_client_detailed_info_dto.g.dart';
@@ -38,7 +38,7 @@ class NewClientDetailedInfoDTO with _$NewClientDetailedInfoDTO {
     @JsonKey(name: 'self_control') required String? selfControl,
   }) = _NewClientDetailedInfoDTO;
 
-  factory NewClientDetailedInfoDTO.fromDomain(NewClientDetailedInfoModel _) {
+  factory NewClientDetailedInfoDTO.fromDomain(ClientDetailedInfoModel _) {
     return NewClientDetailedInfoDTO(
       character: _.character,
       skills: _.skills,
@@ -53,7 +53,7 @@ class NewClientDetailedInfoDTO with _$NewClientDetailedInfoDTO {
   }
 
 // Convert DTO to domain.
-  NewClientDetailedInfoModel toDomain() => NewClientDetailedInfoModel(
+  ClientDetailedInfoModel toDomain() => ClientDetailedInfoModel(
         character: character,
         skills: skills,
         orientation: orientation,

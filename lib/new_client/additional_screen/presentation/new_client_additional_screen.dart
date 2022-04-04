@@ -7,7 +7,9 @@ import 'package:flutter/material.dart';
 
 /// Represent additional screen for new client module.
 class NewClientAdditionalScreen extends StatelessWidget {
-  const NewClientAdditionalScreen({Key? key}) : super(key: key);
+  const NewClientAdditionalScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

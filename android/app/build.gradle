@@ -27,6 +27,7 @@ apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
     compileSdkVersion 32
+    ndkVersion "24.0.8215888"
 
     compileSdkVersion flutter.compileSdkVersion
 
