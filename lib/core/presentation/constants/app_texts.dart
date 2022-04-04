@@ -1,6 +1,6 @@
 /// Represent string constants for Astra-Curator app.
 class AppTexts {
-  /// Аутентификация.
+  /// Authentication.
   static const String enterPassword = "Введите пароль";
   static const String enterPhoneNumber = "Введите номер телефона";
   static const String setPassword = "Задайте пароль";
@@ -20,7 +20,7 @@ class AppTexts {
       "Отсутствует подключение к интернету";
   static const String byId = "По ID";
 
-  /// Клиенты.
+  /// Clients.
   static const String clients = 'Клиенты';
   static const String emptyList = 'Список пуст.';
   static const String lastLogin = 'Посл. вход';
@@ -29,19 +29,18 @@ class AppTexts {
   static const String sortByAlphabeticOrder = 'По имени А-Я';
   static const String sortByAlphabeticOrderReversed = 'По имени Я-А';
 
-  /// Сообщения.
+  /// Messages.
   static const String messages = 'Сообщения';
   static const String delete = 'Удалить';
   static const String confirmDeletion = 'Вы точно хотите удалить диалог?';
   static const String cancel = 'Отмена';
 
-  /// Тексты сообщений.
   static const String waitingNetwork = 'Ожидание сети...';
   static const String message = 'Cooбщение...';
   static const String online = 'В сети';
   static const String offline = 'Не в сети';
 
-  /// Мой счет.
+  /// My account.
   static const String myAccount = 'Мой счет';
   static const String completedO = 'Завершен';
   static const String completed = 'Завершено';
@@ -59,7 +58,7 @@ class AppTexts {
   static const String theRequestAmountIsMoreThanAllowed =
       'Сумма запроса больше чем положено.';
 
-  /// Добавление клиента.
+  /// Adding clients.
   static const String addingClient = 'Добавление клиента';
   static const String phoneNumber = 'Номер телефона';
   static const String lastName = 'Имя';
@@ -84,15 +83,11 @@ class AppTexts {
   static const String addingAtLeast2Photo = 'Добавьте еще как минимум 2 фотографии';
   static const String adding3Photo = 'Добавьте от 3 фотографий';
   static const String chooseAnotherPhoto = 'Выбрать другие фотографии';
-
-  /// Добавление клиента
   static const String noticeTitle = 'Почти готово!';
   static const String noticeContent =
       'Пользователь зарегистрирован и может\nначать поиск своей пары, но чтобы\nувеличить шансы, необходимо  заполнить\nподробную анкету.';
   static const String filloutDetailedApplication = 'Заполнить подробную анкету';
   static const String fillLater = 'Заполнить позже';
-
-  /// Фото.
   static const conformationDeletion = 'Вы точно хотите удалить\nфотографию?';
   static const main = 'Главная';
   static const makeMain = 'Сделать главной';
