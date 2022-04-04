@@ -1,6 +1,7 @@
 import 'package:astra_curator/chats/chat/application/chat_bloc.dart';
 import 'package:astra_curator/chats/chat/presentation/constants/borders.dart';
-import 'package:astra_curator/chats/chat/presentation/constants/chat_texts.dart';
+
+import 'package:astra_curator/core/presentation/constants/app_texts.dart';
 import 'package:astra_curator/core/presentation/theming/colors.dart';
 import 'package:astra_curator/core/presentation/theming/gradients.dart';
 import 'package:astra_curator/core/presentation/widgets/icons/svg_icon.dart';
@@ -63,8 +64,8 @@ class _ChatBottomBarState extends State<ChatBottomBar> {
                             horizontal: 15.0,
                           ),
                           hintText: hasConnection
-                              ? ChatTexts.message
-                              : ChatTexts.waitingNetwork,
+                              ? AppTexts.message
+                              : AppTexts.waitingNetwork,
                           hintStyle:
                               const TextStyle(color: AstraColors.white03),
                           focusedBorder: Theme.of(context)

@@ -1,6 +1,6 @@
+import 'package:astra_curator/core/presentation/constants/app_texts.dart';
 import 'package:astra_curator/core/presentation/theming/colors.dart';
 import 'package:astra_curator/photos/application/photos_bloc.dart';
-import 'package:astra_curator/photos/presentation/constants/photos_texts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -25,7 +25,7 @@ class PhotosMainPhotoButton extends StatelessWidget {
                   .add(const PhotosEvent.mainPhotoChanged());
             },
       child: Text(
-        isMain ? PhotosTexts.main : PhotosTexts.makeMain,
+        isMain ? AppTexts.main : AppTexts.makeMain,
         textAlign: TextAlign.center,
         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
               color: isMain ? AstraColors.white03 : AstraColors.white,

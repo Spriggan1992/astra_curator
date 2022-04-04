@@ -1,3 +1,4 @@
+import 'package:astra_curator/core/presentation/constants/app_texts.dart';
 import 'package:astra_curator/core/presentation/theming/colors.dart';
 import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,7 @@ void showSnackBar(
             child: FlashBar(
               padding: const EdgeInsets.all(20),
               content: Text(
-                title ?? 'Отсутствует подключение к интернету',
+                title ?? AppTexts.noConnectionInternet,
                 textAlign: TextAlign.center,
               ),
             ),

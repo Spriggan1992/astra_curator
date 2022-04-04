@@ -1,8 +1,8 @@
 import 'package:astra_curator/chats/chats/application/chats_bloc.dart';
 import 'package:astra_curator/chats/chats/presentation/chat_list_item.dart';
-import 'package:astra_curator/chats/chats/presentation/constants/chats_text.dart';
 import 'package:astra_curator/core/application/enums/astra_failures.dart';
 import 'package:astra_curator/core/application/enums/loading_state_with_failures.dart';
+import 'package:astra_curator/core/presentation/constants/app_texts.dart';
 import 'package:astra_curator/core/presentation/theming/colors.dart';
 import 'package:astra_curator/core/presentation/widgets/buttons/dialog_action_button.dart';
 import 'package:astra_curator/core/presentation/widgets/dialogs/dialog_two_actions.dart';
@@ -60,7 +60,7 @@ class ChatsContent extends StatelessWidget {
                       children: const [
                         Icon(Icons.delete_outline, color: Colors.white),
                         Text(
-                          ChatsTexts.delete,
+                          AppTexts.delete,
                           style: TextStyle(color: Colors.white, fontSize: 10),
                         ),
                       ],
@@ -74,12 +74,12 @@ class ChatsContent extends StatelessWidget {
                   builder: (BuildContext _) {
                     return DialogTwoActions(
                       content: const Text(
-                        ChatsTexts.confirmDeletion,
+                        AppTexts.confirmDeletion,
                         textAlign: TextAlign.center,
                       ),
                       action1: DialogActionButton(
                         onClick: () => context.router.pop(false),
-                        title: ChatsTexts.cancel,
+                        title: AppTexts.cancel,
                       ),
                       action2: DialogActionButton(
                         onClick: () {
@@ -88,7 +88,7 @@ class ChatsContent extends StatelessWidget {
                               );
                           context.router.pop(true);
                         },
-                        title: ChatsTexts.delete,
+                        title: AppTexts.delete,
                         buttonStyle:
                             TextButton.styleFrom(primary: AstraColors.red),
                       ),

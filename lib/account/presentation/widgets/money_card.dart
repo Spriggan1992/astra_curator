@@ -1,4 +1,4 @@
-import 'package:astra_curator/account/presentation/constants/account_texts.dart';
+import 'package:astra_curator/core/presentation/constants/app_texts.dart';
 import 'package:astra_curator/core/presentation/theming/colors.dart';
 import 'package:astra_curator/core/presentation/widgets/buttons/astra_borderred_button.dart';
 import 'package:flutter/material.dart';
@@ -54,7 +54,7 @@ class MoneyCard extends StatelessWidget {
                 ),
               ),
               AstraBorderedButton(
-                title: AccountTexts.withdraw,
+                title: AppTexts.withdraw,
                 isEnableButton: isEnableCard,
                 onTap: onTap,
               ),
@@ -67,7 +67,7 @@ class MoneyCard extends StatelessWidget {
               TextButton(
                 onPressed: onTapCondition,
                 child: Text(
-                  AccountTexts.withdrawalConditions,
+                  AppTexts.withdrawalConditions,
                   style: Theme.of(context).textTheme.bodySmall!.copyWith(
                         color: AstraColors.black08,
                       ),
@@ -76,7 +76,7 @@ class MoneyCard extends StatelessWidget {
               TextButton(
                 onPressed: onTapMyQuery,
                 child: Text(
-                  AccountTexts.myRequests,
+                  AppTexts.myRequests,
                   style: Theme.of(context).textTheme.bodySmall!.copyWith(
                         color: AstraColors.black08,
                       ),

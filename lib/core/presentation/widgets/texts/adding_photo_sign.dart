@@ -1,5 +1,5 @@
+import 'package:astra_curator/core/presentation/constants/app_texts.dart';
 import 'package:astra_curator/core/presentation/theming/colors.dart';
-import 'package:astra_curator/new_client/adding_client/presentation/constants/adding_client_texts.dart';
 import 'package:flutter/material.dart';
 
 /// Represents interactive sign to adding photos or just inform user about how many photos he should to add.
@@ -21,11 +21,11 @@ class AddingPhotoSign extends StatelessWidget {
 
   String _getSign() {
     if (amount == 2) {
-      return AddingClientTexts.addingAtLeast1Photo;
+      return AppTexts.addingAtLeast1Photo;
     } else if (amount == 1) {
-      return AddingClientTexts.addingAtLeast2Photo;
+      return AppTexts.addingAtLeast2Photo;
     } else {
-      return AddingClientTexts.adding3Photo;
+      return AppTexts.adding3Photo;
     }
   }
 
@@ -44,7 +44,7 @@ class AddingPhotoSign extends StatelessWidget {
       return GestureDetector(
         onTap: isDisabled ? null : onTap,
         child: const Text(
-          AddingClientTexts.chooseAnotherPhoto,
+          AppTexts.chooseAnotherPhoto,
           textAlign: TextAlign.center,
           style: TextStyle(decoration: TextDecoration.underline),
         ),

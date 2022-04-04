@@ -1,4 +1,4 @@
-import 'package:astra_curator/clients/clients/presentation/constants/clients_texts.dart';
+import 'package:astra_curator/core/presentation/constants/app_texts.dart';
 import 'package:astra_curator/core/presentation/routes/app_router.gr.dart';
 import 'package:astra_curator/core/presentation/theming/colors.dart';
 import 'package:auto_route/auto_route.dart';
@@ -57,14 +57,14 @@ class ClientTile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '${ClientsTexts.lastLogin}: $dateTime',
+              '${AppTexts.lastLogin}: $dateTime',
               style: _textTheme.bodySmall!.copyWith(
                 color: AstraColors.black04,
                 fontWeight: FontWeight.w500,
               ),
             ),
             Text(
-              '${ClientsTexts.userId}: $id',
+              '${AppTexts.id}: $id',
               style: _textTheme.bodySmall!.copyWith(
                 color: AstraColors.black,
                 fontWeight: FontWeight.w600,

@@ -1,5 +1,5 @@
 import 'package:astra_curator/account/domain/models/calendar_range_date.dart';
-import 'package:astra_curator/account/presentation/constants/account_texts.dart';
+import 'package:astra_curator/core/presentation/constants/app_texts.dart';
 import 'package:astra_curator/core/presentation/extensions/date_tim_to_string.dart';
 import 'package:astra_curator/core/presentation/theming/colors.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +23,7 @@ class PeriodicWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  '${AccountTexts.chargeForTheEntirePeriod}: ',
+                  '${AppTexts.chargeForTheEntirePeriod}: ',
                   textScaleFactor: 0.8,
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         fontWeight: FontWeight.w600,
@@ -42,7 +42,7 @@ class PeriodicWidget extends StatelessWidget {
             )
           : Center(
               child: Text(
-                AccountTexts.chargeForTheEntirePeriod,
+                AppTexts.chargeForTheEntirePeriod,
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       fontWeight: FontWeight.w600,
                       color: AstraColors.black03,

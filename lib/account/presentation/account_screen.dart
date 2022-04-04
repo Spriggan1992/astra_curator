@@ -2,12 +2,12 @@ import 'package:astra_curator/account/application/account_bloc.dart';
 import 'package:astra_curator/account/application/account_history/account_history_bloc.dart';
 import 'package:astra_curator/account/application/withdraw/withdraw_bloc.dart';
 import 'package:astra_curator/account/domain/models/calendar_range_date.dart';
-import 'package:astra_curator/account/presentation/constants/account_texts.dart';
 import 'package:astra_curator/account/presentation/widgets/account_tile.dart';
 import 'package:astra_curator/account/presentation/widgets/money_card.dart';
 import 'package:astra_curator/account/presentation/widgets/periodic_widget.dart';
 import 'package:astra_curator/account/presentation/widgets/withdraw_dialog.dart';
 import 'package:astra_curator/account/presentation/widgets/withdraw_history_dialog.dart';
+import 'package:astra_curator/core/presentation/constants/app_texts.dart';
 import 'package:astra_curator/core/presentation/dialogs/snack_bar.dart';
 import 'package:astra_curator/core/presentation/extensions/date_tim_to_string.dart';
 import 'package:astra_curator/core/presentation/extensions/money_format.dart';
@@ -56,7 +56,7 @@ class _AccountScreenState extends State<AccountScreen> {
       ],
       child: Scaffold(
         appBar: ReusableAppBar(
-          title: AccountTexts.myAccount,
+          title: AppTexts.myAccount,
           actions: [
             IconButton(
               onPressed: () {
@@ -109,7 +109,7 @@ class _AccountScreenState extends State<AccountScreen> {
                   return const Center(child: PlatformActivityIndicator());
                 } else {
                   return (state.histories.isEmpty)
-                      ? const Center(child: Text(AccountTexts.emptyList))
+                      ? const Center(child: Text(AppTexts.emptyList))
                       : ListView.builder(
                           physics: const BouncingScrollPhysics(),
                           shrinkWrap: true,
@@ -119,7 +119,7 @@ class _AccountScreenState extends State<AccountScreen> {
 
                             return AccountTile(
                               name: _accountHistory.profile,
-                              id: '${AccountTexts.id}: ${_accountHistory.id}',
+                              id: '${AppTexts.id}: ${_accountHistory.id}',
                               date: _accountHistory.convertedDateTime
                                   .dateTimeToddMMyyFormat(),
                               money:

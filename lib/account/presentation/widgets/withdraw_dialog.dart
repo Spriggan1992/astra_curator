@@ -1,4 +1,4 @@
-import 'package:astra_curator/account/presentation/constants/account_texts.dart';
+import 'package:astra_curator/core/presentation/constants/app_texts.dart';
 import 'package:astra_curator/core/presentation/extensions/number_string.dart';
 import 'package:astra_curator/core/presentation/theming/colors.dart';
 import 'package:astra_curator/core/presentation/widgets/buttons/astra_borderred_button.dart';
@@ -59,7 +59,7 @@ class _WithdrawDialogState extends State<WithdrawDialog> {
               ),
             ),
             Text(
-              AccountTexts.specifyTheAmountToWithdraw,
+              AppTexts.specifyTheAmountToWithdraw,
               style: _textTheme.titleMedium!.copyWith(
                 fontWeight: FontWeight.w600,
               ),
@@ -94,7 +94,7 @@ class _WithdrawDialogState extends State<WithdrawDialog> {
             SizedBox(
               width: MediaQuery.of(context).size.width / 1.4,
               child: AstraBorderedButton(
-                title: AccountTexts.sendRequest,
+                title: AppTexts.sendRequest,
                 isEnableButton: widget.controller.text.isNotEmpty,
                 onTap: () {
                   validate();
@@ -124,7 +124,7 @@ class _WithdrawDialogState extends State<WithdrawDialog> {
         0;
 
     if (_enteredNumber < _sum) {
-      errorText = AccountTexts.theRequestAmountIsMoreThanAllowed;
+      errorText = AppTexts.theRequestAmountIsMoreThanAllowed;
       setState(() {});
     } else {
       errorText = '';

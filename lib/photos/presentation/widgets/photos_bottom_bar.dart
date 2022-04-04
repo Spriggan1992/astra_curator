@@ -1,8 +1,8 @@
+import 'package:astra_curator/core/presentation/constants/app_texts.dart';
 import 'package:astra_curator/core/presentation/theming/colors.dart';
 import 'package:astra_curator/core/presentation/widgets/buttons/dialog_action_button.dart';
 import 'package:astra_curator/core/presentation/widgets/dialogs/dialog_two_actions.dart';
 import 'package:astra_curator/photos/application/photos_bloc.dart';
-import 'package:astra_curator/photos/presentation/constants/photos_texts.dart';
 import 'package:astra_curator/photos/presentation/widgets/photos_main_photo_button.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -70,16 +70,16 @@ class PhotosBottomBar extends StatelessWidget {
                             ) {
                               return DialogTwoActions(
                                 content: const Text(
-                                  PhotosTexts.conformationDeletion,
+                                  AppTexts.conformationDeletion,
                                   textAlign: TextAlign.center,
                                 ),
                                 action1: DialogActionButton(
-                                  title: PhotosTexts.cancel,
+                                  title: AppTexts.cancel,
                                   onClick: () =>
                                       showDialogContext.popRoute(false),
                                 ),
                                 action2: DialogActionButton(
-                                  title: PhotosTexts.delete,
+                                  title: AppTexts.delete,
                                   onClick: () {
                                     onDelete();
                                     showDialogContext.router.pop();

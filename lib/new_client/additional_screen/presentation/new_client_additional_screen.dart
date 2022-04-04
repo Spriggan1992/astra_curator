@@ -1,7 +1,7 @@
+import 'package:astra_curator/core/presentation/constants/app_texts.dart';
 import 'package:astra_curator/core/presentation/routes/app_router.gr.dart';
 import 'package:astra_curator/core/presentation/widgets/bars/appbar/main_app_bar.dart';
 import 'package:astra_curator/core/presentation/widgets/buttons/astra_gradient_button.dart';
-import 'package:astra_curator/new_client/additional_screen/presentation/constants/constants.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +17,7 @@ class NewClientAdditionalScreen extends StatelessWidget {
       onWillPop: () async => false,
       child: Scaffold(
         appBar: const ReusableAppBar(
-          title: NewClientAdditionalTexts.appBarTitle,
+          title: AppTexts.addingClient,
         ),
         body: GestureDetector(
           onTap: () {},
@@ -32,12 +32,12 @@ class NewClientAdditionalScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        NewClientAdditionalTexts.noticeTitle,
+                        AppTexts.noticeTitle,
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                       const SizedBox(height: 32),
                       Text(
-                        NewClientAdditionalTexts.noticeContent,
+                        AppTexts.noticeContent,
                         style: Theme.of(context).textTheme.bodyMedium,
                         textAlign: TextAlign.center,
                       ),
@@ -55,7 +55,7 @@ class NewClientAdditionalScreen extends StatelessWidget {
                               const NewClientDetailedInfoRouter(),
                             );
                           },
-                          title: NewClientAdditionalTexts.buttonTitle,
+                          title: AppTexts.continueText,
                         ),
                       ),
                       const SizedBox(height: 24),
@@ -68,7 +68,7 @@ class NewClientAdditionalScreen extends StatelessWidget {
                           );
                         },
                         child: Text(
-                          NewClientAdditionalTexts.fillLater,
+                          AppTexts.fillLater,
                           style: Theme.of(context)
                               .textTheme
                               .bodyMedium
