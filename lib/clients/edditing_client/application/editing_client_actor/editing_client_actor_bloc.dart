@@ -193,7 +193,7 @@ class EditingClientActorBloc
           },
           updatedClientSubmitted: (e) async {
             emit(state.copyWith(loadingState: LoadingStates.loading));
-            await Future.delayed(const Duration(milliseconds: 1000));
+            await Future<Duration>.delayed(const Duration(milliseconds: 1000));
             emit(
               state.copyWith(
                 client: state.updatedClient.copyWith(),

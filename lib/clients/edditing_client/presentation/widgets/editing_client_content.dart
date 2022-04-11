@@ -1,5 +1,6 @@
 import 'package:astra_curator/clients/edditing_client/application/editing_client_actor/editing_client_actor_bloc.dart';
 import 'package:astra_curator/clients/edditing_client/presentation/constants/editing_client_texts.dart';
+import 'package:astra_curator/clients/edditing_client/presentation/widgets/app_bar_action_icon.dart';
 import 'package:astra_curator/core/domain/models/child_status_model.dart';
 import 'package:astra_curator/core/domain/models/city_model.dart';
 import 'package:astra_curator/core/domain/models/country_model.dart';
@@ -10,7 +11,6 @@ import 'package:astra_curator/core/presentation/routes/app_router.gr.dart';
 import 'package:astra_curator/core/presentation/widgets/bars/appbar/main_app_bar.dart';
 import 'package:astra_curator/core/presentation/widgets/buttons/astra_gradient_button.dart';
 import 'package:astra_curator/core/presentation/widgets/date_picker/platform_date_picker.dart';
-import 'package:astra_curator/clients/edditing_client/presentation/widgets/app_bar_action_icon.dart';
 import 'package:astra_curator/core/presentation/widgets/images/photos.dart';
 import 'package:astra_curator/core/presentation/widgets/popup/text_field_pop_up_menu.dart';
 import 'package:astra_curator/core/presentation/widgets/text_fields/core/validators.dart';
@@ -165,32 +165,34 @@ class _EditingClientContentState extends State<EditingClientContent> {
                 ),
                 const SizedBox(height: 50),
                 // City.
-                TextFieldPopUpMenu(
+                TextFieldPopUpMenu<CityModel>(
                   isDisabled: !widget.canSubmit,
                   initialValue: widget.client.city,
                   isFullSize: true,
                   hint: EditingClientTexts.city,
                   items: widget.cities.map((e) => e).toList(),
+                  onDisplay: (item) => item.title,
                   onSelected: (selectedItem) =>
                       context.read<EditingClientActorBloc>().add(
                             EditingClientActorEvent.cityChanged(
-                              selectedItem as CityModel,
+                              selectedItem,
                             ),
                           ),
                 ),
                 // Country.
-                TextFieldPopUpMenu(
+                TextFieldPopUpMenu<CountryModel>(
                   isDisabled: !widget.canSubmit,
                   initialValue: widget.client.country,
                   isFullSize: true,
                   hint: EditingClientTexts.country,
+                  onDisplay: (item) => item.title,
                   items: widget.countries
                       .map((countryModel) => countryModel)
                       .toList(),
                   onSelected: (selectedItem) =>
                       context.read<EditingClientActorBloc>().add(
                             EditingClientActorEvent.countryChanged(
-                              selectedItem as CountryModel,
+                              selectedItem,
                             ),
                           ),
                 ),
@@ -199,11 +201,12 @@ class _EditingClientContentState extends State<EditingClientContent> {
                   children: [
                     // Gender.
                     Expanded(
-                      child: TextFieldPopUpMenu(
+                      child: TextFieldPopUpMenu<GenderModel>(
                         isDisabled: !widget.canSubmit,
                         initialValue: widget.client.gender,
                         isFullSize: true,
                         hint: EditingClientTexts.gender,
+                        onDisplay: (item) => item.title,
                         items: const [
                           GenderModel(
                             title: EditingClientTexts.genderMale,
@@ -217,7 +220,7 @@ class _EditingClientContentState extends State<EditingClientContent> {
                         onSelected: (selectedItem) =>
                             context.read<EditingClientActorBloc>().add(
                                   EditingClientActorEvent.genderChanged(
-                                    selectedItem as GenderModel,
+                                    selectedItem,
                                   ),
                                 ),
                       ),
@@ -245,10 +248,11 @@ class _EditingClientContentState extends State<EditingClientContent> {
                   ],
                 ),
                 // MartialStatus.
-                TextFieldPopUpMenu(
+                TextFieldPopUpMenu<MartialStatusModel>(
                   isDisabled: !widget.canSubmit,
                   initialValue: widget.client.martialStatus,
                   hint: EditingClientTexts.martialStatus,
+                  onDisplay: (item) => item.title,
                   items: const [
                     MartialStatusModel(
                       title: EditingClientTexts.martialStatusSingle,
@@ -262,15 +266,16 @@ class _EditingClientContentState extends State<EditingClientContent> {
                   onSelected: (selectedItem) =>
                       context.read<EditingClientActorBloc>().add(
                             EditingClientActorEvent.martialStatusChanged(
-                              selectedItem as MartialStatusModel,
+                              selectedItem,
                             ),
                           ),
                 ),
                 // Child status.
-                TextFieldPopUpMenu(
+                TextFieldPopUpMenu<ChildStatusModel>(
                   isDisabled: !widget.canSubmit,
                   initialValue: widget.client.haveChild,
                   hint: EditingClientTexts.haveChild,
+                  onDisplay: (item) => item.title,
                   items: const [
                     ChildStatusModel(
                       title: EditingClientTexts.haveChildFalse,
@@ -284,7 +289,7 @@ class _EditingClientContentState extends State<EditingClientContent> {
                   onSelected: (selectedItem) =>
                       context.read<EditingClientActorBloc>().add(
                             EditingClientActorEvent.childStatusChanged(
-                              selectedItem as ChildStatusModel,
+                              selectedItem,
                             ),
                           ),
                 ),

@@ -2,6 +2,7 @@
 
 import 'package:astra_curator/clients/clients/domain/models/client.dart';
 import 'package:astra_curator/core/infrastructure/DTOs/image_dto.dart';
+import 'package:astra_curator/core/infrastructure/services/pagination_service/pagination_service.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'client_DTO.freezed.dart';
 part 'client_DTO.g.dart';

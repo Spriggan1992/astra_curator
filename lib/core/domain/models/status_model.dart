@@ -1,17 +1,16 @@
-import 'package:astra_curator/core/presentation/widgets/popup/core/text_field_popup_menu_item.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'status_model.freezed.dart';
 
 /// Defines clients status model.
 @freezed
-class StatusModel with _$StatusModel implements TextFieldPopUpMenuItem<int> {
+class StatusModel with _$StatusModel {
   const StatusModel._();
   const factory StatusModel({
     /// Status value.
-    @override required int value,
+    required int value,
 
     /// Status title.
-    @override required String title,
+    required String title,
   }) = _StatusModel;
 
   /// Empty status model.
